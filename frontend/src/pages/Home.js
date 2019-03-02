@@ -37,7 +37,7 @@ class Home extends Component {
             {list.map((item) => {
               return(
                 <div>
-                  {item}
+                  {item.name}
                 </div>
               );
             })}
