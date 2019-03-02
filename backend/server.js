@@ -31,7 +31,7 @@ app.use(express.static("public"));
 // app.use("/api/users", usersRoutes(knex));
 
 // Home page
-app.get("/", (req, res) => {
+app.get("/api/getList", (req, res) => {
     knex
     .select("*")
     .from("users")
