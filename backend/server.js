@@ -40,6 +40,10 @@ app.get("/api/getList", (req, res) => {
   });
 });
 
+app.post("/login", (req, res) => {
+  console.log(req)
+})
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
