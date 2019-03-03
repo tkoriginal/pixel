@@ -14,12 +14,12 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.name);
     event.preventDefault();
+    const body = JSON.stringify(this.state)
     fetch('/login', {
       method: 'post',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(this.state) 
+      body: body
      });
   }
 
