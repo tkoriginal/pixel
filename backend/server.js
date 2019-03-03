@@ -43,6 +43,13 @@ app.get("/api/getList", (req, res) => {
 app.post("/login", (req, res) => {
   console.log("Should Print Name:")
   console.log(req.body)
+
+  knex('users')
+    .insert({ name: req.body.name }) 
+    .returning('*')
+    .catch(err => console.log(err.message))
+    .then();
+
 })
 
 app.listen(PORT, () => {
