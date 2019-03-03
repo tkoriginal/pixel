@@ -23,7 +23,7 @@ app.use(morgan('dev'));
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
-
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -39,6 +39,18 @@ app.get("/api/getList", (req, res) => {
       res.json(results);
   });
 });
+
+app.post("/login", (req, res) => {
+  console.log("Should Print Name:")
+  console.log(req.body)
+
+  knex('users')
+    .insert({ name: req.body.name }) 
+    .returning('*')
+    .catch(err => console.log(err.message))
+    .then();
+
+})
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
