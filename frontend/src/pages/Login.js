@@ -3,14 +3,21 @@ import React, { Component } from 'react';
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {name: ''};
+    this.state = {
+      name: '', 
+      password: ''
+    };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChangeName(event) {
     this.setState({name: event.target.value});
+  }
+  handleChangePassword(event) {
+    this.setState({password: event.target.value});
   }
 
   handleSubmit(event) {
@@ -20,7 +27,13 @@ class Login extends Component {
       method: 'post',
       headers: {'Content-Type':'application/json'},
       body: body
-     });
+     })
+     .then(res => res.json())
+     .then(res => console.log(res))
+     .catch(res => {
+       console.log("error", res)
+     })
+     ;
   }
 
   render() {
@@ -28,7 +41,9 @@ class Login extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Name:
-          <input type="text" value={this.state.name} onChange={this.handleChange} />
+          <input type="text" value={this.state.name} onChange={this.handleChangeName} />
+          Password:
+          <input type="password" value={this.state.password} onChange={this.handleChangePassword} />
         </label>
         <input type="submit" value="Submit" />
       </form>
