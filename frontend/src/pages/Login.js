@@ -31,8 +31,8 @@ class Login extends Component {
      })
      .then(res => res.json())
      .then(res => {
-       this.setState({loggedIn:true})
        this.props.successfulLogin(res)
+       this.setState({loggedIn:true})
      })
      .catch(res => {
        console.log("error", res)

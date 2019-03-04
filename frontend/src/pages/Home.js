@@ -12,7 +12,7 @@ class Home extends Component {
 
   // Fetch the list on first mount
   componentDidMount() {
-      // this.getList();
+
   }
 
   // Retrieves the list of items from the Express app
@@ -29,29 +29,11 @@ class Home extends Component {
     if (!this.props.name) {
       return (<Redirect to="/login" />)
     }
-    const { list } = this.state;
     console.log(this.props.name)
     return (
-      <div className="App">
-        <h1>Welcome {this.props.name}</h1>
-        {/* Check to see if any items are found*/}
-        {list.length ? (
-          <div>
-            {/* Render the list of items */}
-            {list.map((item) => {
-              return(
-                <div>
-                  {item.name}
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div>
-            <h2>No List Items Found</h2>
-          </div>
-        )
-      }
+      <div>
+        <h1>Welcome {this.props.name}!</h1>
+        
       </div>
     );
   }
