@@ -55,7 +55,7 @@ app.post('/login', (req, res) => {
     .then( rows => {
       if(rows[0]) {
         req.session.user_id = rows[0].name;
-        res.json({name: rows[0].name})
+        res.json({name: rows[0].name, email})
       } else res.status(500).json({error: 'Invalid Login'})
     })
 

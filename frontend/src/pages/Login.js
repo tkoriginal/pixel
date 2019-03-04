@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-
+import { Redirect } from 'react-router-dom';
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '', 
-      password: ''
+      password: '',
+      loggedIn: false
     };
 
     this.handleChangeName = this.handleChangeName.bind(this);
@@ -29,7 +30,10 @@ class Login extends Component {
       body: body
      })
      .then(res => res.json())
-     .then(res => console.log(res))
+     .then(res => {
+       this.setState({loggedIn:true})
+       this.props.successfulLogin(res)
+     })
      .catch(res => {
        console.log("error", res)
      })
@@ -37,6 +41,9 @@ class Login extends Component {
   }
 
   render() {
+    if (this.state.loggedIn) {
+      return (<Redirect to="/" />)
+    }
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
