@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 
@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <Route exact path='/' component={Home}/>
+          <Route exact path='/' render={(routeProps) => (<Home {...routeProps} name={this.state.name}/>)}/>
           <Route exact path='/login' render={(routeProps) => (<Login {...routeProps} successfulLogin={this.successfulLogin}/>)}/>
         </Switch>
       </div>
