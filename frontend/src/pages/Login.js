@@ -33,6 +33,7 @@ class Login extends Component {
      .then(res => {
        this.props.successfulLogin(res)
        this.setState({loggedIn:true})
+       console.log(this.state)
      })
      .catch(res => {
        console.log("error", res)
