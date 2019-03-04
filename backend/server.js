@@ -63,7 +63,7 @@ app.post('/login', (req, res) => {
               id: rows[0].id,
               name: rows[0].name,
               email: rows[0].email,
-              robots: [users_robots]
+              robots: users_robots
             }) 
           })  
         req.session.user_id = rows[0].name;
@@ -89,5 +89,7 @@ app.post("/registration", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+
+
 
 

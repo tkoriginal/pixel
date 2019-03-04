@@ -8,8 +8,10 @@ class MyRobots extends Component {
         {this.props.robots.map(robot => 
          (<div>
             <p>{robot.name}</p>
+            
           </div>)
         )}
+        Test
       </div>
     )
   }

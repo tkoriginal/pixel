@@ -27,14 +27,13 @@ class Home extends Component {
   }
 
   render() {
-    if (!this.props.name) {
+    if (!this.props.userInfo.name) {
       return (<Redirect to="/login" />)
     }
-    console.log(this.props.name)
     return (
       <div>
         <h1>Welcome {this.props.name}!</h1>
-        <MyRobots robots={this.userInfo.robots}/>
+        <MyRobots robots={this.props.userInfo.robots}/>
       </div>
     );
   }
