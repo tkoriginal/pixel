@@ -9,9 +9,10 @@ const bodyParser  = require("body-parser");
 const app         = express();
 
 const knexConfig  = require("./knexfile");
+const knexLogger  = require('knex-logger');
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
-const knexLogger  = require('knex-logger');
+const cookieSession = require('cookie-session');
 
 // Seperated Routes for each Resource
 // const usersRoutes = require("./routes/users");
@@ -25,6 +26,9 @@ app.use(morgan('dev'));
 app.use(knexLogger(knex));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieSession({
+  secret: process.env.secret
+}))
 app.use(express.static("public"));
 
 // Mount all resource routes
@@ -40,7 +44,25 @@ app.get("/api/getList", (req, res) => {
   });
 });
 
-app.post("/login", (req, res) => {
+app.post('/login', (req, res) => {
+  let validUser;
+  knex('users')
+    .select('*')
+    .where({
+      name: req.body.name ,
+      password: req.body.password
+    })
+    .then( rows => {
+      if(rows[0]) {
+        req.session.user_id = rows[0].name;
+        res.json({name: rows[0].name, email})
+      } else res.status(500).json({error: 'Invalid Login'})
+    })
+
+})
+
+
+app.post("/registration", (req, res) => {
   console.log("Should Print Name:")
   console.log(req.body)
 
