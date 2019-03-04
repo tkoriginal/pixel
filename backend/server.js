@@ -54,8 +54,20 @@ app.post('/login', (req, res) => {
     })
     .then( rows => {
       if(rows[0]) {
+
+        knex('robots')
+          .select('*')
+          .where('user_id', rows[0].id)
+          .then(users_robots => {
+            res.json({
+              id: rows[0].id,
+              name: rows[0].name,
+              email: rows[0].email,
+              robots: users_robots
+            }) 
+          })  
         req.session.user_id = rows[0].name;
-        res.json({name: rows[0].name, email})
+        // res.json({name: rows[0].name, email})
       } else res.status(500).json({error: 'Invalid Login'})
     })
 
@@ -77,5 +89,7 @@ app.post("/registration", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+
+
 
 
