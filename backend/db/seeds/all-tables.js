@@ -11,9 +11,9 @@ exports.seed = async function(knex, Promise) {
   await knex('robots').del();
   await Promise.all (
     [
-      knex('robots').insert({name: 'Robot1', user_id: 1, hp: 10, str: 10, dex: 10, arm: 5}),
-      knex('robots').insert({name: 'Robot2', user_id: 2, hp: 10, str: 10, dex: 10, arm: 5}),
-      knex('robots').insert({name: 'Robot3', user_id: 3, hp: 10, str: 10, dex: 10, arm: 5}),
+      knex('robots').insert({name: 'Robot1', user_id: 1, hp: 10, str: 10, dex: 10, arm: 5, active: true}),
+      knex('robots').insert({name: 'Robot2', user_id: 2, hp: 10, str: 10, dex: 10, arm: 5, active: true}),
+      knex('robots').insert({name: 'Robot3', user_id: 3, hp: 10, str: 10, dex: 10, arm: 5, active: true}),
     ]
   );
 
