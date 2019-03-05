@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom';
 class Combat extends Component {
   state = {
     opponents: undefined,
-    
+    battleLog: undefined
   }
   componentDidMount() {
     fetch('/generate-starter-robots')
@@ -18,7 +18,7 @@ class Combat extends Component {
     })
   }
   launchBattle = (userRobot, opponentRobot) => {
-    return function (e) {
+    return (function (e) {
       const robots = JSON.stringify([userRobot, opponentRobot])
       console.log(robots)
       e.preventDefault();
@@ -30,9 +30,12 @@ class Combat extends Component {
         body: robots
       })
       .then(res => res.json())
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(this.state);
+        this.setState({battleLog: res})
+      })
       .catch((e) => console.log(e, 'Did not get battle info back from server') )
-    }
+    }).bind(this);
   }
   render() {
     if (!this.props.userInfo.name) {
@@ -45,6 +48,15 @@ class Combat extends Component {
         </div>
       )
     }
+    if (this.state.battleLog) {
+      return (
+        <div>
+          {this.state.battleLog.log.map(turn => {
+            return(<p>{JSON.stringify(turn)}</p>)
+          })}
+        </div>
+      )
+    }
     return (
       <div>
         {this.state.opponents.map(robot => 
@@ -54,7 +66,7 @@ class Combat extends Component {
             <p>Str: {robot.strength}</p>
             <p>Dex: {robot.dexterity}</p>
             <p>HP: {robot.health}</p>
-            <p>ARM: {robot.armor}</p>
+            <p>ARM: {robot.armour}</p>
             <p>RS: {robot.remainingStats}</p>
               <button onClick={this.launchBattle(this.props.battleRobot, robot)}>Battle</button>
           </div>)
