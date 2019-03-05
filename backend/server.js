@@ -74,14 +74,14 @@ app.post('/login', (req, res) => {
 
 app.post('/retire', (req, res) => {
   knex('robots')
-    .where('id', req.body.robot.id)
+    .where('id', req.body.id)
     .update('active', false)
     .catch(err => console.log(err.message))
     .then(function () {
-      console.log("Retired robot # " + req.body.robot.id);
+      console.log("Retired robot # " + req.body.id);
       knex('robots')
       .select('*')
-      .where('user_id', req.body.robot.user_id)
+      .where('user_id', req.body.user_id)
       .then(users_robots => {
         res.json({
           robots: users_robots
