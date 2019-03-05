@@ -1,5 +1,6 @@
-const combatLog = [];
+let combatLog = [];
 function Combat(robot1, robot2) {
+  combatLog = [];
   // robot1.name = "Rocky";
   // robot2.name = "Dolf";
   atk = "attack";

@@ -127,18 +127,17 @@ app.get('/generate-starter-robots', (req, res) => {
 })
 
 app.post('/robots-fight', (req, res) => {
- 
-  let results = Combat(req.body[0], req.body[1])
-
+  const result = Combat(req.body[0], req.body[1])
+  console.log('First Pass',result);
   knex('battle_results') //insert to battle results  with the winner ID
     .insert({
-      winner_id: results.winner.id
+      winner_id: result.winner.id
     })
     .returning('id')
     .then(battleEntry => {
       let [battleID] = battleEntry;
       console.log(battleID)
-
+      
       knex('robots_battles') //create first robot_battle entry with id from battle results, and first robot_id
         .insert({
           battle_id: battleID,
@@ -154,10 +153,11 @@ app.post('/robots-fight', (req, res) => {
               battle_id: battleID,
               robot_id: req.body[1].id
             })
-            .returning('*')
+            // .returning('*')
             .then( function() {
               console.log("Final Battle Log Entered")
-              res.json(results); //send the response data (battle results)
+              console.log(result);
+              res.json(result); //send the response data (battle results)
             })
             .catch(err => console.log(err.message));
         })
