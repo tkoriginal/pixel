@@ -1,3 +1,4 @@
+const combatLog = [];
 function Combat(robot1, robot2) {
   // robot1.name = "Rocky";
   // robot2.name = "Dolf";
@@ -53,28 +54,28 @@ test = {
   }
 };
 
-const combatLog = [];
 
-Robot1 = {
-  remainingStats: 0,
-  strength: 16,
-  dexterity: 0,
-  armour: 8,
-  health: 80
-};
 
-Robot2 = {
-  remainingStats: 0,
-  strength: 13,
-  dexterity: 14,
-  armour: 0,
-  health: 80
-};
+// Robot1 = {
+//   remainingStats: 0,
+//   strength: 16,
+//   dexterity: 0,
+//   armour: 8,
+//   health: 80
+// };
 
-let results = Combat(Robot1, Robot2);
-console.log(results.log);
-console.log(results)
-console.log(`The winner is: ${results.winner.name} with ${results.winner.health} health remaining!`);
+// Robot2 = {
+//   remainingStats: 0,
+//   strength: 13,
+//   dexterity: 14,
+//   armour: 0,
+//   health: 80
+// };
+
+// let results = Combat(Robot1, Robot2);
+// console.log(results.log);
+// console.log(results)
+// console.log(`The winner is: ${results.winner.name} with ${results.winner.health} health remaining!`);
 
 module.exports = {Combat}
 

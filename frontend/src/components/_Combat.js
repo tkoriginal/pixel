@@ -3,7 +3,8 @@ import {Redirect} from 'react-router-dom';
 
 class Combat extends Component {
   state = {
-    opponents: undefined
+    opponents: undefined,
+    
   }
   componentDidMount() {
     fetch('/generate-starter-robots')

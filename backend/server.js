@@ -15,7 +15,7 @@ const morgan      = require('morgan');
 const cookieSession = require('cookie-session');
 
 const {generateRobot} = require('./util/robotGenerator.js')
-const {robotFight} = require('./util/robotCombat.js')
+const {Combat} = require('./util/robotCombat.js')
 
 // Seperated Routes for each Resource
 // const usersRoutes = require("./routes/users");
@@ -128,29 +128,31 @@ app.get('/generate-starter-robots', (req, res) => {
 
 app.post('/robots-fight', (req, res) => {
  
-  let results = robotFight(req.body.robots[0], req.body.robots[1])
+  let results = Combat(req.body[0], req.body[1])
 
   knex('battle_results') //insert to battle results  with the winner ID
     .insert({
       winner_id: results.winner.id
     })
     .returning('id')
-    .then(battleID => {
+    .then(battleEntry => {
+      let [battleID] = battleEntry;
       console.log(battleID)
 
-      knex('robot_battles') //create first robot_battle entry with id from battle results, and first robot_id
+      knex('robots_battles') //create first robot_battle entry with id from battle results, and first robot_id
         .insert({
           battle_id: battleID,
-          robot_id: req.body.robots[0].id
+          robot_id: req.body[0].id
         })
-        returning('battle_id')
-        .then(battleID => {
+        .returning('battle_id')
+        .then(battleEntry => {
+          let [battleID] = battleEntry;
           console.log(battleID)
 
-          knex('robot_battles')  //create first robot_battle entry with id from battle results, and second robot_id
+          knex('robots_battles')  //create first robot_battle entry with id from battle results, and second robot_id
             .insert({
               battle_id: battleID,
-              robot_id: req.body.robots[1].id
+              robot_id: req.body[1].id
             })
             .returning('*')
             .then( function() {
