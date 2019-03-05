@@ -102,6 +102,7 @@ app.post('/add-robot', (req, res) => {
       strength: req.body.robot.strength,
       dexterity: req.body.robot.dexterity,
       armour: req.body.robot.armour,
+      remainingStats: req.body.robot.remainingStats,
       active: true
     })
     .returning('*')
