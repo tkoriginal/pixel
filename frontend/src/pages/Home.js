@@ -33,7 +33,7 @@ class Home extends Component {
     return (
       <div>
         <h1>Welcome {this.props.name}!</h1>
-        <MyRobots robots={this.props.userInfo.robots}/>
+        <MyRobots robots={this.props.userInfo.robots} updateRobotInfo={this.props.updateRobotInfo}/>
       </div>
     );
   }
