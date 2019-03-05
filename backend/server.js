@@ -113,7 +113,7 @@ app.post('/add-robot', (req, res) => {
       .then(users_robots => {
         res.json({
           robots: users_robots
-        }) 
+        })
       })  
     );
 })
