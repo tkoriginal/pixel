@@ -5,6 +5,7 @@ class ChooseRobot extends Component {
   state = {
     robots: []
   }
+  
   componentDidMount() {
     fetch('/generate-starter-robots')
     .then(res => res.json())
@@ -28,7 +29,12 @@ class ChooseRobot extends Component {
     }
     return (
       <div>
-        Test
+        {this.state.robots.map( robot => {
+          return (
+          <div>
+            {JSON.stringify(robot)}
+          </div>)
+        })}
       </div>
     )
   }

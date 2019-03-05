@@ -23,14 +23,14 @@ class MyRobots extends Component {
       <div>
         {this.props.robots.map(robot => 
          (<div key={robot.id}>
-            <p>{robot.id}</p>
-            <p>{robot.name}</p>
-            <p>{robot.strength}</p>
-            <p>{robot.dexterity}</p>
-            <p>{robot.health}</p>
-            <p>{robot.armor}</p>
-            <p>{robot.active}</p>
-            <p>{robot.remainingStats}</p>
+            <p>ID: {robot.id}</p>
+            <p>Name: {robot.name}</p>
+            <p>Str: {robot.strength}</p>
+            <p>Dex: {robot.dexterity}</p>
+            <p>HP: {robot.health}</p>
+            <p>ARM: {robot.armor}</p>
+            <p>Active: {robot.active ? 'Active':'Retired'}</p>
+            <p>RS: {robot.remainingStats}</p>
               <button type="submit" onClick={this.retireRobot(robot)}>Retire</button>
           </div>)
         )}
