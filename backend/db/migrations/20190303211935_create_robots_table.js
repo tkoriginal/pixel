@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
     table.integer('health');
     table.integer('strength');
     table.integer('dexterity');
-    table.integer('armor');
+    table.integer('armour');
     table.boolean('active');
   });
 };
