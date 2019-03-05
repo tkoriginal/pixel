@@ -16,11 +16,13 @@ class MyRobots extends Component {
       .then(res => console.log(res))
     }
   }
+
   render() {
     return (
       <div>
         {this.props.robots.map(robot => 
          (<div>
+
             <p>{robot.id}</p>
             <p>{robot.name}</p>
             <p>{robot.str}</p>
@@ -28,6 +30,7 @@ class MyRobots extends Component {
             <p>{robot.hp}</p>
             <p>{robot.arm}</p>
               <button type="submit" onClick={this.retireRobot(robot)}>Retire</button>
+
           </div>)
         )}
         Test
@@ -35,4 +38,6 @@ class MyRobots extends Component {
     )
   }
 }
+
 export default MyRobots;
+

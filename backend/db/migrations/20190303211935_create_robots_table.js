@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
     table.integer('str');
     table.integer('dex');
     table.integer('arm');
+    table.boolean('active');
   });
 };
 
