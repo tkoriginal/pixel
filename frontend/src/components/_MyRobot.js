@@ -5,6 +5,7 @@ class MyRobots extends Component {
   retireRobot = (robot) => {
     return function (e) {
       e.preventDefault();
+      console.log(robot)
       fetch ('/retire', {
         method: 'POST',
         headers: {
