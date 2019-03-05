@@ -14,6 +14,8 @@ const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const cookieSession = require('cookie-session');
 
+const {generateRobot} = require('./util/robotGenerator.js')
+
 // Seperated Routes for each Resource
 // const usersRoutes = require("./routes/users");
 
@@ -90,6 +92,27 @@ app.post('/retire', (req, res) => {
     });
 })
 
+app.post('/add-robot', (req, res) => {
+  knex('robots')
+    .insert({
+      name: req.body.name,
+      user_id: req.body.user_id,
+      health: req.body.hp,
+      strength: req.body.str,
+      dexterity: req.body.dex,
+      armor: req.body.arm,
+      active: true
+    })
+    .returning('*')
+    .catch(err => console.log(err.message))
+    .then();
+})
+
+app.get('/generate-starter-robots', (req, res) => {
+  let starterBots =  generateRobot(3, 30, false)
+  res.json(starterBots);
+})
+
 app.post("/registration", (req, res) => {
   console.log("Should Print Name:")
   console.log(req.body)
@@ -108,4 +131,5 @@ app.listen(PORT, () => {
 
 
 
-
+//Test code
+console.log(generateRobot(3, 30, false));

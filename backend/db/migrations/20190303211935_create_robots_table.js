@@ -4,10 +4,11 @@ exports.up = function(knex, Promise) {
     table.increments('id').primary();
     table.string('name');
     table.integer('user_id').references('id').on('users');
-    table.integer('hp');
-    table.integer('str');
-    table.integer('dex');
-    table.integer('arm');
+    table.integer('remainingStats');
+    table.integer('health');
+    table.integer('strength');
+    table.integer('dexterity');
+    table.integer('armor');
     table.boolean('active');
   });
 };
