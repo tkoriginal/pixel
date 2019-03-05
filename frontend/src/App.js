@@ -16,7 +16,9 @@ class App extends Component {
   }
 
   updateRobotInfo = (robots) => {
-    this.setState({robots})
+    console.log(this);
+    console.log(robots)
+    this.setState({robots: robots})
   }
   render() {
     return (
@@ -24,7 +26,10 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={(routeProps) => (<Home {...routeProps} userInfo={this.state} updateRobotInfo={this.updateRobotInfo}/>)}/>
           <Route exact path='/login' render={(routeProps) => (<Login {...routeProps} successfulLogin={this.successfulLogin}/>)}/>
-          <Route exact path='/choose-robot' render={(routeProps) => (<ChooseRobot {...routeProps} userInfo={this.state} successfulLogin={this.successfulLogin}/>)}/>
+          <Route exact path='/choose-robot' 
+            render={(routeProps) => (<ChooseRobot {...routeProps} 
+            userInfo={this.state} updateRobotInfo={this.updateRobotInfo} 
+            successfulLogin={this.successfulLogin}/>)}/>
         </Switch>
       </div>
     )

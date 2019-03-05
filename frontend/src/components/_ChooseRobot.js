@@ -4,20 +4,29 @@ import { Redirect } from 'react-router-dom';
 class ChooseRobot extends Component {
   state = {
     robotName: undefined,
-    robots: []
+    robots: [],
+    goHome: false
   }
 
   selectRobot = (robot, user_id, robotName) => {
-    return function (e) {
+    return (function (e) {
       const body = JSON.stringify({robot, user_id, robotName})
       fetch('/add-robot', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body
       })
-    }
+        .then(res => res.json())
+        .then(res => {
+          console.log(this)
+          this.props.updateRobotInfo(res.robots)
+          this.setState({goHome: true})
+        })
+        .catch((e) =>{
+          console.log(e)
+        })
+   }).bind(this)
   }
-
   handleRobotName = (e) =>{
     this.setState({robotName: e.target.value})
   } 
@@ -42,6 +51,9 @@ class ChooseRobot extends Component {
       return (<div>
         Loading cool new robots for you to choose from...
       </div>)
+    }
+    if (this.state.goHome) {
+      return (<Redirect to="/" />)
     }
     return (
       <div>
