@@ -93,19 +93,30 @@ app.post('/retire', (req, res) => {
 })
 
 app.post('/add-robot', (req, res) => {
+  console.log(req.body);
   knex('robots')
     .insert({
-      name: req.body.name,
+      name: req.body.robotName,
       user_id: req.body.user_id,
-      health: req.body.hp,
-      strength: req.body.str,
-      dexterity: req.body.dex,
-      armor: req.body.arm,
+      health: req.body.robot.health,
+      strength: req.body.robot.strength,
+      dexterity: req.body.robot.dexterity,
+      armour: req.body.robot.armour,
+      remainingStats: req.body.robot.remainingStats,
       active: true
     })
     .returning('*')
     .catch(err => console.log(err.message))
-    .then();
+    .then(
+      knex('robots')
+      .select('*')
+      .where('user_id', req.body.user_id)
+      .then(users_robots => {
+        res.json({
+          robots: users_robots
+        })
+      })  
+    );
 })
 
 app.get('/generate-starter-robots', (req, res) => {
