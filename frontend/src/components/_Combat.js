@@ -17,15 +17,16 @@ class Combat extends Component {
     })
   }
   launchBattle = (userRobot, opponentRobot) => {
-    const robots = [userRobot, opponentRobot]
     return function (e) {
+      const robots = JSON.stringify([userRobot, opponentRobot])
+      console.log(robots)
       e.preventDefault();
       fetch('/robots-fight', {
         method:'POST',
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(robots)
+        body: robots
       })
       .then(res => res.json())
       .then(res => console.log(res))
