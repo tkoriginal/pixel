@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-
+import { Redirect } from 'react-router-dom';
 class MyRobots extends Component {
-
+  state = {
+    battle: false
+  }
   retireRobot = (robot) => {
     return function (e) {
       e.preventDefault();
@@ -17,8 +19,17 @@ class MyRobots extends Component {
       .then(res => console.log(res))
     }
   }
-
+  launchBattle = (robot) => {
+    return (function (e) {
+      e.preventDefault();
+      this.setState({battle:true});
+      this.props.updateChosenBattleRobot(robot);
+    }).bind(this)
+  }
   render() {
+    if (this.state.battle) {
+      return <Redirect to='/combat' />
+    }
     return (
       <div>
         {this.props.robots.map(robot => 
@@ -31,7 +42,8 @@ class MyRobots extends Component {
             <p>ARM: {robot.armor}</p>
             <p>Active: {robot.active ? 'Active':'Retired'}</p>
             <p>RS: {robot.remainingStats}</p>
-              <button type="submit" onClick={this.retireRobot(robot)}>Retire</button>
+              <button onClick={this.retireRobot(robot)}>Retire</button>
+              <button onClick={this.launchBattle(robot)}>Battle</button>
           </div>)
         )}
       </div>
