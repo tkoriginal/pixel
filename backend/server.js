@@ -106,17 +106,18 @@ app.post('/add-robot', (req, res) => {
       active: true
     })
     .returning('*')
-    .catch(err => console.log(err.message))
-    .then(
+    .then( () => {
       knex('robots')
-      .select('*')
-      .where('user_id', req.body.user_id)
-      .then(users_robots => {
-        res.json({
-          robots: users_robots
-        })
-      })  
-    );
+        .select('*')
+        .where('user_id', req.body.user_id)
+        .then(users_robots => {
+          res.json({
+            robots: users_robots
+          })
+        })  
+      }
+    )
+    .catch(err => console.log(err.message));
 })
 
 app.get('/generate-starter-robots', (req, res) => {
