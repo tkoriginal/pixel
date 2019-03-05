@@ -14,11 +14,15 @@ class App extends Component {
   successfulLogin = (userData) => {
     this.setState(userData)
   }
+
+  updateRobotInfo = (robots) => {
+    this.setState({robots})
+  }
   render() {
     return (
       <div>
         <Switch>
-          <Route exact path='/' render={(routeProps) => (<Home {...routeProps} userInfo={this.state}/>)}/>
+          <Route exact path='/' render={(routeProps) => (<Home {...routeProps} userInfo={this.state} updateRobotInfo={this.updateRobotInfo}/>)}/>
           <Route exact path='/login' render={(routeProps) => (<Login {...routeProps} successfulLogin={this.successfulLogin}/>)}/>
         </Switch>
       </div>
