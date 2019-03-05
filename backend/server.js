@@ -132,4 +132,4 @@ app.listen(PORT, () => {
 
 
 //Test code
-console.log(generateRobot(3, 30, false));
+// console.log(generateRobot(3, 30, false));

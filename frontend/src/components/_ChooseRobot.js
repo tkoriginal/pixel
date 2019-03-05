@@ -3,9 +3,25 @@ import { Redirect } from 'react-router-dom';
 
 class ChooseRobot extends Component {
   state = {
+    robotName: undefined,
     robots: []
   }
-  
+
+  selectRobot = (robot, user_id, robotName) => {
+    return function (e) {
+      const body = JSON.stringify({robot, user_id, robotName})
+      fetch('/add-robot', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body
+      })
+    }
+  }
+
+  handleRobotName = (e) =>{
+    this.setState({robotName: e.target.value})
+  } 
+
   componentDidMount() {
     fetch('/generate-starter-robots')
     .then(res => res.json())
@@ -29,10 +45,16 @@ class ChooseRobot extends Component {
     }
     return (
       <div>
+        <label htmlFor="robot-name">Select Robot Name:</label>
+        <input type="text" name="robot-name" value={this.state.robotName} onChange={this.handleRobotName}/>
         {this.state.robots.map( robot => {
           return (
-          <div>
-            {JSON.stringify(robot)}
+          <div key={robot.strength}>
+            <p>Health: {robot.health}</p>
+            <p>Strength: {robot.strength}</p>
+            <p>Dexterity: {robot.dexterity}</p>
+            <p>Armour: {robot.armour}</p>
+            <button onClick={this.selectRobot(robot, this.props.userInfo.id, this.state.robotName)}>Select Robot</button>
           </div>)
         })}
       </div>
