@@ -17,16 +17,6 @@ class Home extends Component {
 
   }
 
-  // Retrieves the list of items from the Express app
-  getList = () => {
-    fetch('/api/getList')
-    .then(res => res.json())
-    .then(list => {
-      console.log(list);
-      this.setState({ list })
-    })
-  }
-
   render() {
     if (!this.props.userInfo.name) {
       return (<Redirect to="/login" />)
@@ -35,7 +25,11 @@ class Home extends Component {
       <div>
         <h1>Welcome {this.props.userInfo.name}!</h1>
         <AddRobot />
-        <MyRobots robots={this.props.userInfo.robots} updateRobotInfo={this.props.updateRobotInfo}/>
+        <MyRobots 
+          robots={this.props.userInfo.robots} 
+          updateRobotInfo={this.props.updateRobotInfo}
+          updateChosenBattleRobot={this.props.updateChosenBattleRobot}
+        />
       </div>
     );
   }
