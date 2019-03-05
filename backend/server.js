@@ -15,6 +15,7 @@ const morgan      = require('morgan');
 const cookieSession = require('cookie-session');
 
 const {generateRobot} = require('./util/robotGenerator.js')
+const {robotFight} = require('./util/robotCombat.js')
 
 // Seperated Routes for each Resource
 // const usersRoutes = require("./routes/users");
@@ -123,6 +124,45 @@ app.post('/add-robot', (req, res) => {
 app.get('/generate-starter-robots', (req, res) => {
   let starterBots =  generateRobot(3, 30, false)
   res.json(starterBots);
+})
+
+app.post('/robots-fight', (req, res) => {
+ 
+  let results = robotFight(req.body.robots[0], req.body.robots[1])
+
+  knex('battle_results') //insert to battle results  with the winner ID
+    .insert({
+      winner_id: results.winner.id
+    })
+    .returning('id')
+    .then(battleID => {
+      console.log(battleID)
+
+      knex('robot_battles') //create first robot_battle entry with id from battle results, and first robot_id
+        .insert({
+          battle_id: battleID,
+          robot_id: req.body.robots[0].id
+        })
+        returning('battle_id')
+        .then(battleID => {
+          console.log(battleID)
+
+          knex('robot_battles')  //create first robot_battle entry with id from battle results, and second robot_id
+            .insert({
+              battle_id: battleID,
+              robot_id: req.body.robots[1].id
+            })
+            .returning('*')
+            .then( function() {
+              console.log("Final Battle Log Entered")
+              res.json(results); //send the response data (battle results)
+            })
+            .catch(err => console.log(err.message));
+        })
+        .catch(err => console.log(err.message));
+    })
+    .catch(err => console.log(err.message));
+
 })
 
 app.post("/registration", (req, res) => {
