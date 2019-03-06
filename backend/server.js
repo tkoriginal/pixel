@@ -168,14 +168,19 @@ app.post('/robots-fight', (req, res) => {
 })
 
 app.post("/registration", (req, res) => {
-  console.log("Should Print Name:")
   console.log(req.body)
 
   knex('users')
-    .insert({ name: req.body.name }) 
-    .returning('*')
-    .catch(err => console.log(err.message))
-    .then();
+    .insert({ 
+      name: req.body.name,
+      password: req.body.password,
+      email: req.body.email
+      }) 
+    // .returning('*')
+    .then(
+      res.status(200).send('User succesfully created.')
+    )
+    .catch(err => console.log(err.message));
 
 })
 
