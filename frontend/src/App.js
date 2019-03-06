@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Registration from './pages/Registration';
 import ChooseRobot from './components/_ChooseRobot';
 import Combat from './components/_Combat';
+
 class App extends Component {
   state = {
     id: undefined,
@@ -41,6 +43,14 @@ class App extends Component {
             exact path='/login' 
             render={(routeProps) => (
               <Login {...routeProps} 
+                successfulLogin={this.successfulLogin}
+              />
+            )}
+          />
+          <Route 
+            exact path='/registration' 
+            render={(routeProps) => (
+              <Registration {...routeProps} 
                 successfulLogin={this.successfulLogin}
               />
             )}

@@ -176,8 +176,10 @@ app.post("/registration", (req, res) => {
       password: req.body.password,
       email: req.body.email
       }) 
-    .returning('*')
-    .then()
+    // .returning('*')
+    .then(
+      res.status(200).send('User succesfully created.')
+    )
     .catch(err => console.log(err.message));
 
 })
