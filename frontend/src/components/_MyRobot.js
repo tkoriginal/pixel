@@ -78,10 +78,11 @@ const Stats = styled.div`
 class MyRobots extends Component {
   state = {
     battle: false,
-    newRobot: false
+    newRobot: false,
+    updateRobot:false
   }
   retireRobot = (robot) => {
-    return function (e) {
+    return (function (e) {
       e.preventDefault();
       console.log(robot)
       fetch ('/retire', {
@@ -92,8 +93,11 @@ class MyRobots extends Component {
         body: JSON.stringify(robot)
       })
       .then(res => res.json())
-      .then(res => console.log(res))
-    }
+      .then(res => {
+        this.props.updateRobotInfo(res.robots)
+        this.setState({updateRobot:!this.state.updateRobot})
+      })
+    }).bind(this)
   }
   chooseRobot = () => {
     this.setState({newRobot:true})

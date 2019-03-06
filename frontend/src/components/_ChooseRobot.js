@@ -5,11 +5,16 @@ class ChooseRobot extends Component {
   state = {
     robotName: undefined,
     robots: [],
-    goHome: false
+    goHome: false,
+    noName:false
   }
 
   selectRobot = (robot, user_id, robotName) => {
     return (function (e) {
+      if (!robotName){
+        this.setState({noName:true});
+        return
+      }
       const body = JSON.stringify({robot, user_id, robotName})
       fetch('/add-robot', {
         method: 'POST',
@@ -57,8 +62,11 @@ class ChooseRobot extends Component {
     }
     return (
       <div>
-        <label htmlFor="robot-name">Select Robot Name:</label>
-        <input type="text" name="robot-name" value={this.state.robotName} onChange={this.handleRobotName}/>
+        <div style={{display: 'flex'}}>
+          <label htmlFor="robot-name">Select Robot Name:</label>
+          <input type="text" name="robot-name" value={this.state.robotName} onChange={this.handleRobotName} required/>
+          {this.state.noName && <p style={{color:'red'}}>Please enter a robot name</p>}
+        </div>
         {this.state.robots.map( robot => {
           return (
           <div key={robot.strength}>
