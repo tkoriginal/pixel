@@ -7,7 +7,6 @@ class AddRobot extends Component {
   }
   chooseRobot = () => {
     this.setState({newRobot:true})
-  
   }
 
   render() {

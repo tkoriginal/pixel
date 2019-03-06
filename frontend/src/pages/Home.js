@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import MyRobots from '../components/_MyRobot'
-import AddRobot from '../components/_AddRobot'
+import MyRobots from '../components/_MyRobot';
 // import { throws } from 'assert';
 class Home extends Component {
   // Initialize the state
@@ -24,7 +23,6 @@ class Home extends Component {
     return (
       <div>
         <h1>Welcome {this.props.userInfo.name}!</h1>
-        <AddRobot />
         <MyRobots 
           robots={this.props.userInfo.robots} 
           updateRobotInfo={this.props.updateRobotInfo}
