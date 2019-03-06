@@ -21,6 +21,7 @@ const RobotFront = styled.div`
   height: 100%;
   overflow: hidden;
   background-size: cover;
+  background-origin: center;
   background-repeat: no-repeat;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -123,7 +124,7 @@ class MyRobots extends Component {
         </div>
         {this.props.robots.map(robot => 
           (<Robot >
-            <RobotFront key={robot.id} style={{backgroundImage: 'url("https://media.giphy.com/media/eFxMqx03XEhBS/giphy.gif")'}}>
+            <RobotFront key={robot.id} style={{backgroundImage: 'url("https://66.media.tumblr.com/4f8896ebca88bb0d8308607315d085c9/tumblr_n439wbdHxA1sulisxo1_400.gif")'}}>
               <RobotName>{robot.name}</RobotName>
             </RobotFront>
             <RobotBack>
@@ -136,8 +137,12 @@ class MyRobots extends Component {
                 <p>RS: {robot.remainingStats}</p>
               </Stats>
               <div>
-                <button onClick={this.retireRobot(robot)}>Retire</button>
-                <button onClick={this.launchBattle(robot)}>Battle</button>
+                {robot.active && (
+                  <React.Fragment>
+                    <button onClick={this.retireRobot(robot)}>Retire</button>
+                    <button onClick={this.launchBattle(robot)}>Battle</button>
+                  </React.Fragment>
+                )}
               </div>
             </RobotBack>
           </Robot>
