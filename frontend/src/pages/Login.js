@@ -9,21 +9,12 @@ class Login extends Component {
       loggedIn: false
     };
 
-    this.handleChangeName = this.handleChangeName.bind(this);
-    this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChangeName(event) {
-    this.setState({name: event.target.value});
-  }
-  handleChangePassword(event) {
-    this.setState({password: event.target.value});
-  }
-
-  handleRegisteration = () => {
-    this.setState({register: true})
-  }
+  handleChangeName = (event) => this.setState({name: event.target.value});
+  handleChangePassword = (event) => this.setState({password: event.target.value});
+  handleRegistration = () => this.setState({register: true})
 
   handleSubmit(event) {
     event.preventDefault();
@@ -40,8 +31,7 @@ class Login extends Component {
      })
      .catch(res => {
        console.log("error", res)
-     })
-     ;
+     });
   }
   render() {
     if (this.state.loggedIn) {
@@ -60,7 +50,7 @@ class Login extends Component {
             <input type="password" value={this.state.password} onChange={this.handleChangePassword} />
           </label>
           <input type="submit" value="Submit" />
-        <button onClick={this.handleRegisteration}>Register</button>
+        <button onClick={this.handleRegistration}>Register</button>
         </form>
       </React.Fragment>
     );
