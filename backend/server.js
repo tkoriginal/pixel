@@ -47,6 +47,60 @@ app.get("/api/getList", (req, res) => {
   });
 });
 
+app.get('/generate-starter-robots', (req, res) => {
+  let starterBots =  generateRobot(3, 30, false)
+  res.json(starterBots);
+})
+
+
+app.get('/user/active-robots', (req, res) => {
+  knex('robots')
+    .select('*')
+    .where({
+      user_id: req.body.user_id,
+      active: true
+    })
+    .returning('*')
+    .then(users_robots => {
+      res.json({
+        robots: users_robots
+      })
+    }) 
+})
+
+app.get('/user/retired-robots', (req, res) => {
+  knex('robots')
+    .select("*")
+    .where({
+      user_id: req.body.user_id,
+      active: false
+    })
+    .returning("*")
+    .then(users_robots => {
+      res.json({
+        robots: users_robots
+      })
+    }) 
+})
+
+app.get('/hall-of-fame', (req, res) => {
+
+  knex
+  .from('battle_results')
+  .join('robots', 'battle_results.winner_id', '=', 'robots.id')
+  .join('users', 'robots.user_id', '=', 'users.id')
+  .limit(10)
+  .count('winner_id')
+  .groupBy('winner_id', 'users.id', 'users.name', 'robots.name')
+  .orderBy('count', 'desc')
+  .select('winner_id', 'users.id', 'users.name as userName', 'robots.name as robotName')
+  .returning('*')
+  .then(results => {
+    res.json(results)
+  })
+
+})
+
 app.post('/login', (req, res) => {
   let validUser;
   knex('users')
@@ -60,7 +114,10 @@ app.post('/login', (req, res) => {
 
         knex('robots')
           .select('*')
-          .where('user_id', rows[0].id)
+          .where({
+            user_id: rows[0].id,
+            active: true
+          })
           .then(users_robots => {
             res.json({
               id: rows[0].id,
@@ -84,7 +141,10 @@ app.post('/retire', (req, res) => {
       console.log("Retired robot # " + req.body.id);
       knex('robots')
       .select('*')
-      .where('user_id', req.body.user_id)
+      .where({
+        user_id: req.body.user_id,
+        active: true
+      })
       .then(users_robots => {
         res.json({
           robots: users_robots
@@ -110,7 +170,10 @@ app.post('/add-robot', (req, res) => {
     .then( () => {
       knex('robots')
         .select('*')
-        .where('user_id', req.body.user_id)
+        .where({
+          user_id: req.body.user_id,
+          active: true
+        })
         .then(users_robots => {
           res.json({
             robots: users_robots
@@ -119,11 +182,6 @@ app.post('/add-robot', (req, res) => {
       }
     )
     .catch(err => console.log(err.message));
-})
-
-app.get('/generate-starter-robots', (req, res) => {
-  let starterBots =  generateRobot(3, 30, false)
-  res.json(starterBots);
 })
 
 app.post('/robots-fight', (req, res) => {
