@@ -212,11 +212,23 @@ app.post('/robots-fight', (req, res) => {
               robot_id: req.body[1].id
             })
             // .returning('*')
-            .then( function() {
-              console.log("Final Battle Log Entered")
-              console.log(result);
-              res.json(result); //send the response data (battle results)
-            })
+              .then( () => {
+                if (result.winner.id){
+                  knex('robots') //Giving winner stat points.
+                    .where('id', result.winner.id)
+                    .update('remainingStats', (result.winner.remainingStats + 5))
+                    .returning('*')
+                    .then( () => {
+                      res.json(result);
+                    })
+                } else {
+                  res.json(result);
+                }
+              })
+              // function() {
+              // console.log("Final Battle Log Entered")
+              // console.log(result);
+              // res.json(result); //send the response data (battle results)
             .catch(err => console.log(err.message));
         })
         .catch(err => console.log(err.message));
