@@ -23,7 +23,23 @@ class Combat extends Component {
       console.log('Robot route not working right now')
     })
   }
-  
+  componentWillUnmount() {
+    console.log('componentWillUnMount')
+    fetch('/user/active-robots',{
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({user_id: this.props.user_id})
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log('Didmount',res)
+      this.props.updateRobotInfo(res.robots)
+    })
+    .then(res => this.setState({updateRobot:!this.state.updateRobot}))
+    .catch(e => {
+      console.log('Error', e , 'Didn\'t go through')
+    })
+  }
   handleGoHome = () => {
     this.setState({goHome: true})
   }

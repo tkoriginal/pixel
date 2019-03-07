@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 import ChooseRobot from './components/_ChooseRobot';
 import Combat from './components/_Combat';
-
+import HallOfFame from './components/_HallOfFame';
 class App extends Component {
   state = {
     id: undefined,
@@ -68,11 +68,20 @@ class App extends Component {
             render={(routeProps) => (
               <Combat {...routeProps}
                 userInfo={this.state}
+                user_id={this.state.id}
                 battleRobot={this.state.battleRobot}
                 updateRobotInfo={this.updateRobotInfo}
               />
             )}
           />
+          <Route exact path='/hall-of-fame'
+            render={(routeProps) => (
+              <HallOfFame {...routeProps}
+                userInfo={this.state}
+              />
+            )}
+          />
+
         </Switch>
       </div>
     )
