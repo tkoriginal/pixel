@@ -191,11 +191,11 @@ app.post('/robots/update', (req, res) => {
   knex('robots')
     .where('id', req.body.id)
     .update({
-      health: req.body.robot.health,
-      strength: req.body.robot.strength,
-      dexterity: req.body.robot.dexterity,
-      armour: req.body.robot.armour,
-      remainingStats: req.body.robot.remainingStats,
+      health: req.body.health,
+      strength: req.body.strength,
+      dexterity: req.body.dexterity,
+      armour: req.body.armour,
+      remainingStats: req.body.remainingStats,
     })
     .then(function () {
       console.log("Retired robot # " + req.body.id);

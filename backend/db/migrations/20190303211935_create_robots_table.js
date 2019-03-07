@@ -9,6 +9,7 @@ exports.up = function(knex, Promise) {
     table.integer('strength');
     table.integer('dexterity');
     table.integer('armour');
+    table.specificType('traits', 'text[]');
     table.boolean('active');
   });
 };
