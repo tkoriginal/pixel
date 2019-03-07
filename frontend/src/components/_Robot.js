@@ -83,7 +83,7 @@ class Robot extends React.Component{
     health: this.props.robot.health,
     armour: this.props.robot.armour,
     active: this.props.robot.active, 
-    remainingStats: 5
+    remainingStats: 5 || this.props.robot.remainingStats
   }
   fixedState = {
     id : this.props.robot.id,
@@ -112,6 +112,21 @@ class Robot extends React.Component{
       this.setState(obj);
     }
   }
+  handleUpdateState = () => {
+    if (this.state.remainingStats === this.fixedState.remainingStats) {
+      console.log(this.state)
+      return
+    }
+    fetch('/robots/update', {
+      method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.state)
+      })
+      .then(res => res.json)
+      .then(res => console.log(res.json))
+    }
 
   render(){
     return (
@@ -122,39 +137,38 @@ class Robot extends React.Component{
         <RobotBack>
           <Stats>
             <Stat>
+              <StatDescription>HP: {this.state.health}</StatDescription>
+              <StatButton onClick={this.handleStat('health', this.state.health, 'minus').bind(this)}>-</StatButton>
+              <StatButton onClick={this.handleStat('health', this.state.health, 'plus').bind(this)}>+</StatButton>
+            </Stat>
+            <Stat>
               <StatDescription>Str: {this.state.strength}</StatDescription>
               <StatButton onClick={this.handleStat('strength', this.state.strength, 'minus').bind(this)}>-</StatButton>
               <StatButton onClick={this.handleStat('strength', this.state.strength, 'plus').bind(this)}>+</StatButton>
-              </Stat>
+            </Stat>
             <Stat>
               <StatDescription>Dex: {this.state.dexterity}</StatDescription>
               <StatButton onClick={this.handleStat('dexterity', this.state.dexterity, 'minus').bind(this)}>-</StatButton>
               <StatButton onClick={this.handleStat('dexterity', this.state.dexterity, 'plus').bind(this)}>+</StatButton>
-              </Stat>
-            <Stat>
-              <StatDescription>Stat: {this.state.health}</StatDescription>
-              <StatButton onClick={this.handleStat('health', this.state.health, 'minus').bind(this)}>-</StatButton>
-              <StatButton onClick={this.handleStat('health', this.state.health, 'plus').bind(this)}>+</StatButton>
-              </Stat>
+            </Stat>
             <Stat>
               <StatDescription>ARM: {this.state.armour}</StatDescription>
               <StatButton onClick={this.handleStat('armour', this.state.armour, 'minus').bind(this)}>-</StatButton>
               <StatButton onClick={this.handleStat('armour', this.state.armour, 'plus').bind(this)}>+</StatButton>
-              </Stat>
+            </Stat>
             <Stat>
               <StatDescription>Active: {this.state.active ? 'Active':'Retired'}</StatDescription>
-              <StatButton onClick={this.handleStat('active', this.state.active, 'minus').bind(this)}>-</StatButton>
-              <StatButton onClick={this.handleStat('active', this.state.active, 'plus').bind(this)}>+</StatButton>
-              </Stat>
+            </Stat>
             <Stat>
               <StatDescription>RS: {this.state.remainingStats}</StatDescription>
-              </Stat>
+            </Stat>
           </Stats>
           <div>
             {this.state.active && (
               <React.Fragment>
                 <button onClick={this.props.retireRobot(this.state)}>Retire</button>
                 <button onClick={this.props.launchBattle(this.state)}>Battle</button>
+                <button onClick={this.handleUpdateState}>Update</button>
               </React.Fragment>
             )}
           </div>
