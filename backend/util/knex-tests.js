@@ -59,4 +59,17 @@ function getHallOfFame() {
     })
 }
 
-getHallOfFame();
+// getHallOfFame();
+
+function getBattlesFought (){
+  knex('robots_battles')
+    .count('robot_id')
+    .groupBy('robot_id')
+    .select('robot_id')
+    .returning('robot_id')
+    .then(results => {
+      console.log(results)
+    })
+}
+
+// getBattlesFought();

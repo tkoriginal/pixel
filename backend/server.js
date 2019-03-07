@@ -65,7 +65,8 @@ app.get('/user/active-robots', (req, res) => {
       res.json({
         robots: users_robots
       })
-    }) 
+    })
+    .catch(err => console.log(err.message)) 
 })
 
 app.get('/user/retired-robots', (req, res) => {
@@ -80,7 +81,8 @@ app.get('/user/retired-robots', (req, res) => {
       res.json({
         robots: users_robots
       })
-    }) 
+    })
+    .catch(err => console.log(err.message)) 
 })
 
 app.get('/hall-of-fame', (req, res) => {
@@ -149,7 +151,8 @@ app.post('/retire', (req, res) => {
         res.json({
           robots: users_robots
         }) 
-      })  
+      })
+      .catch(err => console.log(err.message))  
     });
 })
 
@@ -184,18 +187,46 @@ app.post('/add-robot', (req, res) => {
     .catch(err => console.log(err.message));
 })
 
+app.post('/robots/update', (req, res) => {
+  knex('robots')
+    .where('id', req.body.id)
+    .update({
+      health: req.body.robot.health,
+      strength: req.body.robot.strength,
+      dexterity: req.body.robot.dexterity,
+      armour: req.body.robot.armour,
+      remainingStats: req.body.robot.remainingStats,
+    })
+    .then(function () {
+      console.log("Retired robot # " + req.body.id);
+      knex('robots')
+      .select('*')
+      .where({
+        user_id: req.body.user_id,
+        active: true
+      })
+      .then(users_robots => {
+        res.json({
+          robots: users_robots
+        }) 
+      })
+      .catch(err => console.log(err.message))  
+    })
+    .catch(err => console.log(err.message))
+
+})
+
 app.post('/robots-fight', (req, res) => {
+  
   const result = Combat(req.body[0], req.body[1])
-  console.log('First Pass',result);
   knex('battle_results') //insert to battle results  with the winner ID
     .insert({
-      winner_id: result.winner.id
+      winner_id: result.winner.id,
+      battle_log: JSON.stringify(result.log)
     })
     .returning('id')
     .then(battleEntry => {
       let [battleID] = battleEntry;
-      console.log(battleID)
-      
       knex('robots_battles') //create first robot_battle entry with id from battle results, and first robot_id
         .insert({
           battle_id: battleID,
@@ -204,19 +235,28 @@ app.post('/robots-fight', (req, res) => {
         .returning('battle_id')
         .then(battleEntry => {
           let [battleID] = battleEntry;
-          console.log(battleID)
 
           knex('robots_battles')  //create first robot_battle entry with id from battle results, and second robot_id
             .insert({
               battle_id: battleID,
               robot_id: req.body[1].id
             })
-            // .returning('*')
-            .then( function() {
-              console.log("Final Battle Log Entered")
-              console.log(result);
-              res.json(result); //send the response data (battle results)
-            })
+              .then( () => {
+                if (result.winner.id){
+                  knex('robots') //Giving winner stat points.
+                    .where('id', result.winner.id)
+                    .update('remainingStats', (result.winner.remainingStats + 5))
+                    .returning('*')
+                    .then( () => {
+                      console.log("Player bot wins:", result);
+                      res.json(result);
+                    })
+                } else {
+                  console.log("AI bot wins:", result);
+                  res.json(result);
+                }
+              })
+
             .catch(err => console.log(err.message));
         })
         .catch(err => console.log(err.message));
