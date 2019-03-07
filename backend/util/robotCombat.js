@@ -1,61 +1,71 @@
-let combatLog = [];
+const assigners = require("./assigners.js");
+// let combatLog = [];
+
 function Combat(robot1, robot2) {
-  combatLog = [];
+  // combatLog = [];
+
   // robot1.name = "Rocky";
   // robot2.name = "Dolf";
-  atk = "attack";
-  def = "defend";
-
   let attacker = robot1.dexterity > robot2.dexterity ? robot1 : robot2;
   let defender = attacker == robot1 ? robot2 : robot1;
-  let turn = 1;
 
-  while (robot1.health > 0 && robot2.health > 0) {
+  const combatStatus = { attacker: attacker, defender: defender, turn: 1, combatLog: [] };
+
+  combatStatus.attacker.states = {
+    offense: [],
+    defense: [],
+    postCombat: []
+  };
+
+  combatStatus.defender.states = {
+    offense: [],
+    defense: [],
+    postCombat: []
+  };
+
+  combatStatus.attacker.traits.forEach(trait => {
+    assigners[trait](robot1);
+  });
+
+  combatStatus.defender.traits.forEach(trait => {
+    assigners[trait](robot2);
+  });
+
+  while (combatStatus.attacker.health > 0 && combatStatus.defender.health > 0) {
     // let damage = defend(attack(attacker), defender);
-    let damage = test[def](test[atk](attacker), defender);
-    defender.health -= damage;
+    // methods[atk](combatStatus);
+    // methods[def](combatStatus);
+    combatStatus.effectiveArmour = combatStatus.defender.armour;
+    combatStatus.effectiveStrength = combatStatus.attacker.strength;
 
-    if (damage) {
-      combatLog.push({ [`Turn ${turn}`]: `${attacker.name} dealt ${damage} damage to ${defender.name}!` });
-    } else {
-      combatLog.push({ [`Turn ${turn}`]: `${defender.name} evaded the attack!` });
-    }
+    combatStatus.attacker.states.offense.forEach(command => {
+      command.action(combatStatus);
+    });
+    combatStatus.defender.states.defense.forEach(command => {
+      command.action(combatStatus);
+    });
+    combatStatus.defender.states.postCombat.forEach(command => {
+      command.action(combatStatus);
+    });
+    // combatStatus.damage = damage;
 
-    //Swap
-    let temp = attacker;
-    attacker = defender;
-    defender = temp;
-    turn++;
+    // combatStatus = methods[element]
+
+    // console.log(combatStatus.damage);
+
+    // methods.assignDamage(combatStatus);
+    // methods.changeTurn(combatStatus);
   }
 
-  combatLog.push({ [`Turn ${turn}`]: `${attacker.name} has died!` });
+  combatStatus.combatLog.push({ [`Turn ${combatStatus.turn}`]: `${combatStatus.attacker.name} has died!` });
 
   const results = {
-    winner: defender,
-    log: combatLog
+    winner: combatStatus.defender,
+    log: combatStatus.combatLog
   };
 
   return results;
 }
-
-test = {
-  attack: function attack(attacker) {
-    return attacker.strength;
-  },
-
-  defend: function defend(intendedDamage, defender) {
-    if (Math.random() * 100 < defender.dexterity * 3) {
-      // console.log(defender.name, 0);
-      return 0;
-    }
-
-    let takenDamage = intendedDamage * ((100 - defender.armour * 3) / 100);
-    //   console.log(defender.name, takenDamage);
-    return Math.floor(takenDamage);
-  }
-};
-
-
 
 // Robot1 = {
 //   remainingStats: 0,
@@ -78,5 +88,4 @@ test = {
 // console.log(results)
 // console.log(`The winner is: ${results.winner.name} with ${results.winner.health} health remaining!`);
 
-module.exports = {Combat}
-
+module.exports = { Combat };
