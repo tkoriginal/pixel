@@ -35,7 +35,9 @@ class ChooseRobot extends Component {
   handleRobotName = (e) =>{
     this.setState({robotName: e.target.value})
   } 
-
+  handleGoHome = () => {
+    this.setState({goHome: true})
+  }
   componentDidMount() {
     fetch('/generate-starter-robots')
     .then(res => res.json())
@@ -67,6 +69,7 @@ class ChooseRobot extends Component {
           <input type="text" name="robot-name" value={this.state.robotName} onChange={this.handleRobotName} required/>
           {this.state.noName && <p style={{color:'red'}}>Please enter a robot name</p>}
         </div>
+        <button onClick={this.handleGoHome}>Back</button>
         {this.state.robots.map( robot => {
           return (
           <div key={robot.strength}>

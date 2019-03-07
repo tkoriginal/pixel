@@ -4,7 +4,8 @@ import {Redirect} from 'react-router-dom';
 class Combat extends Component {
   state = {
     opponents: undefined,
-    battleLog: undefined
+    battleLog: undefined,
+    goHome: false
   }
   componentDidMount() {
     fetch('/generate-starter-robots')
@@ -16,6 +17,9 @@ class Combat extends Component {
     .catch(() => {
       console.log('Robot route not working right now')
     })
+  }
+  handleGoHome = () => {
+    this.setState({goHome: true})
   }
   launchBattle = (userRobot, opponentRobot) => {
     return (function (e) {
@@ -41,6 +45,9 @@ class Combat extends Component {
     if (!this.props.userInfo.name) {
       return (<Redirect to="/login" />)
     }
+    if (this.state.goHome) {
+      return (<Redirect to="/" />)
+    }
     if(!this.state.opponents) {
       return (
         <div>
@@ -51,6 +58,7 @@ class Combat extends Component {
     if (this.state.battleLog) {
       return (
         <div>
+        <button onClick={this.handleGoHome}>Go Back</button>
           {this.state.battleLog.log.map(turn => {
             return(<p>{JSON.stringify(turn)}</p>)
           })}
@@ -58,7 +66,9 @@ class Combat extends Component {
       )
     }
     return (
+      
       <div>
+      <button onClick={this.handleGoHome}>Go Back</button>
         {this.state.opponents.map(robot => 
          (<div key={robot.id}>
             <p>ID: {robot.id}</p>

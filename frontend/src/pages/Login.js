@@ -21,6 +21,10 @@ class Login extends Component {
     this.setState({password: event.target.value});
   }
 
+  handleRegisteration = () => {
+    this.setState({register: true})
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const body = JSON.stringify(this.state)
@@ -39,21 +43,26 @@ class Login extends Component {
      })
      ;
   }
-
   render() {
     if (this.state.loggedIn) {
       return (<Redirect to="/" />)
     }
+    if(this.state.register) {
+      return (<Redirect to='/registration' />)
+    }
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.name} onChange={this.handleChangeName} />
-          Password:
-          <input type="password" value={this.state.password} onChange={this.handleChangePassword} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <React.Fragment>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+            <input type="text" value={this.state.name} onChange={this.handleChangeName} />
+            Password:
+            <input type="password" value={this.state.password} onChange={this.handleChangePassword} />
+          </label>
+          <input type="submit" value="Submit" />
+        <button onClick={this.handleRegisteration}>Register</button>
+        </form>
+      </React.Fragment>
     );
   }
 }
