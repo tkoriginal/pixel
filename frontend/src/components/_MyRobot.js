@@ -62,7 +62,12 @@ class MyRobots extends Component {
           <button type="submit" onClick={this.chooseRobot}>Add robot</button>
         </div>
         {this.props.robots.map(robot => 
-          <Robot robot={robot} retireRobot={this.retireRobot} launchBattle={this.launchBattle}/>
+          <Robot 
+            robot={robot} 
+            updateRobotInfo={this.props.updateRobotInfo} 
+            retireRobot={this.retireRobot} 
+            user_id={this.props.user_id} 
+            launchBattle={this.launchBattle}/>
         )}
       </Robots>
     )

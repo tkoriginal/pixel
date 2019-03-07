@@ -76,6 +76,7 @@ const StatButton = styled.button`
 
 class Robot extends React.Component{
   state = {
+    user_id:this.props.user_id,
     id : this.props.robot.id,
     name: this.props.robot.name,
     strength: this.props.robot.strength,
@@ -83,7 +84,7 @@ class Robot extends React.Component{
     health: this.props.robot.health,
     armour: this.props.robot.armour,
     active: this.props.robot.active, 
-    remainingStats: 5 || this.props.robot.remainingStats
+    remainingStats: this.props.robot.remainingStats
   }
   fixedState = {
     id : this.props.robot.id,
@@ -93,7 +94,7 @@ class Robot extends React.Component{
     health: this.props.robot.health,
     armour: this.props.robot.armour,
     active: this.props.robot.active, 
-    remainingStats: 5 || this.props.robot.remainingStats
+    remainingStats: this.props.robot.remainingStats
   }
   handleStat = (prop, value, operation) => {
     return function (e){
@@ -124,8 +125,8 @@ class Robot extends React.Component{
         },
         body: JSON.stringify(this.state)
       })
-      .then(res => res.json)
-      .then(res => console.log(res.json))
+      .then(res => res.json())
+      .then(res => this.props.updateRobotInfo(res.robots))
     }
 
   render(){

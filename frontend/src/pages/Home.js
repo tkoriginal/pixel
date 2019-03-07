@@ -23,6 +23,7 @@ class Home extends Component {
       <div>
         <h1>Welcome {this.props.userInfo.name}!</h1>
         <MyRobots 
+          user_id={this.props.userInfo.id}
           robots={this.props.userInfo.robots} 
           updateRobotInfo={this.props.updateRobotInfo}
           updateChosenBattleRobot={this.props.updateChosenBattleRobot}
