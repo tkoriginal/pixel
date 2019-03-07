@@ -69,6 +69,7 @@ class App extends Component {
               <Combat {...routeProps}
                 userInfo={this.state}
                 battleRobot={this.state.battleRobot}
+                updateRobotInfo={this.updateRobotInfo}
               />
             )}
           />

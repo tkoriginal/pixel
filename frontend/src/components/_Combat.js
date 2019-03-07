@@ -11,11 +11,22 @@ class Combat extends Component {
     fetch('/generate-starter-robots')
     .then(res => res.json())
     .then(opponents => {
-      console.log(opponents)
       this.setState({opponents})
     })
     .catch(() => {
       console.log('Robot route not working right now')
+    })
+  }
+  componentWillUnmount() {
+    console.log('component will unmount')
+    fetch('/user/active-robots')
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+      // this.props.updateRobotInfo(res.robots)
+    })
+    .catch(e => {
+      console.log('Error', e , 'Didn\'t go through')
     })
   }
   handleGoHome = () => {
@@ -24,7 +35,6 @@ class Combat extends Component {
   launchBattle = (userRobot, opponentRobot) => {
     return (function (e) {
       const robots = JSON.stringify([userRobot, opponentRobot])
-      console.log(robots)
       e.preventDefault();
       fetch('/robots-fight', {
         method:'POST',
@@ -35,7 +45,6 @@ class Combat extends Component {
       })
       .then(res => res.json())
       .then(res => {
-        console.log(this.state);
         this.setState({battleLog: res})
       })
       .catch((e) => console.log(e, 'Did not get battle info back from server') )
