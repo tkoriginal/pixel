@@ -52,6 +52,12 @@ app.get('/generate-starter-robots', (req, res) => {
   res.json(starterBots);
 })
 
+app.post('/generate-combat-robots', (req, res) => {
+
+  let powerLevel = req.body.strength + req.body.dexterity + req.body.armour + ((req.body.health - 50) / 5)
+  let combatBots =  generateRobot(3, powerLevel, false)
+  res.json(combatBots);
+})
 
 app.post('/user/active-robots', (req, res) => {
   knex('robots')
@@ -140,7 +146,6 @@ app.post('/retire', (req, res) => {
     .update('active', false)
     .catch(err => console.log(err.message))
     .then(function () {
-      console.log("Retired robot # " + req.body.id);
       knex('robots')
       .select('*')
       .where({
@@ -157,7 +162,6 @@ app.post('/retire', (req, res) => {
 })
 
 app.post('/add-robot', (req, res) => {
-  console.log(req.body);
   knex('robots')
     .insert({
       name: req.body.robotName,
@@ -166,8 +170,8 @@ app.post('/add-robot', (req, res) => {
       strength: req.body.robot.strength,
       dexterity: req.body.robot.dexterity,
       armour: req.body.robot.armour,
+      traits: req.body.robot.traits, //NEED TO FIX FORMAT
       remainingStats: req.body.robot.remainingStats,
-      traits: req.body.robot.traits,
       active: true
     })
     .returning('*')
@@ -179,6 +183,7 @@ app.post('/add-robot', (req, res) => {
           active: true
         })
         .then(users_robots => {
+          console.log(users_robots)
           res.json({
             robots: users_robots
           })
@@ -199,7 +204,7 @@ app.post('/robots/update', (req, res) => {
       remainingStats: req.body.remainingStats,
     })
     .then(function () {
-      console.log("User_id " + req.body.user_id);
+      console.log("Retired robot # " + req.body.id);
       knex('robots')
       .select('*')
       .where({
@@ -218,7 +223,6 @@ app.post('/robots/update', (req, res) => {
 })
 
 app.post('/robots-fight', (req, res) => {
-  
   const result = Combat(req.body[0], req.body[1])
   knex('battle_results') //insert to battle results  with the winner ID
     .insert({
@@ -249,11 +253,9 @@ app.post('/robots-fight', (req, res) => {
                     .update('remainingStats', (result.winner.remainingStats + 5))
                     .returning('*')
                     .then( () => {
-                      console.log("Player bot wins:", result);
                       res.json(result);
                     })
                 } else {
-                  console.log("AI bot wins:", result);
                   res.json(result);
                 }
               })
@@ -267,7 +269,6 @@ app.post('/robots-fight', (req, res) => {
 })
 
 app.post("/registration", (req, res) => {
-  console.log(req.body)
 
   knex('users')
     .insert({ 
@@ -275,7 +276,6 @@ app.post("/registration", (req, res) => {
       password: req.body.password,
       email: req.body.email
       }) 
-    // .returning('*')
     .then(
       res.status(200).send('User succesfully created.')
     )
@@ -288,6 +288,3 @@ app.listen(PORT, () => {
 });
 
 
-
-//Test code
-// console.log(generateRobot(3, 30, false));
