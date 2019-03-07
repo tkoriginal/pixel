@@ -8,7 +8,13 @@ class Combat extends Component {
     goHome: false
   }
   componentDidMount() {
-    fetch('/generate-starter-robots')
+    fetch('/generate-combat-robots', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.props.battleRobot)
+    })
     .then(res => res.json())
     .then(opponents => {
       this.setState({opponents})
