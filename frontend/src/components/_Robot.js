@@ -84,7 +84,9 @@ class Robot extends React.Component{
     health: this.props.robot.health,
     armour: this.props.robot.armour,
     active: this.props.robot.active, 
-    remainingStats: this.props.robot.remainingStats
+    traits: this.props.robot.traits,
+    remainingStats: this.props.robot.remainingStats,
+    updateStat: false
   }
   fixedState = {
     id : this.props.robot.id,
@@ -94,6 +96,7 @@ class Robot extends React.Component{
     health: this.props.robot.health,
     armour: this.props.robot.armour,
     active: this.props.robot.active, 
+    traits: this.props.robot.traits,
     remainingStats: this.props.robot.remainingStats
   }
   handleStat = (prop, value, operation) => {

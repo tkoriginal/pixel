@@ -17,23 +17,13 @@ class Combat extends Component {
       console.log('Robot route not working right now')
     })
   }
-  componentWillUnmount() {
-    console.log('component will unmount')
-    fetch('/user/active-robots')
-    .then(res => res.json())
-    .then(res => {
-      console.log(res)
-      // this.props.updateRobotInfo(res.robots)
-    })
-    .catch(e => {
-      console.log('Error', e , 'Didn\'t go through')
-    })
-  }
+  
   handleGoHome = () => {
     this.setState({goHome: true})
   }
   launchBattle = (userRobot, opponentRobot) => {
     return (function (e) {
+      console.log(userRobot, opponentRobot);
       const robots = JSON.stringify([userRobot, opponentRobot])
       e.preventDefault();
       fetch('/robots-fight', {

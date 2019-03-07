@@ -37,7 +37,7 @@ function generateRobot(numOfBots, statTotal, enemy) {
   return robots;
 }
 
-const nameArray = ["Maximus", "Taqert", "Gorg", "Killary", "Brocas", "Tin", "Mentim"];
+const nameArray = ["Maximus", "Taqert", "Gorg", "Killary", "Brocas", "Tin", "Slimtim", "Facebump"];
 const traitsArray = ["critical", "block"];
 
 module.exports = { generateRobot };

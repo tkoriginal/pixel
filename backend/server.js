@@ -53,7 +53,7 @@ app.get('/generate-starter-robots', (req, res) => {
 })
 
 
-app.get('/user/active-robots', (req, res) => {
+app.post('/user/active-robots', (req, res) => {
   knex('robots')
     .select('*')
     .where({
@@ -167,6 +167,7 @@ app.post('/add-robot', (req, res) => {
       dexterity: req.body.robot.dexterity,
       armour: req.body.robot.armour,
       remainingStats: req.body.robot.remainingStats,
+      traits: req.body.robot.traits,
       active: true
     })
     .returning('*')
@@ -198,7 +199,7 @@ app.post('/robots/update', (req, res) => {
       remainingStats: req.body.remainingStats,
     })
     .then(function () {
-      console.log("Retired robot # " + req.body.id);
+      console.log("User_id " + req.body.user_id);
       knex('robots')
       .select('*')
       .where({
