@@ -1,5 +1,60 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import styled from "styled-components";
+
+
+const Form = styled.form`
+  margin: 20px auto;
+  width: 300px;
+  padding: 30px 25px;
+  background: white;
+  border: 1px solid #c4c4c4;
+  display: flex;
+  flex-direction: column;
+`
+
+const Title = styled.h1`
+  margin: -28px -25px 25px;
+  padding: 15px 25px;
+  line-height: 30px;
+  font-size: 25px;
+  font-weight: 300;
+  color: #ADADAD;
+  text-align:center;
+  background: #f7f7f7;
+ 
+`
+const Input = styled.input`
+  width: 285px;
+  height: 50px;
+  margin-bottom: 25px;
+  padding-left:10px;
+  font-size: 15px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`
+
+const Button = styled.input`
+  width: 100%;
+  height: 50px;
+  padding: 0;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  background: #f0776c;
+  border: 0;
+  border-radius: 5px;
+  outline:0;
+`
+
+const Login = styled.p`
+  text-align:center;
+  margin-bottom:0px;
+  color:#666;
+  text-decoration:none;
+  font-size:13px;
+`
 
 class Registration extends Component {
   state = {
@@ -47,20 +102,15 @@ class Registration extends Component {
     if (this.state.toLogin) return (<Redirect to='/login'/>);
     return (
       <React.Fragment>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <label>
-            Name:
-            <input type="text" value={this.state.name} onChange={this.handleChangeName} />
-            Email:
-            <input type="text" value={this.state.email} onChange={this.handleChangeEmail} />
-            Password:
-            <input type="password" value={this.state.password} onChange={this.handleChangePassword} />
-            Confirm Password:
-            <input type="password" value={this.state.confirmPassword} onChange={this.handleChangeConfirmPassword} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-        <button onClick={this.handleToLogin}>Login</button>
+        <Form onSubmit={this.handleSubmit.bind(this)}>
+            <Input type="text" value={this.state.name} placeholder="Name" onChange={this.handleChangeName} />
+            <Input type="text" value={this.state.email} placeholder="Email" onChange={this.handleChangeEmail} />
+            <Input type="password" value={this.state.password} placeholder="Password" onChange={this.handleChangePassword} />
+            <Input type="password" value={this.state.confirmPassword} placeholder="Confirm Password" onChange={this.handleChangeConfirmPassword} />
+          <Button type="submit" value="Register" />
+          {/* <Login onClick={this.handleToLogin}>Login</Login> */}
+          <Link to='/login' ><Login>Login</Login></Link>
+        </Form>
       </React.Fragment>
     );
   }

@@ -1,5 +1,67 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
+import styled from "styled-components";
+
+const Form = styled.form`
+  margin: 20px auto;
+  width: 300px;
+  padding: 30px 25px;
+  background: white;
+  border: 1px solid #c4c4c4;
+  display: flex;
+  flex-direction: column;
+`
+
+const Title = styled.h1`
+  margin: -28px -25px 25px;
+  padding: 15px 25px;
+  line-height: 30px;
+  font-size: 25px;
+  font-weight: 300;
+  color: #ADADAD;
+  text-align:center;
+  background: #f7f7f7;
+ 
+`
+
+const ImageBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+`
+
+const Input = styled.input`
+  width: 285px;
+  height: 50px;
+  margin-bottom: 25px;
+  padding-left:10px;
+  font-size: 15px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`
+
+const Button = styled.input`
+  width: 100%;
+  height: 50px;
+  padding: 0;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  background: #f0776c;
+  border: 0;
+  border-radius: 5px;
+  outline:0;
+`
+
+const Register = styled.p`
+  text-align:center;
+  margin-bottom:0px;
+  color:#666;
+  text-decoration:none;
+  font-size:13px;
+`
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -38,19 +100,23 @@ class Login extends Component {
     }
     return (
       <React.Fragment>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" value={this.state.name} onChange={this.handleChangeName} />
-            Password:
-            <input type="password" value={this.state.password} onChange={this.handleChangePassword} />
-          </label>
-          <input type="submit" value="Submit" />
-          <Link to='/registration' ><button>Register</button></Link>
-        </form>
+        <Form onSubmit={this.handleSubmit}>
+          
+            <Title> Login to Battle</Title>
+            <ImageBox>
+              <img src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" alt="Battle Bot" height="150" width="150"></img>
+              <img src="https://66.media.tumblr.com/4f8896ebca88bb0d8308607315d085c9/tumblr_n439wbdHxA1sulisxo1_400.gif" alt="Battle Bot" height="150" width="150"></img>
+            </ImageBox>
+            <Input type="text" value={this.state.name} placeholder="Name" onChange={this.handleChangeName} />
+            <Input type="password" value={this.state.password} placeholder="Password" onChange={this.handleChangePassword} />
+            <Button type="submit" value="Login" />
+            <Link to='/registration' ><Register>Register</Register></Link>
+         
+        </Form>
       </React.Fragment>
     );
   }
 }
 
 export default Login;
+
