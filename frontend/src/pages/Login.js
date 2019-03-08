@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +14,6 @@ class Login extends Component {
 
   handleChangeName = (event) => this.setState({name: event.target.value});
   handleChangePassword = (event) => this.setState({password: event.target.value});
-  handleRegistration = () => this.setState({register: true})
 
   handleSubmit(event) {
     event.preventDefault();
@@ -37,9 +36,6 @@ class Login extends Component {
     if (this.state.loggedIn) {
       return (<Redirect to="/" />)
     }
-    if(this.state.register) {
-      return (<Redirect to='/registration' />)
-    }
     return (
       <React.Fragment>
         <form onSubmit={this.handleSubmit}>
@@ -50,7 +46,7 @@ class Login extends Component {
             <input type="password" value={this.state.password} onChange={this.handleChangePassword} />
           </label>
           <input type="submit" value="Submit" />
-        <button onClick={this.handleRegistration}>Register</button>
+          <Link to='/registration' ><button>Register</button></Link>
         </form>
       </React.Fragment>
     );

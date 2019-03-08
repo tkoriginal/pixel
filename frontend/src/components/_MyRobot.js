@@ -21,23 +21,22 @@ class MyRobots extends Component {
     newRobot: false,
     updateRobot:false
   }
-  // componentDidMount() {
-  //   console.log('component Did Mount')
-  //   fetch('/user/active-robots',{
-  //     method: 'POST',
-  //     headers: {'Content-Type':'application/json'},
-  //     body: JSON.stringify({user_id: this.props.user_id})
-  //   })
-  //   .then(res => res.json())
-  //   .then(res => {
-  //     console.log('Didmount',res)
-  //     this.props.updateRobotInfo(res.robots)
-  //   })
-  //   .then(res => this.setState({updateRobot:!this.state.updateRobot}))
-  //   .catch(e => {
-  //     console.log('Error', e , 'Didn\'t go through')
-  //   })
-  // }
+  componentDidMount() {
+    console.log('component Did Mount')
+    fetch('/user/active-robots',{
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({user_id: this.props.user_id})
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log('Didmount',res)
+      this.props.updateRobotInfo(res.robots)
+    })
+    .catch(e => {
+      console.log('Error', e , 'Didn\'t go through')
+    })
+  }
 
   retireRobot = (robot) => {
     return (function (e) {
@@ -79,8 +78,9 @@ class MyRobots extends Component {
         <div>
           <button type="submit" onClick={this.chooseRobot}>Add robot</button>
         </div>
-        {this.props.robots.map(robot => 
+        {this.props.robots.map((robot, i)=> 
           <Robot 
+            key={i}
             robot={robot} 
             updateRobotInfo={this.props.updateRobotInfo} 
             retireRobot={this.retireRobot} 

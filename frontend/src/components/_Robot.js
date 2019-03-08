@@ -99,11 +99,17 @@ class Robot extends React.Component{
     traits: this.props.robot.traits,
     remainingStats: this.props.robot.remainingStats
   }
-  handleStat = (prop, value, operation) => {
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.remainingStats !== prevProps.remainingStats) {
+      this.fetchData(this.props.remainingStats);
+    }
+  }
+  handleStat = (attribute, value, operation) => {
     return function (e){
       const obj = {};
       let points = this.state.remainingStats;
-      if (operation === 'minus' && value > this.fixedState[prop]){
+      if (operation === 'minus' && value > this.fixedState[attribute]){
         value--;
         points++;
         this.setState({remainingStats: points})
@@ -112,7 +118,7 @@ class Robot extends React.Component{
         points--
         this.setState({remainingStats: points})
       }
-      obj[prop] = value;
+      obj[attribute] = value;
       this.setState(obj);
     }
   }
