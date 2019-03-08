@@ -28,7 +28,7 @@ const RobotBack = styled.div`
   width: 100%;
   top:0;
   left:0;
-  overflow: hidden;
+  overflow: scroll;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: rotateY(180deg);
