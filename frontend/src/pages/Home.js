@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import MyRobots from '../components/_MyRobot';
+import HallOfFame from '../components/_HallOfFame';
 // import { throws } from 'assert';
 class Home extends Component {
 
@@ -18,7 +19,11 @@ class Home extends Component {
           updateRobotInfo={this.props.updateRobotInfo}
           updateChosenBattleRobot={this.props.updateChosenBattleRobot}
         />
-        <Link to='/hall-of-fame'><button>Hall of fame</button></Link>
+        <HallOfFame 
+          user_id={this.props.userInfo.id}
+          hallOfFame={this.props.hallOfFame}
+          updateHallOfFame = {this.props.updateHallOfFame}
+        />
       </div>
     );
   }

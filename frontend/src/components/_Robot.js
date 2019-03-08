@@ -107,7 +107,7 @@ class Robot extends React.Component{
     new Chart(document.getElementById(`stats-chart-${this.state.id}`), {
       type: 'radar',
       data: {
-        labels: ['Strength', 'Dexterity', 'Armour'],
+        labels: ['Strength', 'Dexterity', 'Armour', 'Health'],
         datasets: [
           {
             // label: "Stats",
@@ -116,7 +116,7 @@ class Robot extends React.Component{
             borderColor: "rgba(179,181,198,1)",
             pointBorderColor: "#fff",
             pointBackgroundColor: "rgba(179,181,198,1)",
-            data: [(this.props.robot.strength), (this.props.robot.dexterity), (this.props.robot.armour)]
+            data: [(this.props.robot.strength), (this.props.robot.dexterity), (this.props.robot.armour), ((this.props.robot.health - 50) /5)]
           }  
         ]
       },
