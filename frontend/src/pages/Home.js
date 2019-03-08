@@ -12,13 +12,18 @@ class Home extends Component {
     return (
       <div>
         <h1>Welcome {this.props.userInfo.name}!</h1>
+        <button onClick={this.props.handleLogout}>Logout</button>
         <MyRobots 
           user_id={this.props.userInfo.id}
           robots={this.props.userInfo.robots} 
           updateRobotInfo={this.props.updateRobotInfo}
           updateChosenBattleRobot={this.props.updateChosenBattleRobot}
         />
-        <Link to='/hall-of-fame'><button>Hall of fame</button></Link>
+        <HallOfFame 
+          user_id={this.props.userInfo.id}
+          hallOfFame={this.props.hallOfFame}
+          updateHallOfFame = {this.props.updateHallOfFame}
+        />
       </div>
     );
   }

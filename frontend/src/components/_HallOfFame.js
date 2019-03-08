@@ -15,8 +15,8 @@ class HallOfFame extends React.Component {
         <table>
           <thead>
             <tr>
-              <th>User</th>
               <th>Robot</th>
+              <th>User</th>
               <th>Wins</th>
             </tr>
           </thead>

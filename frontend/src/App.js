@@ -5,7 +5,6 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 import ChooseRobot from './components/_ChooseRobot';
 import Combat from './components/_Combat';
-import HallOfFame from './components/_HallOfFame';
 class App extends Component {
   state = {
     id: undefined,
@@ -21,7 +20,9 @@ class App extends Component {
   successfulLogin = (userData) => {
     this.setState(userData)
   }
-
+  handleLogout = () => {
+    this.setState({id: undefined, name:undefined, email: undefined})
+  }
   updateRobotInfo = (robots) => {
     console.log(this);
     console.log(robots)
@@ -45,9 +46,12 @@ class App extends Component {
           <Route exact path='/' 
             render={(routeProps) => (
               <Home {...routeProps} 
+                handleLogout={this.handleLogout}
                 userInfo={this.state} 
                 updateRobotInfo={this.updateRobotInfo}
                 updateChosenBattleRobot={this.updateChosenBattleRobot}
+                hallOfFame={this.state.hallOfFame}
+                updateHallOfFame = {this.updateHallOfFame}
               />
             )}
           />
@@ -83,15 +87,6 @@ class App extends Component {
                 user_id={this.state.id}
                 battleRobot={this.state.battleRobot}
                 updateRobotInfo={this.updateRobotInfo}
-              />
-            )}
-          />
-          <Route exact path='/hall-of-fame'
-            render={(routeProps) => (
-              <HallOfFame {...routeProps}
-                user_id={this.state.id}
-                hallOfFame={this.state.hallOfFame}
-                updateHallOfFame = {this.updateHallOfFame}
               />
             )}
           />
