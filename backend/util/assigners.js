@@ -42,5 +42,24 @@ module.exports = assigners = {
       type: "block",
       action: methods.block
     });
+  },
+
+  doubleDamage: currentBot => {
+    currentBot.states.offense.push({
+      type: "doubleDamage",
+      action: methods.doubleDamage
+    });
+  },
+  poison: currentBot => {
+    currentBot.states.offense.push({
+      type: "poison",
+      action: methods.poison
+    });
+  },
+  thorns: currentBot => {
+    currentBot.states.postCombat.unshift({
+      type: "thorns",
+      action: methods.thorns
+    });
   }
 };
