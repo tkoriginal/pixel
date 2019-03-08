@@ -38,13 +38,13 @@ const RobotBack = styled.div`
   border-radius: 6px;
   box-shadow: 0 1.5rem 4rem rgba(#111, .15);
   color: #444;
-
 `
 
 const RobotCard = styled.div`
-  width:300px;
-  height:420px;
+  width:200px;
+  height:320px;
   perspective: 150rem;
+  margin-right: 2rem;
   position: relative;
   -moz-perspective: 150rem;
   border-radius: 5px;
@@ -73,7 +73,6 @@ const StatDescription = styled.p`
   margin-right: 5px;
 `
 const StatButton = styled.button`
-
 `
 
 class Robot extends React.Component{
@@ -103,14 +102,12 @@ class Robot extends React.Component{
   }
 
   componentDidMount(){
-    
     new Chart(document.getElementById(`stats-chart-${this.state.id}`), {
       type: 'radar',
       data: {
         labels: ['Strength', 'Dexterity', 'Armour', 'Health'],
         datasets: [
           {
-            // label: "Stats",
             fill: true,
             backgroundColor: "rgba(179,181,198,0.2)",
             borderColor: "rgba(179,181,198,1)",
@@ -139,7 +136,6 @@ class Robot extends React.Component{
   }
 
   handleStat = (attribute, value, operation) => {
-
     return function (e){
       const obj = {};
       let points = this.state.remainingStats;
@@ -173,17 +169,13 @@ class Robot extends React.Component{
     }
 
   render(){
-
     return (
-
       <RobotCard>
         <RobotFront key={this.state.id} style={{backgroundImage: 'url("https://66.media.tumblr.com/4f8896ebca88bb0d8308607315d085c9/tumblr_n439wbdHxA1sulisxo1_400.gif")'}}>
           <RobotName>{this.state.name}</RobotName>
         </RobotFront>
         <RobotBack>
-
-          <canvas key={this.state.id} id={`stats-chart-${this.state.id}`}></canvas>
-
+          <canvas key={this.state.id} id={`stats-chart-${this.state.id}`} width="40" height="40"></canvas>
           <Stats>
             <Stat>
               <StatDescription>HP: {this.state.health}</StatDescription>

@@ -4,17 +4,22 @@ import styled from 'styled-components';
 import Robot from './_Robot';
 //Styles of the component
 const Robots = styled.div`
-  width: 1140px;
-  margin: 0 auto;
   display:flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
+  width: 1100px;
 `
-
-
+const AddRobot = styled.button`
+  width: 200px; 
+  height: 320px;
+  font-size: 150px;
+  background: #fff;
+  border: 1px solid #ddd;
+  color:#aaa;
+  border-radius: 5px;
+  margin-right: 2rem;
+`
 //Styles End
-
-
 class MyRobots extends Component {
   state = {
     battle: false,
@@ -76,11 +81,11 @@ class MyRobots extends Component {
     return (
       <Robots>
         <div>
-          <button type="submit" onClick={this.chooseRobot}>Add robot</button>
+          <AddRobot type="submit" onClick={this.chooseRobot}>+</AddRobot>
         </div>
-        {this.props.robots.map((robot, i)=> 
+        {this.props.robots.map((robot)=> 
           <Robot 
-            key={i}
+            key={robot.id}
             robot={robot} 
             updateRobotInfo={this.props.updateRobotInfo} 
             retireRobot={this.retireRobot} 

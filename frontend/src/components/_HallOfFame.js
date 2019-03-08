@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
  
+const Container = styled.div`
+  width: 500px;
+  height: 100vh;
+`
 class HallOfFame extends React.Component {
   componentDidMount() {
     this.props.updateHallOfFame()
@@ -11,7 +15,7 @@ class HallOfFame extends React.Component {
       return (<Redirect to="/login" />)
     }
     return (
-      <div>
+      <Container>
         <table>
           <thead>
             <tr>
@@ -30,8 +34,7 @@ class HallOfFame extends React.Component {
             )}
           </tbody>
         </table>
-        <Link to='/'><button>Go Home</button></Link>
-      </div>)
+      </Container>)
   }
 }
 
