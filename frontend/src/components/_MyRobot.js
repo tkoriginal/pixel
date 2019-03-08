@@ -33,7 +33,6 @@ class MyRobots extends Component {
       console.log('Didmount',res)
       this.props.updateRobotInfo(res.robots)
     })
-    .then(res => this.setState({updateRobot:!this.state.updateRobot}))
     .catch(e => {
       console.log('Error', e , 'Didn\'t go through')
     })
@@ -79,8 +78,9 @@ class MyRobots extends Component {
         <div>
           <button type="submit" onClick={this.chooseRobot}>Add robot</button>
         </div>
-        {this.props.robots.map(robot => 
+        {this.props.robots.map((robot, i)=> 
           <Robot 
+            key={i}
             robot={robot} 
             updateRobotInfo={this.props.updateRobotInfo} 
             retireRobot={this.retireRobot} 

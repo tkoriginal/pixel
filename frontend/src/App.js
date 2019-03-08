@@ -5,14 +5,15 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 import ChooseRobot from './components/_ChooseRobot';
 import Combat from './components/_Combat';
-
+import HallOfFame from './components/_HallOfFame';
 class App extends Component {
   state = {
     id: undefined,
     name: undefined,
     email: undefined,
     robots: [],
-    battleRobot: undefined
+    battleRobot: undefined,
+    hallOfFame: undefined
   }
   updateChosenBattleRobot = (robot) => {
     this.setState({battleRobot:robot})
@@ -26,6 +27,17 @@ class App extends Component {
     console.log(robots)
     this.setState({robots: robots})
   }
+  
+  updateHallOfFame = () => {
+    fetch('/hall-of-fame')
+      .then(res => res.json())
+      .then(res => this.setState({hallOfFame: res}))
+  }
+
+  componentDidMount() {
+    this.updateHallOfFame();
+  }
+
   render() {
     return (
       <div>
@@ -68,11 +80,22 @@ class App extends Component {
             render={(routeProps) => (
               <Combat {...routeProps}
                 userInfo={this.state}
+                user_id={this.state.id}
                 battleRobot={this.state.battleRobot}
                 updateRobotInfo={this.updateRobotInfo}
               />
             )}
           />
+          <Route exact path='/hall-of-fame'
+            render={(routeProps) => (
+              <HallOfFame {...routeProps}
+                user_id={this.state.id}
+                hallOfFame={this.state.hallOfFame}
+                updateHallOfFame = {this.updateHallOfFame}
+              />
+            )}
+          />
+
         </Switch>
       </div>
     )
