@@ -5,6 +5,17 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 import ChooseRobot from './components/_ChooseRobot';
 import Combat from './components/_Combat';
+import styled, { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  *, *::after, *::before{
+    padding: 0;
+    margin:0;
+  }
+  html{
+    font-size: 62.5%;
+  }
+`
 class App extends Component {
   state = {
     id: undefined,
@@ -42,6 +53,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <GlobalStyle />
         <Switch>
           <Route exact path='/' 
             render={(routeProps) => (

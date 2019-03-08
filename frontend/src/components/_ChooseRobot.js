@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 class ChooseRobot extends Component {
   state = {
-    robotName: undefined,
+    robotName: '',
     robots: [],
     goHome: false,
     noName:false
@@ -70,9 +70,9 @@ class ChooseRobot extends Component {
           {this.state.noName && <p style={{color:'red'}}>Please enter a robot name</p>}
         </div>
         <button onClick={this.handleGoHome}>Back</button>
-        {this.state.robots.map( robot => {
+        {this.state.robots.map( (robot, i) => {
           return (
-          <div key={robot.strength}>
+          <div key={i}>
             <p>Health: {robot.health}</p>
             <p>Strength: {robot.strength}</p>
             <p>Dexterity: {robot.dexterity}</p>
