@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Radar} from 'react-chartjs-2';
 
 const RobotFront = styled.div`
   display:flex;
@@ -86,7 +87,16 @@ class Robot extends React.Component{
     active: this.props.robot.active, 
     traits: this.props.robot.traits,
     remainingStats: this.props.robot.remainingStats,
-    updateStat: false
+    updateStat: false,
+    chartData:{
+      labels: ['Str', 'Dex', 'Arm'],
+      datasets: [{
+        label: "Stats",
+        data: [(this.props.robot.strength), (this.props.robot.dexterity), (this.props.robot.armour)],
+        backgroundColor: '#ff6384'
+      }]
+      
+    }
   }
   fixedState = {
     id : this.props.robot.id,
@@ -99,6 +109,8 @@ class Robot extends React.Component{
     traits: this.props.robot.traits,
     remainingStats: this.props.robot.remainingStats
   }
+
+
   handleStat = (prop, value, operation) => {
     return function (e){
       const obj = {};
@@ -133,12 +145,18 @@ class Robot extends React.Component{
     }
 
   render(){
+
     return (
       <RobotCard>
         <RobotFront key={this.state.id} style={{backgroundImage: 'url("https://66.media.tumblr.com/4f8896ebca88bb0d8308607315d085c9/tumblr_n439wbdHxA1sulisxo1_400.gif")'}}>
           <RobotName>{this.state.name}</RobotName>
         </RobotFront>
         <RobotBack>
+          <div className="chart">
+            <Radar
+              data={this.state.chartData}
+              />
+          </div>
           <Stats>
             <Stat>
               <StatDescription>HP: {this.state.health}</StatDescription>
