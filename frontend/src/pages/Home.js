@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import MyRobots from '../components/_MyRobot';
-import HallOfFame from '../components/_HallOfFame';
 // import { throws } from 'assert';
 class Home extends Component {
 
@@ -12,6 +11,7 @@ class Home extends Component {
     return (
       <div>
         <h1>Welcome {this.props.userInfo.name}!</h1>
+        <button onClick={this.props.handleLogout}>Logout</button>
         <MyRobots 
           user_id={this.props.userInfo.id}
           robots={this.props.userInfo.robots} 

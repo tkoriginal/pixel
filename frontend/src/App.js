@@ -21,7 +21,9 @@ class App extends Component {
   successfulLogin = (userData) => {
     this.setState(userData)
   }
-
+  handleLogout = () => {
+    this.setState({id: undefined, name:undefined, email: undefined})
+  }
   updateRobotInfo = (robots) => {
     console.log(this);
     console.log(robots)
@@ -45,6 +47,7 @@ class App extends Component {
           <Route exact path='/' 
             render={(routeProps) => (
               <Home {...routeProps} 
+                handleLogout={this.handleLogout}
                 userInfo={this.state} 
                 updateRobotInfo={this.updateRobotInfo}
                 updateChosenBattleRobot={this.updateChosenBattleRobot}

@@ -11,6 +11,7 @@ const RobotFront = styled.div`
   left:0;
   width: 100%;
   height: 100%;
+  opacity: 1;
   overflow: hidden;
   background-size: cover;
   background-origin: center;
@@ -29,7 +30,7 @@ const RobotBack = styled.div`
   width: 100%;
   top:0;
   left:0;
-  overflow: hidden;
+  overflow: scroll;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: rotateY(180deg);
@@ -88,22 +89,6 @@ class Robot extends React.Component{
     traits: this.props.robot.traits,
     remainingStats: this.props.robot.remainingStats,
     updateStat: false,
-    // chartData:{
-    //   labels: ['Strength', 'Dexterity', 'Armour'],
-    //   datasets: [{
-    //     label: "Stats",
-    //     data: [(this.props.robot.strength), (this.props.robot.dexterity), (this.props.robot.armour)],
-    //     backgroundColor: '#ff6384',
-    //     options: {
-    //       legend: {
-    //         position: 'top',
-    //       },
-    //       title: {
-    //         display: true,
-    //       }
-    //     }
-    //   }]
-    // }
   }
   fixedState = {
     id : this.props.robot.id,
@@ -153,7 +138,7 @@ class Robot extends React.Component{
 
   }
 
-  handleStat = (prop, value, operation) => {
+  handleStat = (attribute, value, operation) => {
 
     return function (e){
       const obj = {};
