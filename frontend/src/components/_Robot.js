@@ -182,7 +182,7 @@ class Robot extends React.Component{
         </RobotFront>
         <RobotBack>
 
-          <canvas key={this.state.id} id={`stats-chart-${this.state.id}`} width="50" height="50"></canvas>
+          <canvas key={this.state.id} id={`stats-chart-${this.state.id}`}></canvas>
 
           <Stats>
             <Stat>
