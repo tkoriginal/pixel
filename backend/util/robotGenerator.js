@@ -2,7 +2,7 @@ class Robot {
   constructor(statTotal) {
     this.remainingStats = statTotal;
 
-    this.strength = Math.floor(Math.random() * Math.min(25, this.remainingStats) + 5);
+    this.strength = Math.floor(Math.random() * Math.min(15, this.remainingStats) + 5);
     this.remainingStats -= this.strength;
 
     this.dexterity = Math.floor(Math.random() * Math.min(20, this.remainingStats));
