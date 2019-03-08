@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 
 class Combat extends Component {
   state = {
     opponents: undefined,
-    battleLog: undefined,
-    goHome: false
+    battleLog: undefined
   }
   componentDidMount() {
     fetch('/generate-combat-robots', {
@@ -23,23 +22,7 @@ class Combat extends Component {
       console.log('Robot route not working right now')
     })
   }
-  componentWillUnmount() {
-    console.log('componentWillUnMount')
-    fetch('/user/active-robots',{
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({user_id: this.props.user_id})
-    })
-    .then(res => res.json())
-    .then(res => {
-      console.log('Didmount',res)
-      this.props.updateRobotInfo(res.robots)
-    })
-    .then(res => this.setState({updateRobot:!this.state.updateRobot}))
-    .catch(e => {
-      console.log('Error', e , 'Didn\'t go through')
-    })
-  }
+
   handleGoHome = () => {
     this.setState({goHome: true})
   }
@@ -66,9 +49,6 @@ class Combat extends Component {
     if (!this.props.userInfo.name) {
       return (<Redirect to="/login" />)
     }
-    if (this.state.goHome) {
-      return (<Redirect to="/" />)
-    }
     if(!this.state.opponents) {
       return (
         <div>
@@ -79,19 +59,18 @@ class Combat extends Component {
     if (this.state.battleLog) {
       return (
         <div>
-        <button onClick={this.handleGoHome}>Go Back</button>
-          {this.state.battleLog.log.map(turn => {
-            return(<p>{JSON.stringify(turn)}</p>)
+        <Link to='/'><button>Go Back</button></Link>
+          {this.state.battleLog.log.map((turn, i) => {
+            return(<p key={i}>{JSON.stringify(turn)}</p>)
           })}
         </div>
       )
     }
     return (
-      
       <div>
-      <button onClick={this.handleGoHome}>Go Back</button>
-        {this.state.opponents.map(robot => 
-         (<div key={robot.id}>
+        <Link to='/'><button>Go Back</button></Link>
+        {this.state.opponents.map((robot, i) => 
+         (<div key={i}>
             <p>ID: {robot.id}</p>
             <p>Name: {robot.name}</p>
             <p>Str: {robot.strength}</p>
