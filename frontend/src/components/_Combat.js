@@ -59,10 +59,10 @@ class Combat extends Component {
     if (this.state.battleLog) {
       return (
         <div>
-        <Link to='/'><button>Go Back</button></Link>
           {this.state.battleLog.log.map((turn, i) => {
             return(<p key={i}>{JSON.stringify(turn)}</p>)
           })}
+        <Link to='/'><button>Go Back</button></Link>
         </div>
       )
     }
