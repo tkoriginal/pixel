@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import MyRobots from '../components/_MyRobot';
+import HallOfFame from '../components/_HallOfFame';
 // import { throws } from 'assert';
 class Home extends Component {
 
@@ -17,6 +18,7 @@ class Home extends Component {
           updateRobotInfo={this.props.updateRobotInfo}
           updateChosenBattleRobot={this.props.updateChosenBattleRobot}
         />
+        <Link to='/hall-of-fame'><button>Hall of fame</button></Link>
       </div>
     );
   }

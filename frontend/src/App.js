@@ -12,7 +12,8 @@ class App extends Component {
     name: undefined,
     email: undefined,
     robots: [],
-    battleRobot: undefined
+    battleRobot: undefined,
+    hallOfFame: undefined
   }
   updateChosenBattleRobot = (robot) => {
     this.setState({battleRobot:robot})
@@ -26,6 +27,17 @@ class App extends Component {
     console.log(robots)
     this.setState({robots: robots})
   }
+  
+  updateHallOfFame = () => {
+    fetch('/hall-of-fame')
+      .then(res => res.json())
+      .then(res => this.setState({hallOfFame: res}))
+  }
+
+  componentDidMount() {
+    this.updateHallOfFame();
+  }
+
   render() {
     return (
       <div>
@@ -77,7 +89,9 @@ class App extends Component {
           <Route exact path='/hall-of-fame'
             render={(routeProps) => (
               <HallOfFame {...routeProps}
-                userInfo={this.state}
+                user_id={this.state.id}
+                hallOfFame={this.state.hallOfFame}
+                updateHallOfFame = {this.updateHallOfFame}
               />
             )}
           />
