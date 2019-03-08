@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+const Chart = require("chart.js");
 
 const RobotFront = styled.div`
   display:flex;
@@ -86,7 +87,23 @@ class Robot extends React.Component{
     active: this.props.robot.active, 
     traits: this.props.robot.traits,
     remainingStats: this.props.robot.remainingStats,
-    updateStat: false
+    updateStat: false,
+    // chartData:{
+    //   labels: ['Strength', 'Dexterity', 'Armour'],
+    //   datasets: [{
+    //     label: "Stats",
+    //     data: [(this.props.robot.strength), (this.props.robot.dexterity), (this.props.robot.armour)],
+    //     backgroundColor: '#ff6384',
+    //     options: {
+    //       legend: {
+    //         position: 'top',
+    //       },
+    //       title: {
+    //         display: true,
+    //       }
+    //     }
+    //   }]
+    // }
   }
   fixedState = {
     id : this.props.robot.id,
@@ -99,13 +116,45 @@ class Robot extends React.Component{
     traits: this.props.robot.traits,
     remainingStats: this.props.robot.remainingStats
   }
-  componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
-    if (this.props.remainingStats !== prevProps.remainingStats) {
-      this.fetchData(this.props.remainingStats);
-    }
+
+  componentDidMount(){
+    
+    new Chart(document.getElementById(`stats-chart-${this.state.id}`), {
+      type: 'radar',
+      data: {
+        labels: ['Strength', 'Dexterity', 'Armour'],
+        datasets: [
+          {
+            // label: "Stats",
+            fill: true,
+            backgroundColor: "rgba(179,181,198,0.2)",
+            borderColor: "rgba(179,181,198,1)",
+            pointBorderColor: "#fff",
+            pointBackgroundColor: "rgba(179,181,198,1)",
+            data: [(this.props.robot.strength), (this.props.robot.dexterity), (this.props.robot.armour)]
+          }  
+        ]
+      },
+        options: {
+          legend: {
+            display: false
+          },
+          scale: {
+            ticks: {
+              min: 0
+            }
+          },
+          title: {
+            display: true,
+            text: 'Robot Stats'
+          }
+        }
+    });
+
   }
-  handleStat = (attribute, value, operation) => {
+
+  handleStat = (prop, value, operation) => {
+
     return function (e){
       const obj = {};
       let points = this.state.remainingStats;
@@ -139,12 +188,17 @@ class Robot extends React.Component{
     }
 
   render(){
+
     return (
+
       <RobotCard>
         <RobotFront key={this.state.id} style={{backgroundImage: 'url("https://66.media.tumblr.com/4f8896ebca88bb0d8308607315d085c9/tumblr_n439wbdHxA1sulisxo1_400.gif")'}}>
           <RobotName>{this.state.name}</RobotName>
         </RobotFront>
         <RobotBack>
+
+          <canvas key={this.state.id} id={`stats-chart-${this.state.id}`} width="50" height="50"></canvas>
+
           <Stats>
             <Stat>
               <StatDescription>HP: {this.state.health}</StatDescription>
