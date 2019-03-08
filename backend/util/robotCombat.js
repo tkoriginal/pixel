@@ -2,12 +2,10 @@ const assigners = require("./assigners.js");
 // let combatLog = [];
 
 function Combat(robot1, robot2) {
-  // combatLog = [];
-
   // robot1.name = "Rocky";
   // robot2.name = "Dolf";
   let attacker = robot1.dexterity > robot2.dexterity ? robot1 : robot2;
-  let defender = attacker == robot1 ? robot2 : robot1;
+  let defender = attacker === robot1 ? robot2 : robot1;
 
   const combatStatus = { attacker: attacker, defender: defender, turn: 1, combatLog: [] };
 
@@ -35,6 +33,8 @@ function Combat(robot1, robot2) {
     // let damage = defend(attack(attacker), defender);
     // methods[atk](combatStatus);
     // methods[def](combatStatus);
+
+    combatStatus.turnLog = [];
     combatStatus.effectiveArmour = combatStatus.defender.armour;
     combatStatus.effectiveStrength = combatStatus.attacker.strength;
 
@@ -57,10 +57,22 @@ function Combat(robot1, robot2) {
     // methods.changeTurn(combatStatus);
   }
 
-  combatStatus.combatLog.push({ [`Turn ${combatStatus.turn}`]: `${combatStatus.attacker.name} has died!` });
+  if (combatStatus.attacker.health <= 0 && combatStatus.defender.health <= 0) {
+    combatStatus.combatLog.push(`         ***Both fighters are dead!***       `);
+
+    const results = {
+      winner: null,
+      log: combatStatus.combatLog
+    };
+
+    return results;
+  }
+  combatStatus.winner = combatStatus.attacker.health > 0 ? combatStatus.attacker : combatStatus.defender;
+  combatStatus.loser = combatStatus.winner === combatStatus.attacker ? combatStatus.defender : combatStatus.attacker;
+  combatStatus.combatLog.push(`    ***${combatStatus.loser.name} has died!***     `);
 
   const results = {
-    winner: combatStatus.defender,
+    winner: combatStatus.winner,
     log: combatStatus.combatLog
   };
 

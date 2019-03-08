@@ -2,7 +2,7 @@ class Robot {
   constructor(statTotal) {
     this.remainingStats = statTotal;
 
-    this.strength = Math.floor(Math.random() * Math.min(20, this.remainingStats));
+    this.strength = Math.floor(Math.random() * Math.min(15, this.remainingStats) + 5);
     this.remainingStats -= this.strength;
 
     this.dexterity = Math.floor(Math.random() * Math.min(20, this.remainingStats));
@@ -37,8 +37,8 @@ function generateRobot(numOfBots, statTotal, enemy) {
   return robots;
 }
 
-const nameArray = ["Maximus", "Taqert", "Gorg", "Killary", "Brocas", "Tin", "Slimtim", "Facebump"];
-const traitsArray = ["critical", "block"];
+const nameArray = ["Maximus", "Taqert", "Gorg", "Killary", "Brocas", "Tin", "Slimtim", "Facebump", "OnlyJuan", "Mr.Cache"];
+const traitsArray = ["critical", "block", "doubleDamage", "poison", "thorns"];
 
 module.exports = { generateRobot };
 // export default generateRobot;
