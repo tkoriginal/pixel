@@ -12,7 +12,6 @@ const RobotCard = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  z-index: -1;
 `
 
 const RobotInfo = styled.div`
@@ -47,6 +46,7 @@ const Stats = styled.div`
 `
 const Stat = styled.div`
   margin-right: 1rem;
+  z-index:2;
 `
 const StatDescription = styled.p`
   display: inline-block;
@@ -54,7 +54,6 @@ const StatDescription = styled.p`
   font-size: 1.2rem;
 `
 const GraphArea = styled.div`
-  z-index: -1;
   width: 350px;
   margin-left: -10rem;
 `
