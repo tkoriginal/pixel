@@ -2,67 +2,46 @@ import React from 'react';
 import styled from 'styled-components';
 const Chart = require("chart.js");
 
-const RobotFront = styled.div`
-  display:flex;
-  /* justify-content: center; */
-  align-items: flex-end;
-  position: absolute;
-  top:0;
-  left:0;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-  overflow: hidden;
-  background-size: cover;
-  background-origin: center;
-  background-repeat: no-repeat;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transition: all .8s ease;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  box-shadow: 0 1.5rem 4rem rgba(#111, .15);
-`
-const RobotBack = styled.div`
-  position: absolute;
-  background-color: #F5F3F5;
-  height: 100%;
-  width: 100%;
-  top:0;
-  left:0;
-  overflow: scroll;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform: rotateY(180deg);
-  transition: all .8s ease;
-  border-radius: 6px;
-  box-shadow: 0 1.5rem 4rem rgba(#111, .15);
-  color: #444;
+const RobotCard = styled.div`
+  width:100%;
+  height:200px;
+  padding: 10px;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #c4c4c4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 10px;
 `
 
-const RobotCard = styled.div`
-  width:200px;
-  height:320px;
-  perspective: 150rem;
-  margin-right: 2rem;
-  position: relative;
-  -moz-perspective: 150rem;
-  border-radius: 5px;
-  &:hover ${RobotFront}{
-    transform: rotateY(-180deg)
-  }
-  &:hover ${RobotBack}{
-    transform: rotateY(0deg);
-  }
+const RobotInfo = styled.div`
+  display: flex;
+  flex-direction: row;
 `
+
+const Actions = styled.div`
+  height:25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`
+
+const RobotBio = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow:1;
+  height:200px;
+`
+
 const RobotName = styled.p`
-  flex: 1;
-  margin-bottom: 3rem;
-  background-color: #999;
-  height: 3rem;
   text-align: center;
 `
 const Stats = styled.div`
+  height:200px;
+  display: flex;
+  flex-direction: column;
+  flex-grow:1;
 
 `
 const Stat = styled.div`
@@ -72,7 +51,53 @@ const StatDescription = styled.p`
   display: inline-block;
   margin-right: 5px;
 `
+const GraphArea = styled.div`
+  height:50px;
+  display: flex;
+  flex-direction: row;
+  flex-grow:2;
+`
+
 const StatButton = styled.button`
+`
+
+const RetireBtn = styled.button`
+  width: 50px;
+  height: 20px;
+  padding: 0;
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  background: #f0776c;
+  border: 0;
+  border-radius: 5px;
+  outline:0;
+`
+
+const UpdateBtn = styled.button`
+  width: 50px;
+  height: 20px;
+  padding: 0;
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  background: #0066ff;
+  border: 0;
+  border-radius: 5px;
+  outline:0;
+`
+
+const BattleBtn = styled.button`
+  width: 50px;
+  height: 20px;
+  padding: 0;
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  background: #ff971a;
+  border: 0;
+  border-radius: 5px;
+  outline:0;
 `
 
 class Robot extends React.Component{
@@ -109,10 +134,10 @@ class Robot extends React.Component{
         datasets: [
           {
             fill: true,
-            backgroundColor: "rgba(179,181,198,0.2)",
-            borderColor: "rgba(179,181,198,1)",
+            backgroundColor: "#ffb347",
+            borderColor: "#ff971a",
             pointBorderColor: "#fff",
-            pointBackgroundColor: "rgba(179,181,198,1)",
+            pointBackgroundColor: "#ff9900",
             data: [(this.props.robot.strength), (this.props.robot.dexterity), (this.props.robot.armour), ((this.props.robot.health - 50) /5)]
           }  
         ]
@@ -171,12 +196,15 @@ class Robot extends React.Component{
   render(){
     return (
       <RobotCard>
-        <RobotFront key={this.state.id} style={{backgroundImage: 'url("https://66.media.tumblr.com/4f8896ebca88bb0d8308607315d085c9/tumblr_n439wbdHxA1sulisxo1_400.gif")'}}>
-          <RobotName>{this.state.name}</RobotName>
-        </RobotFront>
-        <RobotBack>
-          <canvas key={this.state.id} id={`stats-chart-${this.state.id}`} width="40" height="40"></canvas>
-          <Stats>
+
+        <RobotInfo>
+            
+          <RobotBio>
+            <RobotName>{this.state.name}</RobotName>
+            <img src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" alt="Battle Bot" height="150" width="150"></img>
+          </RobotBio>
+
+         <Stats>
             <Stat>
               <StatDescription>HP: {this.state.health}</StatDescription>
               <StatButton onClick={this.handleStat('health', this.state.health, 'minus').bind(this)}>-</StatButton>
@@ -204,16 +232,24 @@ class Robot extends React.Component{
               <StatDescription>RS: {this.state.remainingStats}</StatDescription>
             </Stat>
           </Stats>
-          <div>
-            {this.state.active && (
-              <React.Fragment>
-                <button onClick={this.props.retireRobot(this.state)}>Retire</button>
-                <button onClick={this.props.launchBattle(this.state)}>Battle</button>
-                <button onClick={this.handleUpdateState}>Update</button>
-              </React.Fragment>
-            )}
-          </div>
-        </RobotBack>
+          
+          <GraphArea>
+            <canvas key={this.state.id} id={`stats-chart-${this.state.id}`} width="40" height="40"></canvas>
+          </GraphArea>
+
+        </RobotInfo>
+        
+          
+        <Actions>
+          {this.state.active && (
+            <React.Fragment>
+              <RetireBtn onClick={this.props.retireRobot(this.state)}>Retire</RetireBtn>
+              <UpdateBtn onClick={this.handleUpdateState}>Update</UpdateBtn>
+              <BattleBtn onClick={this.props.launchBattle(this.state)}>Battle</BattleBtn>
+            </React.Fragment>
+          )}
+        </Actions>
+
       </RobotCard>
     )}
 }

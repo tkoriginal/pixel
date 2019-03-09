@@ -7,17 +7,39 @@ import HallOfFame from '../components/_HallOfFame';
 
 const Content = styled.div`
   display:flex;
-  
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start
+  width: 600px;
 `
+const TopBar = styled.div`
+  width: 600px;
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  padding: 15px;
+`
+
+const HomeScreen = styled.div`
+  width: 100%;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+`
+
 class Home extends Component {
   render() {
     if (!this.props.userInfo.name) {
       return (<Redirect to="/login" />)
     }
     return (
-      <div>
-        <h1>Welcome {this.props.userInfo.name}!</h1>
-        <button onClick={this.props.handleLogout}>Logout</button>
+      <HomeScreen>
+        <TopBar>
+          <h1>Welcome {this.props.userInfo.name}!</h1>
+          <button onClick={this.props.handleLogout}>Logout</button>
+        </TopBar>
+
         <Content>
           <MyRobots 
             user_id={this.props.userInfo.id}
@@ -31,7 +53,7 @@ class Home extends Component {
             updateHallOfFame = {this.props.updateHallOfFame}
           />
         </Content> 
-      </div>
+      </HomeScreen>
     );
   }
 }
