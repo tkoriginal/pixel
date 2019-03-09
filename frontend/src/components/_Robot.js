@@ -130,7 +130,7 @@ class Robot extends React.Component{
     new Chart(document.getElementById(`stats-chart-${this.state.id}`), {
       type: 'radar',
       data: {
-        labels: ['Strength', 'Dexterity', 'Armour', 'Health'],
+        labels: ['STR', 'DEX', 'ARM', 'HP'],
         datasets: [
           {
             fill: true,
