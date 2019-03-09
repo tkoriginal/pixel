@@ -3,21 +3,21 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import Robot from './_Robot';
 //Styles of the component
+
 const Robots = styled.div`
-  display:flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  width: 1100px;
+  width:450px;
+  display: flex;
+  flex-direction: column;
 `
 const AddRobot = styled.button`
-  width: 200px; 
-  height: 320px;
-  font-size: 150px;
-  background: #fff;
+  width: 472px; 
+  height: 40px;
+  font-size: 35px;
+  background: #77dd77;
   border: 1px solid #ddd;
-  color:#aaa;
+  color: #fff;
   border-radius: 5px;
-  margin-right: 2rem;
+  margin-top: 10px;
 `
 //Styles End
 class MyRobots extends Component {
@@ -80,9 +80,6 @@ class MyRobots extends Component {
     }
     return (
       <Robots>
-        <div>
-          <AddRobot type="submit" onClick={this.chooseRobot}>+</AddRobot>
-        </div>
         {this.props.robots.map((robot)=> 
           <Robot 
             key={robot.id}
@@ -92,6 +89,9 @@ class MyRobots extends Component {
             user_id={this.props.user_id} 
             launchBattle={this.launchBattle}/>
         )}
+
+        <AddRobot type="submit" onClick={this.chooseRobot}>+</AddRobot>
+       
       </Robots>
     )
   }

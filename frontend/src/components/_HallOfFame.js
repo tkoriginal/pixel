@@ -3,8 +3,13 @@ import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
  
 const Container = styled.div`
-  width: 500px;
-  height: 100vh;
+  border-radius: 4px;
+  border: 1px solid #c4c4c4;
+  display: flex;
+  flex-direction: row;
+  width: 100px;
+  margin-bottom: 10px;
+
 `
 class HallOfFame extends React.Component {
   componentDidMount() {
