@@ -10,7 +10,6 @@ const RobotCard = styled.div`
   border-radius: 4px;
   border: 1px solid #c4c4c4;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   margin-bottom: 10px;
 `
@@ -21,10 +20,10 @@ const RobotInfo = styled.div`
 `
 
 const Actions = styled.div`
-  height:25px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
+  margin-right: 2rem;
 `
 
 const RobotBio = styled.div`
@@ -50,6 +49,7 @@ const Stat = styled.div`
 const StatDescription = styled.p`
   display: inline-block;
   margin-right: 5px;
+  font-size: 1.2rem;
 `
 const GraphArea = styled.div`
   height:50px;
@@ -58,46 +58,36 @@ const GraphArea = styled.div`
   flex-grow:2;
 `
 
+
+let red = '#f0776c';
+let blue = '#0066ff';
+let yellow = '#ff971a';
+
+const ActionBtn = styled.button`
+  padding: 1rem 4rem;
+  font-size: 1.5rem;
+  color: #fff;
+  background: ${props => props.color === 'red' ?  red : props.color === 'blue' ? blue : yellow};
+  border: 0;
+  border-radius: 5px;
+  outline:none;
+`
+const StatChangeContainer = styled.div`
+  width: 100px;
+  display:flex;
+  height: 30px;
+  justify-content:space-between;
+`
+const StatNumber = styled.p`
+
+`
 const StatButton = styled.button`
+  background:none;
+  
 `
-
-const RetireBtn = styled.button`
-  width: 50px;
-  height: 20px;
-  padding: 0;
-  font-size: 15px;
-  color: #fff;
-  text-align: center;
-  background: #f0776c;
-  border: 0;
-  border-radius: 5px;
-  outline:0;
-`
-
-const UpdateBtn = styled.button`
-  width: 50px;
-  height: 20px;
-  padding: 0;
-  font-size: 15px;
-  color: #fff;
-  text-align: center;
-  background: #0066ff;
-  border: 0;
-  border-radius: 5px;
-  outline:0;
-`
-
-const BattleBtn = styled.button`
-  width: 50px;
-  height: 20px;
-  padding: 0;
-  font-size: 15px;
-  color: #fff;
-  text-align: center;
-  background: #ff971a;
-  border: 0;
-  border-radius: 5px;
-  outline:0;
+const Canvas = styled.canvas`
+  width: 400px !important;
+  height: 200px !important;
 `
 
 class Robot extends React.Component{
@@ -157,9 +147,42 @@ class Robot extends React.Component{
           }
         }
     });
-
+    
   }
-
+  componentDidUpdate(){
+    new Chart(document.getElementById(`stats-chart-${this.state.id}`), {
+      type: 'radar',
+      data: {
+        labels: ['STR', 'DEX', 'ARM', 'HP'],
+        datasets: [
+          {
+            fill: true,
+            backgroundColor: "#ffb347",
+            borderColor: "#ff971a",
+            pointBorderColor: "#fff",
+            pointBackgroundColor: "#ff9900",
+            data: [(this.state.strength), (this.state.dexterity), (this.state.armour), ((this.state.health - 50) /5)]
+          }  
+        ]
+      },
+        options: {
+          legend: {
+            display: false
+          },
+          scale: {
+            ticks: {
+              min: 0
+            }
+          },
+          title: {
+            display: true,
+            text: 'Robot Stats'
+          }
+        }
+    });
+    
+  }
+ 
   handleStat = (attribute, value, operation) => {
     return function (e){
       const obj = {};
@@ -196,37 +219,37 @@ class Robot extends React.Component{
   render(){
     return (
       <RobotCard>
-
         <RobotInfo>
-            
           <RobotBio>
             <RobotName>{this.state.name}</RobotName>
             <img src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" alt="Battle Bot" height="150" width="150"></img>
           </RobotBio>
-
          <Stats>
             <Stat>
-              <StatDescription>HP: {this.state.health}</StatDescription>
-              <StatButton onClick={this.handleStat('health', this.state.health, 'minus').bind(this)}>-</StatButton>
-              <StatButton onClick={this.handleStat('health', this.state.health, 'plus').bind(this)}>+</StatButton>
+              <StatDescription>Health</StatDescription>
+              <StatChangeContainer>
+                <StatButton onClick={this.handleStat('health', this.state.health, 'minus').bind(this)}>-</StatButton>
+                <StatNumber>{this.state.health}</StatNumber>
+                <StatButton onClick={this.handleStat('health', this.state.health, 'plus').bind(this)}>+</StatButton>
+              </StatChangeContainer>
             </Stat>
             <Stat>
-              <StatDescription>Str: {this.state.strength}</StatDescription>
               <StatButton onClick={this.handleStat('strength', this.state.strength, 'minus').bind(this)}>-</StatButton>
+              <StatDescription>Str {this.state.strength}</StatDescription>
               <StatButton onClick={this.handleStat('strength', this.state.strength, 'plus').bind(this)}>+</StatButton>
             </Stat>
             <Stat>
-              <StatDescription>Dex: {this.state.dexterity}</StatDescription>
               <StatButton onClick={this.handleStat('dexterity', this.state.dexterity, 'minus').bind(this)}>-</StatButton>
+              <StatDescription>Dex {this.state.dexterity}</StatDescription>
               <StatButton onClick={this.handleStat('dexterity', this.state.dexterity, 'plus').bind(this)}>+</StatButton>
             </Stat>
             <Stat>
-              <StatDescription>ARM: {this.state.armour}</StatDescription>
               <StatButton onClick={this.handleStat('armour', this.state.armour, 'minus').bind(this)}>-</StatButton>
+              <StatDescription>ARM {this.state.armour}</StatDescription>
               <StatButton onClick={this.handleStat('armour', this.state.armour, 'plus').bind(this)}>+</StatButton>
             </Stat>
             <Stat>
-              <StatDescription>Active: {this.state.active ? 'Active':'Retired'}</StatDescription>
+              <StatDescription>Trait: {this.state.traits[4]}</StatDescription>
             </Stat>
             <Stat>
               <StatDescription>RS: {this.state.remainingStats}</StatDescription>
@@ -234,7 +257,7 @@ class Robot extends React.Component{
           </Stats>
           
           <GraphArea>
-            <canvas key={this.state.id} id={`stats-chart-${this.state.id}`} width="40" height="40"></canvas>
+            <Canvas key={this.state.id} id={`stats-chart-${this.state.id}`} ></Canvas>
           </GraphArea>
 
         </RobotInfo>
@@ -243,9 +266,9 @@ class Robot extends React.Component{
         <Actions>
           {this.state.active && (
             <React.Fragment>
-              <RetireBtn onClick={this.props.retireRobot(this.state)}>Retire</RetireBtn>
-              <UpdateBtn onClick={this.handleUpdateState}>Update</UpdateBtn>
-              <BattleBtn onClick={this.props.launchBattle(this.state)}>Battle</BattleBtn>
+              <ActionBtn color='red' onClick={this.props.retireRobot(this.state)}>Retire</ActionBtn>
+              <ActionBtn color='blue' onClick={this.handleUpdateState}>Update</ActionBtn>
+              <ActionBtn color='yellow' onClick={this.props.launchBattle(this.state)}>Battle</ActionBtn>
             </React.Fragment>
           )}
         </Actions>

@@ -70,7 +70,7 @@ class Combat extends Component {
       <div>
         <Link to='/'><button>Go Back</button></Link>
         {this.state.opponents.map((robot, i) => 
-         (<div key={i}>
+         (<div key={i} >
             <p>ID: {robot.id}</p>
             <p>Name: {robot.name}</p>
             <p>Str: {robot.strength}</p>
@@ -78,6 +78,7 @@ class Combat extends Component {
             <p>HP: {robot.health}</p>
             <p>ARM: {robot.armour}</p>
             <p>RS: {robot.remainingStats}</p>
+            
               <button onClick={this.launchBattle(this.props.battleRobot, robot)}>Battle</button>
           </div>)
         )}
