@@ -5,19 +5,19 @@ import Robot from './_Robot';
 //Styles of the component
 
 const Robots = styled.div`
-  width:70%;
+  /* max-width:800px; */
   display: flex;
   flex-direction: column;
 `
 const AddRobot = styled.button`
-  width: 472px; 
-  height: 40px;
-  font-size: 35px;
+  width: 100%; 
+  font-size: 4rem;
   background: #77dd77;
   border: 1px solid #ddd;
   color: #fff;
   border-radius: 5px;
   margin-top: 10px;
+  padding: 1.2rem 0;
 `
 //Styles End
 class MyRobots extends Component {

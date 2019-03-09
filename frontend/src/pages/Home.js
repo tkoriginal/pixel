@@ -10,9 +10,9 @@ const Content = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  > #my-robots{
+  /* > #my-robots{
     width: 700px;
-  }
+  } */
 `
 const TopBar = styled.div`
   width: 100%;
