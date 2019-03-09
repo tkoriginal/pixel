@@ -77,6 +77,7 @@ class ChooseRobot extends Component {
             <p>Strength: {robot.strength}</p>
             <p>Dexterity: {robot.dexterity}</p>
             <p>Armour: {robot.armour}</p>
+            <p>Trait: {robot.traits[4]}</p>
             <button onClick={this.selectRobot(robot, this.props.userInfo.id, this.state.robotName)}>Select Robot</button>
           </div>)
         })}

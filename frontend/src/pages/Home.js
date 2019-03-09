@@ -7,23 +7,25 @@ import HallOfFame from '../components/_HallOfFame';
 
 const Content = styled.div`
   display:flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start
-  width: 600px;
+  align-items: flex-start;
+  width: 100%;
+  > #my-robots{
+    width: 700px;
+  }
 `
 const TopBar = styled.div`
-  width: 600px;
+  width: 100%;
   display:flex;
-  flex-direction:row;
   justify-content: space-between;
   padding: 15px;
 `
 
 const HomeScreen = styled.div`
-  width: 100%;
+  margin: 0 auto;
+  width: 70%;
   display:flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   flex-direction: column;
 `
@@ -42,6 +44,7 @@ class Home extends Component {
 
         <Content>
           <MyRobots 
+            id='my-robots'
             user_id={this.props.userInfo.id}
             robots={this.props.userInfo.robots} 
             updateRobotInfo={this.props.updateRobotInfo}

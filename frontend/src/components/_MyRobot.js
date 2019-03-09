@@ -5,7 +5,7 @@ import Robot from './_Robot';
 //Styles of the component
 
 const Robots = styled.div`
-  width:450px;
+  width:70%;
   display: flex;
   flex-direction: column;
 `
