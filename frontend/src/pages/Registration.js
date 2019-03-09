@@ -5,27 +5,17 @@ import styled from "styled-components";
 
 const Form = styled.form`
   margin: 20px auto;
-  width: 300px;
+  width: 350px;
   padding: 30px 25px;
   background: white;
   border: 1px solid #c4c4c4;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `
 
-const Title = styled.h1`
-  margin: -28px -25px 25px;
-  padding: 15px 25px;
-  line-height: 30px;
-  font-size: 25px;
-  font-weight: 300;
-  color: #ADADAD;
-  text-align:center;
-  background: #f7f7f7;
- 
-`
 const Input = styled.input`
-  width: 285px;
+  width: 100%;
   height: 50px;
   margin-bottom: 25px;
   padding-left:10px;
@@ -50,6 +40,7 @@ const Button = styled.input`
 
 const Login = styled.p`
   text-align:center;
+  margin-top:25px;
   margin-bottom:0px;
   color:#666;
   text-decoration:none;
