@@ -19,6 +19,10 @@ const GlobalStyle = createGlobalStyle`
   }
   body{
     box-sizing: border-box;
+    background: url('img/wallpaper.gif');
+    background-attachment:fixed;
+    background-size: cover;
+    background-repeat:no-repeat
   }
 `
 class App extends Component {

@@ -51,11 +51,23 @@ const GraphArea = styled.div`
   flex-direction: row;
   flex-grow:2;
 `
+const Battle = styled.div`
+  width: 800px;
+  height: 800px;
+  /* background-color: */
+`
 
+const Robot2 = styled.img`
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+`
 class Combat extends Component {
   state = {
     opponents: undefined,
-    battleLog: undefined
+    battleLog: undefined,
+    opponentRobot: undefined
   }
   componentDidMount() {
     fetch('/generate-combat-robots', {
@@ -138,6 +150,7 @@ class Combat extends Component {
   }
   launchBattle = (userRobot, opponentRobot) => {
     return (function (e) {
+      this.setState({opponentRobot})
       console.log(userRobot, opponentRobot);
       const robots = JSON.stringify([userRobot, opponentRobot])
       e.preventDefault();
@@ -169,23 +182,26 @@ class Combat extends Component {
     }
     if (this.state.battleLog) {
       return (
-        <div>
-          {this.state.battleLog.log.map((turn, i) => {
-            return(<p key={i}>{JSON.stringify(turn)}</p>)
-          })}
-        <Link to='/'><button>Go Back</button></Link>
-        </div>
+        <React.Fragment>
+          <Battle>
+            <img src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" alt="Battle Robot"/>
+            <Robot2 src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" alt=""/>
+          </Battle>
+          <div>
+            {this.state.battleLog.log.map((turn, i) => {
+              return(<p key={i}>{JSON.stringify(turn)}</p>)
+            })}
+          <Link to='/'><button>Go Back</button></Link>
+          </div>
+        </React.Fragment>
       )
     }
     return (
       <div>
         <Link to='/'><button>Go Back</button></Link>
         {this.state.opponents.map((robot, i) => 
-
          (<div key={i}>
-
           <RobotCard>
-                
               <RobotBio>
                 <RobotName>{robot.name}</RobotName>
                 <img src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" alt="Battle Bot" height="150" width="150"></img>
