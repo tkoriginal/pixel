@@ -15,7 +15,7 @@ class Robot {
     this.remainingStats = 0;
 
     this.traits = ["attack", "defend", "assignDamage", "changeTurn"];
-    this.traits.push(traitsArray[Math.floor(Math.random() * 2)]);
+    this.traits.push(traitsArray[Math.floor(Math.random() * traitsArray.length)]);
 
     this.name = nameArray[Math.floor(Math.random() * (nameArray.length - 1))];
   }

@@ -11,27 +11,20 @@ const RobotCard = styled.div`
   border-radius: 4px;
   border: 1px solid #c4c4c4;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   margin-bottom: 10px;
 `
 
-const RobotInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-`
-
-const Actions = styled.div`
-  height:25px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-`
+// const RobotInfo = styled.div`
+//   display: flex;
+//   flex-direction: row;
+// `
 
 const RobotBio = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow:1;
+  flex-grow:2;
   height:200px;
 `
 
@@ -53,7 +46,7 @@ const StatDescription = styled.p`
   margin-right: 5px;
 `
 const GraphArea = styled.div`
-  height:50px;
+  height:100%;
   display: flex;
   flex-direction: row;
   flex-grow:2;
@@ -88,13 +81,16 @@ class Combat extends Component {
         new Chart(document.getElementById(`stats-chart-${robot.opponentId}`), {
           type: 'radar',
           data: {
+            responsive:true,
             labels: ['STR', 'DEX', 'ARM', 'HP'],
             datasets: [
               {
                 label: "Your Stats",
                 fill: true,
-                backgroundColor: "#ffb347",
+                backgroundColor: "rgba(255,151,26,0.3)",
                 borderColor: "#ff971a",
+                borderWidth: 1,
+                pointRadius: 0,
                 pointBorderColor: "#fff",
                 pointBackgroundColor: "#ff9900",
                 data: [(this.props.battleRobot.strength), (this.props.battleRobot.dexterity), (this.props.battleRobot.armour), ((this.props.battleRobot.health - 50) /5)]
@@ -102,8 +98,10 @@ class Combat extends Component {
               {
                 label: "Opponents Stats",
                 fill: true,
-                backgroundColor: "#ff6961",
+                backgroundColor: "rgba(255,105,97,0.3)",
                 borderColor: "#ff6961",
+                borderWidth: 1,
+                pointRadius: 0,
                 pointBorderColor: "#fff",
                 pointBackgroundColor: "#ff6961",
                 data: [robot.strength, robot.dexterity, robot.armour, ((robot.health - 50) /5)]
@@ -116,7 +114,8 @@ class Combat extends Component {
               },
               scale: {
                 ticks: {
-                  min: 0
+                  min: 0,
+                  max: 20
                 }
               },
               title: {
@@ -186,8 +185,6 @@ class Combat extends Component {
          (<div key={i}>
 
           <RobotCard>
-
-            <RobotInfo>
                 
               <RobotBio>
                 <RobotName>{robot.name}</RobotName>
@@ -212,8 +209,6 @@ class Combat extends Component {
               <GraphArea>
                 <canvas id={`stats-chart-${robot.opponentId}`}></canvas>
               </GraphArea>
-
-            </RobotInfo>
 
           </RobotCard>
           </div>)
