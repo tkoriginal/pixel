@@ -1,5 +1,63 @@
 import React, {Component} from 'react';
 import {Redirect, Link} from 'react-router-dom';
+import styled from 'styled-components';
+const Chart = require("chart.js");
+
+const RobotCard = styled.div`
+  width:600px;
+  height:200px;
+  padding: 10px;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #c4c4c4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 10px;
+`
+
+const RobotInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+const Actions = styled.div`
+  height:25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`
+
+const RobotBio = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow:1;
+  height:200px;
+`
+
+const RobotName = styled.p`
+  text-align: center;
+`
+const Stats = styled.div`
+  height:200px;
+  display: flex;
+  flex-direction: column;
+  flex-grow:1;
+
+`
+const Stat = styled.div`
+
+`
+const StatDescription = styled.p`
+  display: inline-block;
+  margin-right: 5px;
+`
+const GraphArea = styled.div`
+  height:50px;
+  display: flex;
+  flex-direction: row;
+  flex-grow:2;
+`
 
 class Combat extends Component {
   state = {
@@ -16,7 +74,60 @@ class Combat extends Component {
     })
     .then(res => res.json())
     .then(opponents => {
-      this.setState({opponents})
+      let fixedOpponents = opponents.map((opponent,i) => {
+        return {...opponent,opponentId: i}
+      })
+      this.setState({opponents:fixedOpponents})
+      return fixedOpponents
+    })
+    .then(fixedOpponents => {
+      console.log(fixedOpponents)
+
+      fixedOpponents.forEach(robot => {
+        
+        new Chart(document.getElementById(`stats-chart-${robot.opponentId}`), {
+          type: 'radar',
+          data: {
+            labels: ['STR', 'DEX', 'ARM', 'HP'],
+            datasets: [
+              {
+                label: "Your Stats",
+                fill: true,
+                backgroundColor: "#ffb347",
+                borderColor: "#ff971a",
+                pointBorderColor: "#fff",
+                pointBackgroundColor: "#ff9900",
+                data: [(this.props.battleRobot.strength), (this.props.battleRobot.dexterity), (this.props.battleRobot.armour), ((this.props.battleRobot.health - 50) /5)]
+              },
+              {
+                label: "Opponents Stats",
+                fill: true,
+                backgroundColor: "#ff6961",
+                borderColor: "#ff6961",
+                pointBorderColor: "#fff",
+                pointBackgroundColor: "#ff6961",
+                data: [robot.strength, robot.dexterity, robot.armour, ((robot.health - 50) /5)]
+              }   
+            ]
+          },
+            options: {
+              legend: {
+                display: true,
+              },
+              scale: {
+                ticks: {
+                  min: 0
+                }
+              },
+              title: {
+                display: true,
+                // text: 'Robot Stats'
+              }
+            }
+        });
+        
+      });
+      
     })
     .catch(() => {
       console.log('Robot route not working right now')
@@ -44,7 +155,8 @@ class Combat extends Component {
       })
       .catch((e) => console.log(e, 'Did not get battle info back from server') )
     }).bind(this);
-  }
+  };
+
   render() {
     if (!this.props.userInfo.name) {
       return (<Redirect to="/login" />)
@@ -71,14 +183,45 @@ class Combat extends Component {
         <Link to='/'><button>Go Back</button></Link>
         {this.state.opponents.map((robot, i) => 
          (<div key={i}>
-            <p>ID: {robot.id}</p>
-            <p>Name: {robot.name}</p>
+            {/* <p>Name: {robot.name}</p>
             <p>Str: {robot.strength}</p>
             <p>Dex: {robot.dexterity}</p>
             <p>HP: {robot.health}</p>
             <p>ARM: {robot.armour}</p>
-            <p>RS: {robot.remainingStats}</p>
-              <button onClick={this.launchBattle(this.props.battleRobot, robot)}>Battle</button>
+            <p>RS: {robot.remainingStats}</p> */}
+          <RobotCard>
+
+            <RobotInfo>
+                
+              <RobotBio>
+                <RobotName>{robot.name}</RobotName>
+                <img src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" alt="Battle Bot" height="150" width="150"></img>
+                <button onClick={this.launchBattle(this.props.battleRobot, robot)}>Battle</button>
+              </RobotBio>
+
+              <Stats>
+                <Stat>
+                  <StatDescription>Health: {robot.health}</StatDescription>
+                </Stat>
+                <Stat>
+                  <StatDescription>strength: {robot.strength}</StatDescription>
+                </Stat>
+                <Stat>
+                  <StatDescription>Dexterity: {robot.dexterity}</StatDescription>
+                </Stat>
+                <Stat>
+                  <StatDescription>Armour: {robot.armour}</StatDescription>
+                </Stat>
+              </Stats>
+              
+              <GraphArea>
+                <canvas id={`stats-chart-${robot.opponentId}`}></canvas>
+              </GraphArea>
+
+            </RobotInfo>
+
+          </RobotCard>
+
           </div>)
         )}
       </div>
@@ -87,3 +230,5 @@ class Combat extends Component {
 }
 
 export default Combat;
+
+
