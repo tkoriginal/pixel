@@ -46,7 +46,7 @@ const Stats = styled.div`
 
 `
 const Stat = styled.div`
-
+  
 `
 const StatDescription = styled.p`
   display: inline-block;
@@ -194,7 +194,6 @@ class Combat extends Component {
                 <img src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" alt="Battle Bot" height="150" width="150"></img>
                 <button onClick={this.launchBattle(this.props.battleRobot, robot)}>Battle</button>
               </RobotBio>
-
               <Stats>
                 <Stat>
                   <StatDescription>Health: {robot.health}</StatDescription>

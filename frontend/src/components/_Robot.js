@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Chart = require("chart.js");
 
 const RobotCard = styled.div`
-  width:100%;
+  max-width:100%;
   height:200px;
   padding: 10px;
   background: white;
@@ -12,6 +12,7 @@ const RobotCard = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  z-index: -1;
 `
 
 const RobotInfo = styled.div`
@@ -23,7 +24,6 @@ const Actions = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-right: 2rem;
 `
 
 const RobotBio = styled.div`
@@ -35,16 +35,18 @@ const RobotBio = styled.div`
 
 const RobotName = styled.p`
   text-align: center;
+  font-size: 2rem
 `
 const Stats = styled.div`
-  height:200px;
+  width:200px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0 auto;
   flex-grow:1;
 
 `
 const Stat = styled.div`
-
+  margin-right: 1rem;
 `
 const StatDescription = styled.p`
   display: inline-block;
@@ -52,10 +54,9 @@ const StatDescription = styled.p`
   font-size: 1.2rem;
 `
 const GraphArea = styled.div`
-  height:50px;
-  display: flex;
-  flex-direction: row;
-  flex-grow:2;
+  z-index: -1;
+  width: 350px;
+  margin-left: -10rem;
 `
 
 
@@ -73,21 +74,25 @@ const ActionBtn = styled.button`
   outline:none;
 `
 const StatChangeContainer = styled.div`
-  width: 100px;
+  width: 72px;
   display:flex;
-  height: 30px;
-  justify-content:space-between;
+  margin-bottom: .5rem;
+  border: 1px solid #c4c4c4;
 `
 const StatNumber = styled.p`
-
+  font-size: 1.5rem;
+  align-self: center;
+  width: 3rem;
+  text-align: center;
 `
 const StatButton = styled.button`
   background:none;
-  
+  font-size: 1.3rem;
+  border: none;
+  padding: .7rem;
 `
 const Canvas = styled.canvas`
-  width: 400px !important;
-  height: 200px !important;
+  
 `
 
 class Robot extends React.Component{
@@ -234,19 +239,28 @@ class Robot extends React.Component{
               </StatChangeContainer>
             </Stat>
             <Stat>
-              <StatButton onClick={this.handleStat('strength', this.state.strength, 'minus').bind(this)}>-</StatButton>
-              <StatDescription>Str {this.state.strength}</StatDescription>
-              <StatButton onClick={this.handleStat('strength', this.state.strength, 'plus').bind(this)}>+</StatButton>
+              <StatDescription>Strength</StatDescription>
+              <StatChangeContainer>
+                <StatButton onClick={this.handleStat('strength', this.state.strength, 'minus').bind(this)}>-</StatButton>
+                <StatNumber>{this.state.strength}</StatNumber>
+                <StatButton onClick={this.handleStat('strength', this.state.strength, 'plus').bind(this)}>+</StatButton>
+              </StatChangeContainer>
             </Stat>
             <Stat>
-              <StatButton onClick={this.handleStat('dexterity', this.state.dexterity, 'minus').bind(this)}>-</StatButton>
-              <StatDescription>Dex {this.state.dexterity}</StatDescription>
-              <StatButton onClick={this.handleStat('dexterity', this.state.dexterity, 'plus').bind(this)}>+</StatButton>
+              <StatDescription>Dexterity</StatDescription>
+              <StatChangeContainer>
+                <StatButton onClick={this.handleStat('dexterity', this.state.dexterity, 'minus').bind(this)}>-</StatButton>
+                <StatNumber>{this.state.dexterity}</StatNumber>
+                <StatButton onClick={this.handleStat('dexterity', this.state.dexterity, 'plus').bind(this)}>+</StatButton>
+              </StatChangeContainer>
             </Stat>
             <Stat>
-              <StatButton onClick={this.handleStat('armour', this.state.armour, 'minus').bind(this)}>-</StatButton>
-              <StatDescription>ARM {this.state.armour}</StatDescription>
-              <StatButton onClick={this.handleStat('armour', this.state.armour, 'plus').bind(this)}>+</StatButton>
+              <StatDescription>Armour</StatDescription>
+              <StatChangeContainer>
+                <StatButton onClick={this.handleStat('armour', this.state.armour, 'minus').bind(this)}>-</StatButton>
+                <StatNumber>{this.state.armour}</StatNumber>
+                <StatButton onClick={this.handleStat('armour', this.state.armour, 'plus').bind(this)}>+</StatButton>
+              </StatChangeContainer>
             </Stat>
             <Stat>
               <StatDescription>Trait: {this.state.traits[4]}</StatDescription>
@@ -255,15 +269,10 @@ class Robot extends React.Component{
               <StatDescription>RS: {this.state.remainingStats}</StatDescription>
             </Stat>
           </Stats>
-          
           <GraphArea>
             <Canvas key={this.state.id} id={`stats-chart-${this.state.id}`} ></Canvas>
           </GraphArea>
-
-        </RobotInfo>
-        
-          
-        <Actions>
+          <Actions>
           {this.state.active && (
             <React.Fragment>
               <ActionBtn color='red' onClick={this.props.retireRobot(this.state)}>Retire</ActionBtn>
@@ -272,6 +281,7 @@ class Robot extends React.Component{
             </React.Fragment>
           )}
         </Actions>
+        </RobotInfo>
 
       </RobotCard>
     )}
