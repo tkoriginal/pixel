@@ -121,7 +121,7 @@ class Combat extends Component {
               },
               title: {
                 display: true,
-                text: 'Robot Stats'
+                // text: 'Robot Stats'
               }
             }
         });
