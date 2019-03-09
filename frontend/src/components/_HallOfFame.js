@@ -7,10 +7,10 @@ const Container = styled.div`
   border: 1px solid #c4c4c4;
   display: flex;
   flex-direction: row;
-  width: 100px;
+  width: 25%;
   margin-bottom: 10px;
-
 `
+
 class HallOfFame extends React.Component {
   componentDidMount() {
     this.props.updateHallOfFame()

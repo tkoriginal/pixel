@@ -211,7 +211,6 @@ class ChooseRobot extends Component {
 
             </RobotCard>
 
-
           </div>)
         })}
       </div>

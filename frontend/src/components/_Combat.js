@@ -182,8 +182,9 @@ class Combat extends Component {
       <div>
         <Link to='/'><button>Go Back</button></Link>
         {this.state.opponents.map((robot, i) => 
+
          (<div key={i}>
-         
+
           <RobotCard>
 
             <RobotInfo>
@@ -216,7 +217,6 @@ class Combat extends Component {
             </RobotInfo>
 
           </RobotCard>
-
           </div>)
         )}
       </div>
