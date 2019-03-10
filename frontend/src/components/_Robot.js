@@ -33,29 +33,36 @@ const RobotBio = styled.div`
 `
 
 const RobotName = styled.p`
+  width: 150px;
+  flex-wrap: warp;
   text-align: center;
-  font-size: 2rem
+  font-size: 2rem;
+  word-wrap: break-word;
 `
 const Stats = styled.div`
-  width:200px;
+  width:150px;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
+  flex-direction: column;
   flex-grow:1;
   z-index: 2;
 
 `
 const Stat = styled.div`
-  margin-right: 1rem;
+  width: 100px;
+  /* margin-right: 1rem; */
 `
 const StatDescription = styled.p`
   display: inline-block;
   margin-right: 5px;
-  font-size: 1.2rem;
+  font-size: 1rem;
 `
 const GraphArea = styled.div`
-  width: 350px;
-  margin-left: -10rem;
+  /* width: 350px; */
+  margin-left: -5rem;
+  margin-right: -2.5rem;
 `
 
 
@@ -73,13 +80,15 @@ const ActionBtn = styled.button`
   outline:none;
 `
 const StatChangeContainer = styled.div`
-  width: 72px;
-  display:flex;
+  display: flex;
+  flex-direction: row;
+  width: 100px;
+  justify-content: space-between;
   margin-bottom: .5rem;
   border: 1px solid #c4c4c4;
 `
 const StatNumber = styled.p`
-  font-size: 1.5rem;
+  font-size: 1rem;
   align-self: center;
   width: 3rem;
   text-align: center;
@@ -88,10 +97,11 @@ const StatButton = styled.button`
   background:none;
   font-size: 1.3rem;
   border: none;
-  padding: .7rem;
+  padding: .2rem;
 `
 const Canvas = styled.canvas`
-  
+  width: 315px;
+  /* height: 150px; */
 `
 
 class Robot extends React.Component{
@@ -146,8 +156,7 @@ class Robot extends React.Component{
             }
           },
           title: {
-            display: true,
-            text: 'Robot Stats'
+            display: false,
           }
         }
     });
@@ -179,8 +188,8 @@ class Robot extends React.Component{
             }
           },
           title: {
-            display: true,
-            text: 'Robot Stats'
+            display: false,
+            // text: 'Robot Stats'
           }
         }
     });
