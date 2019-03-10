@@ -187,7 +187,7 @@ class Combat extends Component {
           <RobotCard>
               <RobotBio>
                 <RobotName>{robot.name}</RobotName>
-                <img src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" alt="Battle Bot" height="150" width="150"></img>
+                <img src={robot.img_url} alt="Battle Bot" height="150" width="150"></img>
                 <button onClick={this.launchBattle(this.props.battleRobot, robot)}>Battle</button>
               </RobotBio>
               <Stats>

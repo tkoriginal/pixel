@@ -167,6 +167,7 @@ app.post('/add-robot', (req, res) => {
     .insert({
       name: req.body.robotName,
       user_id: req.body.user_id,
+      img_url: req.body.robot.img_url,
       health: req.body.robot.health,
       strength: req.body.robot.strength,
       dexterity: req.body.robot.dexterity,
