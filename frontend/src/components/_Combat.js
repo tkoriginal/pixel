@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {Redirect, Link} from 'react-router-dom';
 import styled from 'styled-components';
+import posed from 'react-pose';
 const Chart = require("chart.js");
+
+
 
 const RobotCard = styled.div`
   width:600px;
@@ -15,11 +18,6 @@ const RobotCard = styled.div`
   justify-content: space-between;
   margin-bottom: 10px;
 `
-
-// const RobotInfo = styled.div`
-//   display: flex;
-//   flex-direction: row;
-// `
 
 const RobotBio = styled.div`
   display: flex;
@@ -36,7 +34,6 @@ const Stats = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow:1;
-
 `
 const Stat = styled.div`
   
