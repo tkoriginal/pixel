@@ -7,10 +7,11 @@ import Robot from './_Robot';
 const Robots = styled.div`
   /* max-width:800px; */
   display: flex;
+  width: 700px;
+  margin-right: 10px;
   flex-direction: column;
 `
 const AddRobot = styled.button`
-  width: 100%; 
   font-size: 4rem;
   background: #77dd77;
   border: 1px solid #ddd;

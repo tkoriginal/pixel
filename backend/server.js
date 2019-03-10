@@ -99,9 +99,9 @@ app.get('/hall-of-fame', (req, res) => {
   .join('users', 'robots.user_id', '=', 'users.id')
   .limit(10)
   .count('winner_id')
-  .groupBy('winner_id', 'users.id', 'users.name', 'robots.name')
+  .groupBy('winner_id', 'users.id', 'users.name', 'robots.name', 'robots.img_url')
   .orderBy('count', 'desc')
-  .select('winner_id', 'users.id', 'users.name as userName', 'robots.name as robotName')
+  .select('winner_id', 'users.id', 'users.name as userName', 'robots.name as robotName', 'robots.img_url')
   .returning('*')
   .then(results => {
     res.json(results)

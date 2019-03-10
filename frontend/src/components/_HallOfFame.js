@@ -4,43 +4,18 @@ import { Redirect } from 'react-router-dom';
  
 const Container = styled.div`
   border-radius: 4px;
+  width: 175px;
   display: flex;
   background-color: #fff;
   flex-direction: column;
   align-content: center;
-  width: 250px;
-  margin-bottom: 10px;
+  padding: 10px;
 `
 const Title = styled.p`
   text-align: center;
   font-size: 2.5rem;
   padding-bottom: 2rem;
   padding-top: 2rem;
-`
-const Table = styled.table`
-  width: 100%;
-  font-size: 2rem;
-  background-color: #fff;
-  color: #666;
-  border-radius: 5px;
-`
-const Thead = styled.thead`
-
-`
-const Tbody = styled.tbody`
-
-`
-const Tr = styled.tr`
-
-`
-const Th = styled.th`
-  padding-bottom: 2rem;
-  padding-top: 2rem;
-`
-const Td = styled.td`
-  overflow-x: auto;
-  text-align: center;
-  padding-bottom: 2rem;
 `
 
 const List = styled.ol`
@@ -59,6 +34,10 @@ const ListText = styled.p`
   text-align: left;
 `
 
+const ChampImg = styled.img`
+  padding-bottom: 2rem;
+`
+
 class HallOfFame extends React.Component {
   componentDidMount() {
     this.props.updateHallOfFame()
@@ -70,6 +49,7 @@ class HallOfFame extends React.Component {
     return (
       <Container>
         <Title>Hall of Fame</Title>
+        <ChampImg src={this.props.hallOfFame[0].img_url} alt="Battle Bot" height="150" width="150"></ChampImg>
           <List>
             {this.props.hallOfFame.map((stat, i) => 
               (<ListItem key={i}>

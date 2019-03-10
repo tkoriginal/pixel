@@ -24,7 +24,7 @@ const TopBar = styled.div`
 
 const HomeScreen = styled.div`
   margin: 0 auto;
-  width: 70%;
+  width: 900px;
   display:flex;
   justify-content: space-around;
   align-items: center;
