@@ -173,7 +173,7 @@ class ChooseRobot extends Component {
               <RobotCard>
                 <RobotInfo>
                   <RobotBio>
-                    <img src={robot.img} alt="Battle Bot" height="150" width="150" />
+                    <img src={robot.img_url} alt="Battle Bot" height="150" width="150" />
                     <button onClick={this.selectRobot(robot, this.props.userInfo.id, this.state.robotName)}>Select Robot</button>
                   </RobotBio>
 

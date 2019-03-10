@@ -19,7 +19,7 @@ class Robot {
 
     this.name = nameArray[Math.floor(Math.random() * nameArray.length)];
 
-    this.img = imgArray[Math.floor(Math.random() * imgArray.length)];
+    this.img_url = imgArray[Math.floor(Math.random() * imgArray.length)];
   }
 }
 
