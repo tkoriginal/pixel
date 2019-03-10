@@ -13,15 +13,15 @@ const Container = styled.div`
 
 //Combat Animations
 const Robot1Animation  = posed.img({
-  0: {
+  Part1: {
     top: 0,
     left: 0
   },
-  1: {
+  Part2: {
     top: '300px',
     left: '300px',
   },
-  2: {
+  Part3: {
     visible: {
       opacity: 0,
       transition: { duration: 300 }
@@ -31,24 +31,34 @@ const Robot1Animation  = posed.img({
 })
 
 const Robot2Animation  = posed.img({
-  0: {
+  Part1: {
     top: '100%',
     left: '100%'
   },
-  1: {
+  Part2: {
     top: '350px',
     left: '350px',
     opacity: 1
+  },
+  Part3: {
+    visible: {
+      opacity: 0,
+      transition: { duration: 300 }
+    }
+    
   }
 })
 
 const CloudAnimation = posed.img({
-  1: {
+  Part1:{
+    opacity: 0,
+  },
+  Part2: {
     opacity: 0,
     top: '350px',
     left: '350px',
   },
-  2: {
+  Part3: {
     top: '350px',
     left: '350px',
     opacity: 1,
@@ -79,15 +89,18 @@ const Cloud = styled(CloudAnimation)`
   left: '350px'
 `
 
-
 class Battle extends React.Component {
   state = {
-    battleState: 0
+    battleState: 'Part1'
   }
-
+  sceneActivator = () => {
+    setTimeout(() => {
+      this.setState({battleState: 'Part2'})
+      setTimeout(() => this.setState({battleState: 'Part3'}), 1000)
+    }, 1000)
+  }
   componentDidMount() {
-    setTimeout(() => this.setState({battleState: 1}), 1000)
-    setTimeout(() => this.setState({battleState: 2}), 2000)
+    this.sceneActivator();
   }
   render() {
     return (
@@ -96,16 +109,16 @@ class Battle extends React.Component {
             <Robot1 
               src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" 
               alt="Battle Robot1"
-              pose={this.state.battleState ? this.state.battleState : 0}
+              pose={this.state.battleState ? this.state.battleState : 'Part1'}
             />
             <Robot2 
               src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" 
               alt=""
-              pose={this.state.battleState ? this.state.battleState : 0}
+              pose={this.state.battleState ? this.state.battleState : 'Part1'}
             />
             <Cloud 
               src="img/Fightcloud.gif"
-              pose={this.state.battleState ? this.state.battleState : 0}
+              pose={this.state.battleState ? this.state.battleState : 'Part1'}
             />
           </Container>
       </div>
