@@ -88,6 +88,9 @@ class Battle extends React.Component {
     setTimeout(() => {
       this.setState({battleState: 'Part2'})
       setTimeout(() => this.setState({battleState: 'Part3'}), 200)
+      setTimeout(() => this.setState({battleState: 'Part3'}), 500)
+      setTimeout(() => this.setState({battleState: 'Part4'}), 1000)
+      setTimeout(() => this.setState({battleState: 'Part5'}), 1200)
     }, 1000)
   }
   componentDidMount() {
@@ -98,12 +101,12 @@ class Battle extends React.Component {
       <div>
           <Container>
             <Robot1 
-              src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" 
+              src={this.props.userRobot.img_url}
               alt="Battle Robot1"
               pose={this.state.battleState ? this.state.battleState : 'Part1'}
             />
             <Robot2 
-              src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" 
+              src={this.props.opponentRobot.img_url} 
               alt=""
               pose={this.state.battleState ? this.state.battleState : 'Part1'}
             />

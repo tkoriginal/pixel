@@ -170,7 +170,7 @@ class Combat extends Component {
     if (this.state.battleLog) {
       return (
         <React.Fragment>
-          <Battle />
+          <Battle userRobot={this.props.battleRobot} opponentRobot={this.state.opponentRobot}/>
           <div>
               {this.state.battleLog.log.map((turn, i) => {
                 return(<p key={i}>{JSON.stringify(turn)}</p>)
