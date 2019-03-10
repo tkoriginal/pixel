@@ -6,6 +6,24 @@ import Battle from './_Battle';
 
 const Chart = require("chart.js");
 
+const Content = styled.div`
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+`
+
+const Instuctions = styled.div`
+  width: 600px;
+  height: 75px;
+  padding: 10px;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #c4c4c4;
+  padding-top:20px;
+  margin-bottom: 10px;
+`;
 
 const RobotCard = styled.div`
   width:600px;
@@ -43,11 +61,26 @@ const StatDescription = styled.p`
   display: inline-block;
   margin-right: 5px;
 `
+
 const GraphArea = styled.div`
-  height:100%;
-  display: flex;
-  flex-direction: row;
-  flex-grow:2;
+  /* width: 350px; */
+  margin-left: -5rem;
+  margin-right: -2.5rem;
+`
+
+const Canvas = styled.canvas`
+  width: 315px;
+  /* height: 150px; */
+`
+const BackBtn = styled.button`
+  width:600px;
+  font-size: 4rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #000;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 1.2rem 0;
 `
 
 class Combat extends Component {
@@ -109,16 +142,16 @@ class Combat extends Component {
           },
             options: {
               legend: {
-                display: true,
+                display: false,
               },
               scale: {
                 ticks: {
                   min: 0,
-                  max: 20
+                  max: 25
                 }
               },
               title: {
-                display: true,
+                display: false,
                 // text: 'Robot Stats'
               }
             }
@@ -182,6 +215,13 @@ class Combat extends Component {
     return (
       <div>
         <Link to='/'><button>Go Back</button></Link>
+
+        <Content>
+
+          <Instuctions>
+            <p>Choose an opponent for your robot to fight!</p>
+          </Instuctions>
+
         {this.state.opponents.map((robot, i) => 
          (<div key={i}>
           <RobotCard>
@@ -203,15 +243,21 @@ class Combat extends Component {
                 <Stat>
                   <StatDescription>Armour: {robot.armour}</StatDescription>
                 </Stat>
+                <Stat>
+                  <StatDescription>Trait: {robot.traits[4]}</StatDescription>
+                </Stat>
               </Stats>
               
               <GraphArea>
-                <canvas id={`stats-chart-${robot.opponentId}`}></canvas>
+                <Canvas id={`stats-chart-${robot.opponentId}`}></Canvas>
               </GraphArea>
 
           </RobotCard>
           </div>)
         )}
+        <Link to='/'><BackBtn>Go Back</BackBtn></Link>
+
+      </Content>
       </div>
     )
   }

@@ -3,6 +3,24 @@ import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 const Chart = require("chart.js");
 
+const Content = styled.div`
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+`
+const Instuctions = styled.div`
+  width: 600px;
+  height: 75px;
+  padding: 10px;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #c4c4c4;
+  padding-top:20px;
+  margin-bottom: 10px;
+`;
+
 const RobotCard = styled.div`
   width: 600px;
   height: 200px;
@@ -19,13 +37,6 @@ const RobotCard = styled.div`
 const RobotInfo = styled.div`
   display: flex;
   flex-direction: row;
-`;
-
-const Actions = styled.div`
-  height: 25px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
 `;
 
 const RobotBio = styled.div`
@@ -107,9 +118,6 @@ class ChooseRobot extends Component {
         console.log("New Robots: ", newRobots);
 
         newRobots.forEach(robot => {
-          console.log("Robot: ", robot);
-          console.log("Robot: ", document.getElementById(`stats-chart-${robot.robotId}`));
-          console.log(typeof document.getElementById(`stats-chart-${robot.robotId}`) === "string");
 
           new Chart(document.getElementById(`stats-chart-${robot.robotId}`), {
             type: "radar",
@@ -161,11 +169,17 @@ class ChooseRobot extends Component {
     return (
       <div>
         <div style={{ display: "flex" }}>
-          <label htmlFor="robot-name">Select Robot Name:</label>
-          <input type="text" name="robot-name" value={this.state.robotName} onChange={this.handleRobotName} required />
-          {this.state.noName && <p style={{ color: "red" }}>Please enter a robot name</p>}
+
         </div>
         <button onClick={this.handleGoHome}>Back</button>
+
+        <Content>
+
+          <Instuctions>
+            <label htmlFor="robot-name">Give your new champion name...</label>
+            <input type="text" name="robot-name" value={this.state.robotName} onChange={this.handleRobotName} required />
+            {this.state.noName && <p style={{ color: "red" }}>Please enter a robot name</p>}
+          </Instuctions>
 
         {this.state.starterRobots.map((robot, i) => {
           return (
@@ -190,6 +204,9 @@ class ChooseRobot extends Component {
                     <Stat>
                       <StatDescription>Armour: {robot.armour}</StatDescription>
                     </Stat>
+                    <Stat>
+                      <StatDescription>Trait: {robot.traits[4]}</StatDescription>
+                    </Stat>
                   </Stats>
 
                   <GraphArea>
@@ -200,6 +217,9 @@ class ChooseRobot extends Component {
             </div>
           );
         })}
+
+        </Content>  
+
       </div>
     );
   }

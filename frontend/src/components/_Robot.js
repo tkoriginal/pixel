@@ -186,7 +186,8 @@ class Robot extends React.Component{
           },
           scale: {
             ticks: {
-              min: 0
+              min: 0, 
+              max: 25
             }
           },
           title: {
