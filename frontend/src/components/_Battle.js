@@ -1,64 +1,24 @@
 import React from 'react';
-import posed from 'react-pose';
 import styled from 'styled-components';
-import { transform } from 'popmotion';
 import {TweenMax, TimelineLite, Elastic} from "gsap/TweenMax";
 
 const Container = styled.div`
+  width:100%;
+  height:100%;
+  background: url('img/wallpaper.gif');
+  background-attachment:fixed;
+  background-size: cover;
+  background-repeat:no-repeat
+`
+const BattleBox = styled.div`
+
   width: 800px;
   height: 800px;
-  position:relative;
-  /* background-color: */
+  top: 284px;
+  left: 320px;
+  /* position: absolute; */
 `
 
-//Combat Animations
-// const Robot1Animation  = posed.img({
-//   Part1: {
-//     top: '300px',
-//     left: 0
-//   },
-//   Part2: {
-//     top: '300px',
-//     left: '300px',
-//   },
-//   Part3: {
-//     opacity: 0,
-//     transition: { duration: 300 }
-//   }
-// })
-
-// const Robot2Animation  = posed.img({
-//   Part1: {
-//     top: '300px',
-//     left: '100%'
-//   },
-//   Part2: {
-//     top: '350px',
-//     left: '350px',
-//     opacity: 1
-//   },
-//   Part3: {
-//       opacity: 0,
-//       transition: { duration: 300 }
-    
-//   }
-// })
-
-// const CloudAnimation = posed.img({
-//   Part1:{
-//     opacity: 0,
-//   },
-//   Part2: {
-//     opacity: 0,
-//     top: '350px',
-//     left: '350px',
-//   },
-//   Part3: {
-//     top: '350px',
-//     left: '350px',
-//     opacity: 1,
-//   }
-// })
 const Robot1 = styled.img`
   position:absolute;
   top: 350px;
@@ -71,49 +31,45 @@ const Robot2 = styled.img`
   transform: scaleX(-1);
   position:absolute;
   top: 350px;
-  left: 750px;
+  left: 800px;
 `
 const Cloud = styled.img`
   position: absolute;
   opacity: 0;
-  top: 400px;
-  left: 350px
+  top: 310px;
+  left: 400px
 `
 
 class Battle extends React.Component {
-  state = {
-    battleState: 'Part1'
-  }
-  sceneActivator = () => {
-    setTimeout(() => {
-      this.setState({battleState: 'Part2'})
-      setTimeout(() => this.setState({battleState: 'Part3'}), 200)
-      setTimeout(() => this.setState({battleState: 'Part3'}), 500)
-      setTimeout(() => this.setState({battleState: 'Part4'}), 1000)
-      setTimeout(() => this.setState({battleState: 'Part5'}), 1200)
-    }, 1000)
-  }
+
   componentDidMount() {
     const tl = new TimelineLite();
+    tl.to('#container', 1, {
+      backgroundSize: "150% 150%"
+    })
     tl.add('robotsMove')
-    tl.to("#robot1", 2, {
-      x: 320
+    tl.to("#robot1", 1.25, {
+      x: 420
     }, 'robotsMove');
-    tl.to("#robot2", 2, {
-      x: -320
+    tl.to("#robot2", 1.25, {
+      x: -365
     },'robotsMove');
-    tl.to('#cloud',2, {
+    tl.to('#cloud',1, {
       opacity: 1,
-      x: 40,
-      scaleX: 3,
-      scaleY: 2,
-    }, '-=1.5')
+      x: -20,
+      scaleX: 1.4,
+      scaleY: 1.4,
+    }, '-=.8');
+    tl.to('#robot1, #robot2', 0.5, {
+      opacity: 0,
+    });
 
+    
   }
   render() {
     return (
-      <div>
-          <Container>
+      <Container id='container'>
+          <BattleBox>
             <Robot1 
               src={this.props.userRobot.img_url}
               alt="Battle Robot1"
@@ -128,8 +84,8 @@ class Battle extends React.Component {
               src="img/Fightcloud.gif"
               id='cloud'
             />
-          </Container>
-      </div>
+          </BattleBox>
+      </Container>
     )
   }
 }
