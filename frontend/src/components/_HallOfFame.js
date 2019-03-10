@@ -5,12 +5,17 @@ import { Redirect } from 'react-router-dom';
 const Container = styled.div`
   border-radius: 4px;
   display: flex;
+  background-color: #fff;
   flex-direction: column;
-  width: 300px;
+  align-content: center;
+  width: 250px;
   margin-bottom: 10px;
 `
 const Title = styled.p`
-  font-size: 4rem;
+  text-align: center;
+  font-size: 2.5rem;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
 `
 const Table = styled.table`
   width: 100%;
@@ -34,10 +39,26 @@ const Th = styled.th`
 `
 const Td = styled.td`
   overflow-x: auto;
-  text-align:center;
+  text-align: center;
   padding-bottom: 2rem;
+`
+
+const List = styled.ol`
+  list-style-position: inside;
+`
+
+const ListItem = styled.li`
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
 
 `
+const ListText = styled.p`
+  overflow-x: auto;
+  text-align: left;
+`
+
 class HallOfFame extends React.Component {
   componentDidMount() {
     this.props.updateHallOfFame()
@@ -50,22 +71,22 @@ class HallOfFame extends React.Component {
       <Container>
         <Title>Hall of Fame</Title>
         <Table>
-          <Thead>
+          {/* <Thead>
             <Tr>
               <Th>Robot</Th>
               <Th>User</Th>
               <Th>Wins</Th>
             </Tr>
-          </Thead>
-          <Tbody>
+          </Thead> */}
+          <List>
             {this.props.hallOfFame.map((stat, i) => 
-              (<Tr key={i}>
-                <Td>{stat.robotName}</Td>
-                <Td>{stat.userName}</Td>
-                <Td>{stat.count}</Td>
-              </Tr>)
+              (<ListItem key={i}>
+                <ListText>Name: {stat.robotName}</ListText>
+                <ListText>Owner: {stat.userName}</ListText>
+                <ListText>#Wins: {stat.count}</ListText>
+              </ListItem>)
             )}
-          </Tbody>
+          </List>
         </Table>
       </Container>)
   }
