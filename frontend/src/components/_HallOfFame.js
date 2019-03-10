@@ -70,14 +70,6 @@ class HallOfFame extends React.Component {
     return (
       <Container>
         <Title>Hall of Fame</Title>
-        <Table>
-          {/* <Thead>
-            <Tr>
-              <Th>Robot</Th>
-              <Th>User</Th>
-              <Th>Wins</Th>
-            </Tr>
-          </Thead> */}
           <List>
             {this.props.hallOfFame.map((stat, i) => 
               (<ListItem key={i}>
@@ -87,7 +79,6 @@ class HallOfFame extends React.Component {
               </ListItem>)
             )}
           </List>
-        </Table>
       </Container>)
   }
 }
