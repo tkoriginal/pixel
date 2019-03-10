@@ -2,6 +2,13 @@ const methods = require("./commands.js");
 
 //assign traits to proper state
 module.exports = assigners = {
+  sortStates: combatStatus => {
+    combatStatus.defender.states.defense.sort(methods.sortDefense);
+    combatStatus.defender.states.postCombat.sort(methods.sortPostCombat);
+    combatStatus.attacker.states.defense.sort(methods.sortDefense);
+    combatStatus.attacker.states.postCombat.sort(methods.sortPostCombat);
+  },
+
   attack: currentBot => {
     currentBot.states.offense.push({
       type: "attack",

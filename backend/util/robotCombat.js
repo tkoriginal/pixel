@@ -29,11 +29,13 @@ function Combat(robot1, robot2) {
     assigners[trait](robot2);
   });
 
+  assigners.sortStates(combatStatus);
+
   while (combatStatus.attacker.health > 0 && combatStatus.defender.health > 0) {
     // let damage = defend(attack(attacker), defender);
     // methods[atk](combatStatus);
     // methods[def](combatStatus);
-
+    combatStatus.damage = 0;
     combatStatus.turnLog = [];
     combatStatus.effectiveArmour = combatStatus.defender.armour;
     combatStatus.effectiveStrength = combatStatus.attacker.strength;
@@ -41,6 +43,9 @@ function Combat(robot1, robot2) {
     combatStatus.attacker.states.offense.forEach(command => {
       command.action(combatStatus);
     });
+
+    assigners.sortStates(combatStatus);
+
     combatStatus.defender.states.defense.forEach(command => {
       command.action(combatStatus);
     });

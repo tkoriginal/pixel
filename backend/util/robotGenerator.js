@@ -17,12 +17,15 @@ class Robot {
     this.traits = ["attack", "defend", "assignDamage", "changeTurn"];
     this.traits.push(traitsArray[Math.floor(Math.random() * traitsArray.length)]);
 
-    this.name = nameArray[Math.floor(Math.random() * (nameArray.length - 1))];
+    this.name = nameArray[Math.floor(Math.random() * nameArray.length)];
+
+    this.img = imgArray[Math.floor(Math.random() * imgArray.length)];
   }
 }
 
 function generateRobot(numOfBots, statTotal, enemy) {
   const robots = [];
+
   if (enemy) {
     for (let i = 0; i < numOfBots - 2; i++) {
       robots.push(new Robot(statTotal));
@@ -37,6 +40,28 @@ function generateRobot(numOfBots, statTotal, enemy) {
   return robots;
 }
 
+const imgArray = [
+  "img/robot1.gif",
+  "img/robot2.gif",
+  "img/robot3.gif",
+  "img/robot4.gif",
+  "img/robot5.gif",
+  "img/robot6.gif",
+  "img/robot7.gif",
+  "img/robot8.gif",
+  "img/robot9.gif",
+  "img/robot10.gif",
+  "img/robot11.gif",
+  "img/robot12.gif",
+  "img/robot13.gif",
+  "img/robot14.gif",
+  "img/robot15.gif",
+  "img/robot16.gif",
+  "img/robot17.gif",
+  "img/robot18.gif",
+  "img/robot19.gif",
+  "img/robot20.gif"
+];
 const nameArray = ["Maximus", "Taqert", "Gorg", "Killary", "Brocas", "Tin", "Slimtim", "Facebump", "OnlyJuan", "Mr.Cache"];
 const traitsArray = ["critical", "block", "doubleDamage", "poison", "thorns"];
 
