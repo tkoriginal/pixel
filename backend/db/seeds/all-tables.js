@@ -11,9 +11,9 @@ exports.seed = async function(knex, Promise) {
   await knex('robots').del();
   await Promise.all (
     [
-      knex('robots').insert({name: 'Robot1', user_id: 1, remainingStats: 0, health: 75, strength: 10, dexterity: 10, armour: 5, traits: ['attack', 'defend', 'assignDamage', 'changeTurn'], active: true}),
-      knex('robots').insert({name: 'Robot2', user_id: 2, remainingStats: 0, health: 75, strength: 10, dexterity: 10, armour: 5, traits: ['attack', 'defend', 'assignDamage', 'changeTurn'], active: true}),
-      knex('robots').insert({name: 'Robot3', user_id: 3, remainingStats: 0, health: 75, strength: 10, dexterity: 10, armour: 5, traits: ['attack', 'defend', 'assignDamage', 'changeTurn'], active: true}),
+      knex('robots').insert({name: 'Robot1', user_id: 1, img_url: "https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif", remainingStats: 0, health: 75, strength: 10, dexterity: 10, armour: 5, traits: ['attack', 'defend', 'assignDamage', 'changeTurn'], active: true}),
+      knex('robots').insert({name: 'Robot2', user_id: 2, img_url: "https://66.media.tumblr.com/4f8896ebca88bb0d8308607315d085c9/tumblr_n439wbdHxA1sulisxo1_400.gif",remainingStats: 0, health: 75, strength: 10, dexterity: 10, armour: 5, traits: ['attack', 'defend', 'assignDamage', 'changeTurn'], active: true}),
+      knex('robots').insert({name: 'Robot3', user_id: 3, img_url: "https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif",remainingStats: 0, health: 75, strength: 10, dexterity: 10, armour: 5, traits: ['attack', 'defend', 'assignDamage', 'changeTurn'], active: true}),
     ]
   );
 

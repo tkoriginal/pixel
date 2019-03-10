@@ -109,6 +109,7 @@ class Robot extends React.Component{
     user_id:this.props.user_id,
     id : this.props.robot.id,
     name: this.props.robot.name,
+    img_url: this.props.robot.img_url,
     strength: this.props.robot.strength,
     dexterity: this.props.robot.dexterity,
     health: this.props.robot.health,
@@ -121,6 +122,7 @@ class Robot extends React.Component{
   fixedState = {
     id : this.props.robot.id,
     name: this.props.robot.name,
+    img_url: this.props.robot.img_url,
     strength: this.props.robot.strength,
     dexterity: this.props.robot.dexterity,
     health: this.props.robot.health,
@@ -235,7 +237,7 @@ class Robot extends React.Component{
         <RobotInfo>
           <RobotBio>
             <RobotName>{this.state.name}</RobotName>
-            <img src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" alt="Battle Bot" height="150" width="150"></img>
+            <img src={this.state.img_url} alt="Battle Bot" height="150" width="150"></img>
           </RobotBio>
          <Stats>
             <Stat>

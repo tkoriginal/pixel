@@ -127,6 +127,7 @@ app.post('/login', (req, res) => {
             active: true
           })
           .then(users_robots => {
+            console.log(users_robots)
             res.json({
               id: rows[0].id,
               name: rows[0].name,
