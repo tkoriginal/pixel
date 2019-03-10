@@ -1,4 +1,12 @@
 module.exports = methods = {
+  sortDefense: (a, b) => {
+    return defenseOrder.indexOf(a.type) - defenseOrder.indexOf(b.type);
+  },
+
+  sortPostCombat: (a, b) => {
+    return postCombatOrder.indexOf(a.type) - postCombatOrder.indexOf(b.type);
+  },
+
   changeTurn: combatStatus => {
     combatStatus.turnLog.forEach(log => {
       combatStatus.combatLog.push(log);
@@ -99,3 +107,6 @@ module.exports = methods = {
     }
   }
 };
+
+const defenseOrder = ["block", "defend"];
+const postCombatOrder = ["assignDamage", "thorns", "poisoned", "changeTurn"];
