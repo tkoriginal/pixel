@@ -14,7 +14,7 @@ const Container = styled.div`
 //Combat Animations
 const Robot1Animation  = posed.img({
   Part1: {
-    top: 0,
+    top: '300px',
     left: 0
   },
   Part2: {
@@ -22,17 +22,14 @@ const Robot1Animation  = posed.img({
     left: '300px',
   },
   Part3: {
-    visible: {
-      opacity: 0,
-      transition: { duration: 300 }
-    }
-    
+    opacity: 0,
+    transition: { duration: 300 }
   }
 })
 
 const Robot2Animation  = posed.img({
   Part1: {
-    top: '100%',
+    top: '300px',
     left: '100%'
   },
   Part2: {
@@ -41,10 +38,8 @@ const Robot2Animation  = posed.img({
     opacity: 1
   },
   Part3: {
-    visible: {
       opacity: 0,
       transition: { duration: 300 }
-    }
     
   }
 })
@@ -62,10 +57,6 @@ const CloudAnimation = posed.img({
     top: '350px',
     left: '350px',
     opacity: 1,
-    visible: {
-      opacity: 1,
-      transition: { duration: 300 }
-    }
   }
 })
 const Robot1 = styled(Robot1Animation)`
@@ -96,7 +87,7 @@ class Battle extends React.Component {
   sceneActivator = () => {
     setTimeout(() => {
       this.setState({battleState: 'Part2'})
-      setTimeout(() => this.setState({battleState: 'Part3'}), 1000)
+      setTimeout(() => this.setState({battleState: 'Part3'}), 200)
     }, 1000)
   }
   componentDidMount() {

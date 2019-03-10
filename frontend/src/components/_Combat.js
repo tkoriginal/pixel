@@ -176,6 +176,7 @@ class Combat extends Component {
                 return(<p key={i}>{JSON.stringify(turn)}</p>)
               })}
           </div>
+          <Link to='/'><button>Go Back</button></Link>
         </React.Fragment>
       )
     }
