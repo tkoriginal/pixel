@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-const Chart = require("chart.js");
+import ReactTooltip from 'react-tooltip';
 
-const appearDuration = 1000;
-const transitionName = `example`
+const Chart = require("chart.js");
 const RobotCard = styled.div`
   max-width: 100%;
   height: 200px;
@@ -54,7 +53,6 @@ const Stats = styled.div`
 `;
 const Stat = styled.div`
   width: 100px;
-  /* margin-right: 1rem; */
 `;
 const StatDescription = styled.p`
   display: inline-block;
@@ -62,7 +60,6 @@ const StatDescription = styled.p`
   font-size: 1rem;
 `;
 const GraphArea = styled.div`
-  /* width: 350px; */
   margin-left: -5rem;
   margin-right: -2.5rem;
 `;
@@ -260,6 +257,23 @@ class Robot extends React.Component {
       .then(res => this.props.updateRobotInfo(res.robots));
   };
 
+  traitText = () => {
+    if (this.state.traits[4] === 'critical') {
+      return 'Critical \n increase the change of your character'
+    }
+    if (this.state.traits[4] === 'poison') {
+      return 'Poison increase continuous damage'
+    }
+    if (this.state.traits[4] === 'block') {
+      return 'Block increase the chance of fully blocking an attack'
+    }
+    if (this.state.traits[4] === 'thorns') {
+      return 'Thorns returns some of the damage back'
+    }
+    if (this.state.traits[4] === 'doubleDamage') {
+      return 'Double Damage increase the change of double damage'
+    }
+  }
   render() {
     return (
         <RobotCard>
@@ -270,7 +284,7 @@ class Robot extends React.Component {
             </RobotBio>
             <Stats>
               <Stat>
-                <StatDescription>Health</StatDescription>
+                <StatDescription data-tip="Robot's health">Health</StatDescription>
                 <StatChangeContainer>
                   <StatButton onClick={this.handleStat("health", this.state.health, "minus").bind(this)}>-</StatButton>
                   <StatNumber>{this.state.health}</StatNumber>
@@ -278,7 +292,7 @@ class Robot extends React.Component {
                 </StatChangeContainer>
               </Stat>
               <Stat>
-                <StatDescription>Strength</StatDescription>
+                <StatDescription data-tip="Affects how much damage they can do per turn">Strength</StatDescription>
                 <StatChangeContainer>
                   <StatButton onClick={this.handleStat("strength", this.state.strength, "minus").bind(this)}>-</StatButton>
                   <StatNumber>{this.state.strength}</StatNumber>
@@ -286,7 +300,7 @@ class Robot extends React.Component {
                 </StatChangeContainer>
               </Stat>
               <Stat>
-                <StatDescription>Dexterity</StatDescription>
+                <StatDescription data-tip='Affects how well they can dodge an attack'>Dexterity</StatDescription>
                 <StatChangeContainer>
                   <StatButton onClick={this.handleStat("dexterity", this.state.dexterity, "minus").bind(this)}>-</StatButton>
                   <StatNumber>{this.state.dexterity}</StatNumber>
@@ -294,7 +308,7 @@ class Robot extends React.Component {
                 </StatChangeContainer>
               </Stat>
               <Stat>
-                <StatDescription>Armour</StatDescription>
+                <StatDescription data-tip='Affects how well they can defend an attack'>Armour</StatDescription>
                 <StatChangeContainer>
                   <StatButton onClick={this.handleStat("armour", this.state.armour, "minus").bind(this)}>-</StatButton>
                   <StatNumber>{this.state.armour}</StatNumber>
@@ -302,10 +316,10 @@ class Robot extends React.Component {
                 </StatChangeContainer>
               </Stat>
               <Stat>
-                <StatDescription>Trait: {this.state.traits[4]}</StatDescription>
+                <StatDescription data-tip={this.traitText()}>Trait: {this.state.traits[4]}</StatDescription>
               </Stat>
               <Stat>
-                <StatDescription>RS: {this.state.remainingStats}</StatDescription>
+                <StatDescription>RP: {this.state.remainingStats}</StatDescription>
               </Stat>
             </Stats>
             <GraphArea>
@@ -327,6 +341,7 @@ class Robot extends React.Component {
               )}
             </Actions>
           </RobotInfo>
+          <ReactTooltip />
         </RobotCard>
     );
   }

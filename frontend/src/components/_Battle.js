@@ -184,7 +184,7 @@ class Battle extends React.Component {
               id="cloud"
             />
             <Winner 
-              src={this.winner() ? 'img/pixelPile.png' : this.winner().img_url}
+              src={this.winner() ?  this.winner().img_url : 'img/pixelPile.png'}
               id="winner" />
             <Ash 
               src="img/pixelPile.png"
