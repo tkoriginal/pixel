@@ -17,11 +17,10 @@ const AddRobot = styled.button`
   font-size: 4rem;
   font-family: 'Press Start 2P', cursive;
   background: #77dd77;
-  /* border: 2px solid #000; */
   color: #fff;
   border-radius: 5px;
   border: 0;
-  margin-top: 10px;
+  margin: 10px 0;
   padding: 1.2rem 0;
   -moz-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
@@ -93,26 +92,24 @@ class MyRobots extends Component {
       return <Redirect to='/combat' />
     }
     return (
-
       <Robots>
-      <CSSTransitionGroup
-        transitionName='retire'
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}
-      >
-        {this.props.robots.map((robot)=> 
-            <Robot 
-              key={robot.id}
-              robot={robot} 
-              updateRobotInfo={this.props.updateRobotInfo} 
-              retireRobot={this.retireRobot} 
-              user_id={this.props.user_id} 
-              launchBattle={this.launchBattle}
-            />
-        )}
-      </CSSTransitionGroup>
         <AddRobot type="submit" onClick={this.chooseRobot}>Add New Robot</AddRobot>
-       
+        <CSSTransitionGroup
+          transitionName='retire'
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
+          {this.props.robots.map((robot)=> 
+              <Robot 
+                key={robot.id}
+                robot={robot} 
+                updateRobotInfo={this.props.updateRobotInfo} 
+                retireRobot={this.retireRobot} 
+                user_id={this.props.user_id} 
+                launchBattle={this.launchBattle}
+              />
+          )}
+        </CSSTransitionGroup>
       </Robots>
     )
   }
