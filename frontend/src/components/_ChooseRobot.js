@@ -4,12 +4,12 @@ import styled from "styled-components";
 const Chart = require("chart.js");
 
 const Content = styled.div`
-  display:flex;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
   width: 100%;
-`
+`;
 const Instuctions = styled.div`
   width: 600px;
   height: 75px;
@@ -17,8 +17,10 @@ const Instuctions = styled.div`
   background: white;
   border-radius: 4px;
   border: 1px solid #c4c4c4;
-  padding-top:20px;
+  padding-top: 20px;
   margin-bottom: 10px;
+  background-image: url("img/cardBackground.jpg");
+  background-size: cover;
 `;
 
 const RobotCard = styled.div`
@@ -32,6 +34,8 @@ const RobotCard = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 10px;
+  background-image: url("img/cardBackground.jpg");
+  background-size: cover;
 `;
 
 const RobotInfo = styled.div`
@@ -118,7 +122,6 @@ class ChooseRobot extends Component {
         console.log("New Robots: ", newRobots);
 
         newRobots.forEach(robot => {
-
           new Chart(document.getElementById(`stats-chart-${robot.robotId}`), {
             type: "radar",
             data: {
@@ -168,58 +171,53 @@ class ChooseRobot extends Component {
     }
     return (
       <div>
-        <div style={{ display: "flex" }}>
-
-        </div>
+        <div style={{ display: "flex" }} />
         <button onClick={this.handleGoHome}>Back</button>
 
         <Content>
-
           <Instuctions>
             <label htmlFor="robot-name">Give your new champion name...</label>
             <input type="text" name="robot-name" value={this.state.robotName} onChange={this.handleRobotName} required />
             {this.state.noName && <p style={{ color: "red" }}>Please enter a robot name</p>}
           </Instuctions>
 
-        {this.state.starterRobots.map((robot, i) => {
-          return (
-            <div key={i}>
-              <RobotCard>
-                <RobotInfo>
-                  <RobotBio>
-                    <img src={robot.img_url} alt="Battle Bot" height="150" width="150" />
-                    <button onClick={this.selectRobot(robot, this.props.userInfo.id, this.state.robotName)}>Select Robot</button>
-                  </RobotBio>
+          {this.state.starterRobots.map((robot, i) => {
+            return (
+              <div key={i}>
+                <RobotCard>
+                  <RobotInfo>
+                    <RobotBio>
+                      <img src={robot.img_url} alt="Battle Bot" height="150" width="150" />
+                      <button onClick={this.selectRobot(robot, this.props.userInfo.id, this.state.robotName)}>Select Robot</button>
+                    </RobotBio>
 
-                  <Stats>
-                    <Stat>
-                      <StatDescription>Health: {robot.health}</StatDescription>
-                    </Stat>
-                    <Stat>
-                      <StatDescription>strength: {robot.strength}</StatDescription>
-                    </Stat>
-                    <Stat>
-                      <StatDescription>Dexterity: {robot.dexterity}</StatDescription>
-                    </Stat>
-                    <Stat>
-                      <StatDescription>Armour: {robot.armour}</StatDescription>
-                    </Stat>
-                    <Stat>
-                      <StatDescription>Trait: {robot.traits[4]}</StatDescription>
-                    </Stat>
-                  </Stats>
+                    <Stats>
+                      <Stat>
+                        <StatDescription>Health: {robot.health}</StatDescription>
+                      </Stat>
+                      <Stat>
+                        <StatDescription>strength: {robot.strength}</StatDescription>
+                      </Stat>
+                      <Stat>
+                        <StatDescription>Dexterity: {robot.dexterity}</StatDescription>
+                      </Stat>
+                      <Stat>
+                        <StatDescription>Armour: {robot.armour}</StatDescription>
+                      </Stat>
+                      <Stat>
+                        <StatDescription>Trait: {robot.traits[4]}</StatDescription>
+                      </Stat>
+                    </Stats>
 
-                  <GraphArea>
-                    <canvas id={`stats-chart-${robot.robotId}`} />
-                  </GraphArea>
-                </RobotInfo>
-              </RobotCard>
-            </div>
-          );
-        })}
-
-        </Content>  
-
+                    <GraphArea>
+                      <canvas id={`stats-chart-${robot.robotId}`} />
+                    </GraphArea>
+                  </RobotInfo>
+                </RobotCard>
+              </div>
+            );
+          })}
+        </Content>
       </div>
     );
   }
