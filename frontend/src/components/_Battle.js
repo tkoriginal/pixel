@@ -179,7 +179,7 @@ class Battle extends React.Component {
               id="robot2"
             />
             <Cloud 
-              src="img/Fightcloud.gif"
+              src="img/fightCloud.gif"
               id="cloud"
             />
             <Winner 
