@@ -27,13 +27,13 @@ const Instuctions = styled.div`
 
 const RobotCard = styled.div`
   width: 600px;
-  height: 200px;
+  height: 225px;
   padding: 10px;
   background: white;
   border-radius: 4px;
   border: 1px solid #c4c4c4;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   margin-bottom: 10px;
 `;
@@ -41,18 +41,24 @@ const RobotCard = styled.div`
 const RobotBio = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 2;
+  width: 160px;
   height: 200px;
 `;
+
+const RobotInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+`
 
 const RobotName = styled.p`
   text-align: center;
 `;
 const Stats = styled.div`
-  height: 200px;
+  width: 160px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 `;
 const Stat = styled.div``;
 
@@ -70,16 +76,49 @@ const Canvas = styled.canvas`
   width: 315px;
   /* height: 150px; */
 `
+
+const FightBtn = styled.button`
+  padding: 1rem 1rem;
+  font-size: 1.5rem;
+  font-family: 'Press Start 2P', cursive;
+  color: #fff;
+  background: #ff971a;
+  border: 0;
+  border-radius: 5px;
+  outline:none;
+  -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+
+  :hover {
+    cursor: pointer;
+    background: #d67604;
+  }
+`
+
+
 const BackBtn = styled.button`
   width:600px;
   font-size: 4rem;
-  background: #fff;
+  font-family: 'Press Start 2P', cursive;
+  background: rgb(169,169,169, 0.8);
   border: 1px solid #ddd;
   color: #000;
   border-radius: 5px;
   margin-top: 10px;
   padding: 1.2rem 0;
+  -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+
+  :hover {
+    cursor: pointer;
+    background: rgb(169,169,169, 0.9);
+  }
 `
+
 class Combat extends Component {
   state = {
     opponents: undefined,
@@ -222,11 +261,13 @@ class Combat extends Component {
          (<div key={i}>
             <RobotCard>
 
+              <RobotInfo>
+
                 <RobotBio>
                   <RobotName>{robot.name}</RobotName>
                   <img src={robot.img_url} alt="Battle Bot" height="150" width="150" />
-                  <button onClick={this.launchBattle(this.props.battleRobot, robot)}>Battle</button>
                 </RobotBio>
+                
                 <Stats>
                   <Stat>
                     <StatDescription>Health: {robot.health}</StatDescription>
@@ -249,10 +290,14 @@ class Combat extends Component {
                   <Canvas id={`stats-chart-${robot.opponentId}`}></Canvas>
                 </GraphArea>
 
+              </RobotInfo>
+                
+              <FightBtn onClick={this.launchBattle(this.props.battleRobot, robot)}>Fight!</FightBtn>
+
             </RobotCard>
           </div>)
         )}
-        <Link to='/'><BackBtn>Go Back</BackBtn></Link>
+        <Link to='/'><BackBtn>Nevermind...</BackBtn></Link>
 
       </Content>
 

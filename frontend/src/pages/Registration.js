@@ -30,12 +30,22 @@ const Button = styled.input`
   height: 50px;
   padding: 0;
   font-size: 20px;
+  font-family: 'Press Start 2P', cursive;
   color: #fff;
   text-align: center;
   background: #f0776c;
-  border: 0;
+  border: 1px solid #ccc;
   border-radius: 5px;
   outline:0;
+  -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+
+  :hover {
+    cursor: pointer;
+    background: #ed5749;
+  }
 `
 
 const Login = styled.p`
@@ -77,6 +87,8 @@ class Registration extends Component {
          console.log(res)
          if (res.status ===  200){
            this.setState({userRegistered: true})
+         } else if (res.status === 500) {
+          window.alert("Email already registered to an account.");
          }
        })
        .catch(res => {
