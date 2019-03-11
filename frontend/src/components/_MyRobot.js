@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import Robot from './_Robot';
+import { CSSTransitionGroup } from 'react-transition-group';
+
 //Styles of the component
 
 const Robots = styled.div`
@@ -48,7 +50,6 @@ class MyRobots extends Component {
     })
     .then(res => res.json())
     .then(res => {
-      console.log('Didmount',res)
       this.props.updateRobotInfo(res.robots)
     })
     .catch(e => {
@@ -92,17 +93,24 @@ class MyRobots extends Component {
       return <Redirect to='/combat' />
     }
     return (
-      <Robots>
-        {this.props.robots.map((robot)=> 
-          <Robot 
-            key={robot.id}
-            robot={robot} 
-            updateRobotInfo={this.props.updateRobotInfo} 
-            retireRobot={this.retireRobot} 
-            user_id={this.props.user_id} 
-            launchBattle={this.launchBattle}/>
-        )}
 
+      <Robots>
+      <CSSTransitionGroup
+        transitionName='retire'
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}
+      >
+        {this.props.robots.map((robot)=> 
+            <Robot 
+              key={robot.id}
+              robot={robot} 
+              updateRobotInfo={this.props.updateRobotInfo} 
+              retireRobot={this.retireRobot} 
+              user_id={this.props.user_id} 
+              launchBattle={this.launchBattle}
+            />
+        )}
+      </CSSTransitionGroup>
         <AddRobot type="submit" onClick={this.chooseRobot}>Add New Robot</AddRobot>
        
       </Robots>

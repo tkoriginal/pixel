@@ -24,6 +24,28 @@ const GlobalStyle = createGlobalStyle`
     background-size: cover;
     background-repeat:no-repeat
   }
+  .retire-enter {
+    opacity: .01;
+	  transform: scaleX(0) translateX(-300px);
+  }
+
+  .retire-enter.retire-enter-active {
+    opacity: 1;
+    transform: scaleX(1) translateX(0);
+    transition: all 500ms ease-in-out;
+  }
+
+  .retire-leave {
+    opacity: 1;
+	  transform: scaleX(1) translateX(0);
+  }
+
+  .retire-leave.retire-leave-active {
+    opacity: .01;
+    transform: translateX(-300px);
+    transition: all 500ms ease-in-out
+  }
+
 `
 
 class App extends Component {
