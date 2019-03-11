@@ -24,9 +24,8 @@ const GlobalStyle = createGlobalStyle`
     background-size: cover;
     background-repeat:no-repeat
   }
-  
-
 `
+
 class App extends Component {
   state = {
     id: undefined,
@@ -64,6 +63,7 @@ class App extends Component {
   render() {
     return (
       <div>
+
         <GlobalStyle />
         <Switch>
           <Route exact path='/' 
