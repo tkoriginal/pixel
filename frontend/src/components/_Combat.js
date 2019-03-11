@@ -14,21 +14,26 @@ const Content = styled.div`
 `
 
 const Instuctions = styled.div`
+  display: flex;
+  align-content: center;
+  justify-content: center;
   width: 600px;
   height: 75px;
   padding: 10px;
-  background: white;
+  background: rgb(255,255,255, 0.8);
   border-radius: 4px;
   border: 1px solid #c4c4c4;
   padding-top:20px;
+  margin-top: 25px;
   margin-bottom: 10px;
+  font-size: 2rem;
 `;
 
 const RobotCard = styled.div`
   width: 600px;
-  height: 225px;
+  height: 250px;
   padding: 10px;
-  background: white;
+  background: rgb(255,255,255, 0.8);
   border-radius: 4px;
   border: 1px solid #c4c4c4;
   display: flex;
@@ -51,8 +56,13 @@ const RobotInfo = styled.div`
 `
 
 const RobotName = styled.p`
+  width: 150px;
+  flex-wrap: warp;
   text-align: center;
+  font-size: 2rem;
+  word-wrap: break-word;
 `;
+
 const Stats = styled.div`
   width: 160px;
   padding: 10px;
@@ -99,9 +109,9 @@ const FightBtn = styled.button`
 
 const BackBtn = styled.button`
   width:600px;
-  font-size: 4rem;
+  font-size: 2rem;
   font-family: 'Press Start 2P', cursive;
-  background: rgb(169,169,169, 0.8);
+  background: rgb(255,255,255, 0.8);
   border: 1px solid #ddd;
   color: #000;
   border-radius: 5px;
@@ -185,6 +195,7 @@ class Combat extends Component {
               },
               scale: {
                 ticks: {
+                  backdropColor: 'rgb(255,255,255, 0)',
                   min: 0,
                   max: 25
                 }
@@ -249,11 +260,10 @@ class Combat extends Component {
     }
     return (
       <div>
-        <Link to='/'><button>Go Back</button></Link>
-        <Content>
 
+        <Content>
           <Instuctions>
-            <p>Choose an opponent for your robot to fight!</p>
+            <p>And you will fight...</p>
           </Instuctions>
 
         {this.state.opponents.map((robot, i) => 

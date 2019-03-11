@@ -7,7 +7,7 @@ const Form = styled.form`
   margin: 20px auto;
   width: 350px;
   padding: 30px 25px;
-  background: white;
+  background: rgb(192,192,192, 0.5);
   border: 1px solid #c4c4c4;
   display: flex;
   flex-direction: column;
@@ -52,7 +52,7 @@ const Login = styled.p`
   text-align:center;
   margin-top:25px;
   margin-bottom:0px;
-  color:#666;
+  color: white;
   text-decoration:none;
   font-size:13px;
 `
@@ -107,7 +107,7 @@ class Registration extends Component {
       <React.Fragment>
         <Form onSubmit={this.handleSubmit.bind(this)}>
             <Input type="text" value={this.state.name} placeholder="Name" onChange={this.handleChangeName} />
-            <Input type="text" value={this.state.email} placeholder="Email" onChange={this.handleChangeEmail} />
+            <Input type="email" value={this.state.email} placeholder="Email" onChange={this.handleChangeEmail} />
             <Input type="password" value={this.state.password} placeholder="Password" onChange={this.handleChangePassword} />
             <Input type="password" value={this.state.confirmPassword} placeholder="Confirm Password" onChange={this.handleChangeConfirmPassword} />
           <Button type="submit" value="Register" />

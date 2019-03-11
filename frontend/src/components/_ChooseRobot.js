@@ -11,21 +11,26 @@ const Content = styled.div`
   width: 100%;
 `;
 const Instuctions = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 600px;
   height: 75px;
   padding: 10px;
-  background: white;
+  background: rgb(255,255,255, 0.8);
   border-radius: 4px;
   border: 1px solid #c4c4c4;
   padding-top: 20px;
   margin-bottom: 10px;
+  margin-top: 25px;
+  font-size: 2rem;
 `;
 
 const RobotCard = styled.div`
   width: 600px;
   height: 225px;
   padding: 10px;
-  background: white;
+  background: rgb(255,255,255, 0.8);
   border-radius: 4px;
   border: 1px solid #c4c4c4;
   display: flex;
@@ -89,9 +94,9 @@ const SelectBtn = styled.button`
 
 const BackBtn = styled.button`
   width: 600px;
-  font-size: 4rem;
+  font-size: 2rem;
   font-family: "Press Start 2P", cursive;
-  background: rgb(169, 169, 169, 0.8);
+  background: rgb(255,255,255, 0.8);
   border: 1px solid #ddd;
   color: #000;
   border-radius: 5px;
@@ -184,7 +189,9 @@ class ChooseRobot extends Component {
               },
               scale: {
                 ticks: {
-                  min: 0
+                  backdropColor: 'rgb(255,255,255, 0)',
+                  min: 0,
+                  max: 25
                 }
               },
               title: {
@@ -212,11 +219,10 @@ class ChooseRobot extends Component {
     return (
       <div>
         <div style={{ display: "flex" }} />
-        <button onClick={this.handleGoHome}>Back</button>
 
         <Content>
           <Instuctions>
-            <label htmlFor="robot-name">Give your new champion a name...</label>
+            <label htmlFor="robot-name">Choose their name: </label>
             <input type="text" name="robot-name" value={this.state.robotName} onChange={this.handleRobotName} required />
             {this.state.noName && <p style={{ color: "red" }}>Please enter a robot name</p>}
           </Instuctions>

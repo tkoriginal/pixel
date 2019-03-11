@@ -15,9 +15,12 @@ const Container = styled.div`
 `;
 const Title = styled.p`
   text-align: center;
-  font-size: 2.5rem;
+  color: white;
+  font-size: 3rem;
   padding-bottom: 2rem;
   padding-top: 2rem;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 `;
 
 const List = styled.ol`
@@ -33,6 +36,7 @@ const ListItem = styled.li`
 const ListText = styled.p`
   overflow-x: auto;
   text-align: left;
+  color: black;
 `;
 
 const ChampImg = styled.img`
