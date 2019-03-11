@@ -114,7 +114,7 @@ app.post('/login', (req, res) => {
   knex('users')
     .select('*')
     .where({
-      name: req.body.name ,
+      email: req.body.email ,
       password: req.body.password
     })
     .then( rows => {
@@ -273,15 +273,27 @@ app.post('/robots-fight', (req, res) => {
 app.post("/registration", (req, res) => {
 
   knex('users')
-    .insert({ 
-      name: req.body.name,
-      password: req.body.password,
-      email: req.body.email
-      }) 
-    .then(
-      res.status(200).send('User succesfully created.')
-    )
+    .where('email', req.body.email)
+    .then(result => {
+      console.log(result);
+      if (result[0]) {
+        res.status(500).send('Email already exists.')
+      } else {
+        knex('users')
+        .insert({ 
+          name: req.body.name,
+          password: req.body.password,
+          email: req.body.email
+          }) 
+        .then(
+          res.status(200).send('User succesfully created.')
+        )
+        .catch(err => console.log(err.message));
+      }
+    })
     .catch(err => console.log(err.message));
+
+
 
 })
 
