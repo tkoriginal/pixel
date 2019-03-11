@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 const Chart = require("chart.js");
 
+const appearDuration = 1000;
+const transitionName = `example`
 const RobotCard = styled.div`
   max-width: 100%;
   height: 200px;
@@ -255,72 +257,72 @@ class Robot extends React.Component {
 
   render() {
     return (
-      <RobotCard>
-        <RobotInfo>
-          <RobotBio>
-            <RobotName>{this.state.name}</RobotName>
-            <img src={this.state.img_url} alt="Battle Bot" height="150" width="150" />
-          </RobotBio>
-          <Stats>
-            <Stat>
-              <StatDescription>Health</StatDescription>
-              <StatChangeContainer>
-                <StatButton onClick={this.handleStat("health", this.state.health, "minus").bind(this)}>-</StatButton>
-                <StatNumber>{this.state.health}</StatNumber>
-                <StatButton onClick={this.handleStat("health", this.state.health, "plus").bind(this)}>+</StatButton>
-              </StatChangeContainer>
-            </Stat>
-            <Stat>
-              <StatDescription>Strength</StatDescription>
-              <StatChangeContainer>
-                <StatButton onClick={this.handleStat("strength", this.state.strength, "minus").bind(this)}>-</StatButton>
-                <StatNumber>{this.state.strength}</StatNumber>
-                <StatButton onClick={this.handleStat("strength", this.state.strength, "plus").bind(this)}>+</StatButton>
-              </StatChangeContainer>
-            </Stat>
-            <Stat>
-              <StatDescription>Dexterity</StatDescription>
-              <StatChangeContainer>
-                <StatButton onClick={this.handleStat("dexterity", this.state.dexterity, "minus").bind(this)}>-</StatButton>
-                <StatNumber>{this.state.dexterity}</StatNumber>
-                <StatButton onClick={this.handleStat("dexterity", this.state.dexterity, "plus").bind(this)}>+</StatButton>
-              </StatChangeContainer>
-            </Stat>
-            <Stat>
-              <StatDescription>Armour</StatDescription>
-              <StatChangeContainer>
-                <StatButton onClick={this.handleStat("armour", this.state.armour, "minus").bind(this)}>-</StatButton>
-                <StatNumber>{this.state.armour}</StatNumber>
-                <StatButton onClick={this.handleStat("armour", this.state.armour, "plus").bind(this)}>+</StatButton>
-              </StatChangeContainer>
-            </Stat>
-            <Stat>
-              <StatDescription>Trait: {this.state.traits[4]}</StatDescription>
-            </Stat>
-            <Stat>
-              <StatDescription>RS: {this.state.remainingStats}</StatDescription>
-            </Stat>
-          </Stats>
-          <GraphArea>
-            <Canvas key={this.state.id} id={`stats-chart-${this.state.id}`} />
-          </GraphArea>
-          <Actions>
-            {this.state.active && (
-              <React.Fragment>
-                <ActionBtn color="red" onClick={this.props.retireRobot(this.state)}>
-                  Retire
-                </ActionBtn>
-                <ActionBtn color="blue" onClick={this.handleUpdateState}>
-                  Update
-                </ActionBtn>
-                <ActionBtn color="yellow" onClick={this.props.launchBattle(this.state)}>
-                  Battle
-                </ActionBtn>
-              </React.Fragment>
-            )}
-          </Actions>
-        </RobotInfo>
-      </RobotCard>
+        <RobotCard>
+          <RobotInfo>
+            <RobotBio>
+              <RobotName>{this.state.name}</RobotName>
+              <img src={this.state.img_url} alt="Battle Bot" height="150" width="150" />
+            </RobotBio>
+            <Stats>
+              <Stat>
+                <StatDescription>Health</StatDescription>
+                <StatChangeContainer>
+                  <StatButton onClick={this.handleStat("health", this.state.health, "minus").bind(this)}>-</StatButton>
+                  <StatNumber>{this.state.health}</StatNumber>
+                  <StatButton onClick={this.handleStat("health", this.state.health, "plus").bind(this)}>+</StatButton>
+                </StatChangeContainer>
+              </Stat>
+              <Stat>
+                <StatDescription>Strength</StatDescription>
+                <StatChangeContainer>
+                  <StatButton onClick={this.handleStat("strength", this.state.strength, "minus").bind(this)}>-</StatButton>
+                  <StatNumber>{this.state.strength}</StatNumber>
+                  <StatButton onClick={this.handleStat("strength", this.state.strength, "plus").bind(this)}>+</StatButton>
+                </StatChangeContainer>
+              </Stat>
+              <Stat>
+                <StatDescription>Dexterity</StatDescription>
+                <StatChangeContainer>
+                  <StatButton onClick={this.handleStat("dexterity", this.state.dexterity, "minus").bind(this)}>-</StatButton>
+                  <StatNumber>{this.state.dexterity}</StatNumber>
+                  <StatButton onClick={this.handleStat("dexterity", this.state.dexterity, "plus").bind(this)}>+</StatButton>
+                </StatChangeContainer>
+              </Stat>
+              <Stat>
+                <StatDescription>Armour</StatDescription>
+                <StatChangeContainer>
+                  <StatButton onClick={this.handleStat("armour", this.state.armour, "minus").bind(this)}>-</StatButton>
+                  <StatNumber>{this.state.armour}</StatNumber>
+                  <StatButton onClick={this.handleStat("armour", this.state.armour, "plus").bind(this)}>+</StatButton>
+                </StatChangeContainer>
+              </Stat>
+              <Stat>
+                <StatDescription>Trait: {this.state.traits[4]}</StatDescription>
+              </Stat>
+              <Stat>
+                <StatDescription>RS: {this.state.remainingStats}</StatDescription>
+              </Stat>
+            </Stats>
+            <GraphArea>
+              <Canvas key={this.state.id} id={`stats-chart-${this.state.id}`} />
+            </GraphArea>
+            <Actions>
+              {this.state.active && (
+                <React.Fragment>
+                  <ActionBtn color="red" onClick={this.props.retireRobot(this.state)}>
+                    Retire
+                  </ActionBtn>
+                  <ActionBtn color="blue" onClick={this.handleUpdateState}>
+                    Update
+                  </ActionBtn>
+                  <ActionBtn color="yellow" onClick={this.props.launchBattle(this.state)}>
+                    Battle
+                  </ActionBtn>
+                </React.Fragment>
+              )}
+            </Actions>
+          </RobotInfo>
+        </RobotCard>
     );
   }
 }

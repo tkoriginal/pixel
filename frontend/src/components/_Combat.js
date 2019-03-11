@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import styled from "styled-components";
 import Battle from "./_Battle";
-import { color } from "style-value-types";
 
 const Chart = require("chart.js");
 
