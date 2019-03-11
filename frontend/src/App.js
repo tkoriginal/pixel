@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 import ChooseRobot from './components/_ChooseRobot';
 import Combat from './components/_Combat';
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   *, *::after, *::before{
@@ -24,6 +24,8 @@ const GlobalStyle = createGlobalStyle`
     background-size: cover;
     background-repeat:no-repeat
   }
+  
+
 `
 class App extends Component {
   state = {
