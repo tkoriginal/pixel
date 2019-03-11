@@ -68,7 +68,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '', 
+      email: '', 
       password: '',
       loggedIn: false
     };
@@ -76,7 +76,7 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChangeName = (event) => this.setState({name: event.target.value});
+  handleChangeEmail = (event) => this.setState({email: event.target.value});
   handleChangePassword = (event) => this.setState({password: event.target.value});
 
   handleSubmit(event) {
@@ -109,7 +109,7 @@ class Login extends Component {
               <img src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" alt="Battle Bot" height="150" width="150"></img>
               <img src="https://66.media.tumblr.com/4f8896ebca88bb0d8308607315d085c9/tumblr_n439wbdHxA1sulisxo1_400.gif" alt="Battle Bot" height="150" width="150"></img>
             </ImageBox>
-            <Input type="text" value={this.state.name} placeholder="Name" onChange={this.handleChangeName} />
+            <Input type="text" value={this.state.email} placeholder="Email" onChange={this.handleChangeEmail} />
             <Input type="password" value={this.state.password} placeholder="Password" onChange={this.handleChangePassword} />
             <Button type="submit" value="Login" />
             <Link to='/registration' ><Register>Register</Register></Link>

@@ -77,6 +77,8 @@ class Registration extends Component {
          console.log(res)
          if (res.status ===  200){
            this.setState({userRegistered: true})
+         } else if (res.status === 500) {
+          window.alert("Email already registered to an account.");
          }
        })
        .catch(res => {
