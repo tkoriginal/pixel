@@ -225,11 +225,11 @@ class Robot extends React.Component {
       const obj = {};
       let points = this.state.remainingStats;
       if (operation === "minus" && value > this.fixedState[attribute]) {
-        value--;
+        attribute === 'health' ? value-=5 : value--;
         points++;
         this.setState({ remainingStats: points });
       } else if (operation === "plus" && this.state.remainingStats > 0) {
-        value++;
+        attribute === 'health' ? value+=5 : value++;
         points--;
         this.setState({ remainingStats: points });
       }
