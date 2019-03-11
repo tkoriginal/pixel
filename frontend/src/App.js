@@ -46,8 +46,8 @@ const GlobalStyle = createGlobalStyle`
     transition: all 500ms ease-in-out
   }
 
-
 `
+
 class App extends Component {
   state = {
     id: undefined,
@@ -85,6 +85,7 @@ class App extends Component {
   render() {
     return (
       <div>
+
         <GlobalStyle />
         <Switch>
           <Route exact path='/' 

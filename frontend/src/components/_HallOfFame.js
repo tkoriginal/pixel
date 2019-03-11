@@ -11,7 +11,7 @@ const Container = styled.div`
   align-content: center;
   padding: 10px;
   background-image: url("img/banner.jpg");
-  background-size: 100%;
+  background-size: cover;
 `;
 const Title = styled.p`
   text-align: center;

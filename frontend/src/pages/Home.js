@@ -16,11 +16,42 @@ const Content = styled.div`
 `
 const TopBar = styled.div`
   width: 100%;
-  height: 50px;
+  height: 75px;
   display:flex;
   justify-content: space-between;
-  padding: 15px;
+  align-items: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
 `
+
+const WelcomeTxt = styled.h1`
+  color: white;
+  font-size: 5rem;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: black;
+`
+
+const LogoutBtn = styled.button`
+  width: 175px;
+  height: 50px;
+  font-size: 1.5rem;
+  font-family: "Press Start 2P", cursive;
+  background: rgb(255,255,255, 1);
+  border: 1px solid #ddd;
+  color: #000;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 1.2rem 0;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+
+  :hover {
+    cursor: pointer;
+    background: rgb(235, 235, 235, 1);
+  }
+`;
 
 const HomeScreen = styled.div`
   margin: 0 auto;
@@ -39,8 +70,8 @@ class Home extends Component {
     return (
       <HomeScreen>
         <TopBar>
-          <h1>Welcome {this.props.userInfo.name}!</h1>
-          <button onClick={this.props.handleLogout}>Logout</button>
+          <WelcomeTxt>Welcome {this.props.userInfo.name}!</WelcomeTxt>
+          <LogoutBtn onClick={this.props.handleLogout}>Logout</LogoutBtn>
         </TopBar>
 
         <Content>

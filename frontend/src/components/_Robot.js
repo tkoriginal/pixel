@@ -14,6 +14,7 @@ const RobotCard = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  background-image: linear-gradient(to right, #d3d3d3, #808080);
 `;
 
 const RobotInfo = styled.div`
@@ -211,7 +212,8 @@ class Robot extends React.Component {
         scale: {
           ticks: {
             min: 0,
-            max: 25
+            max: 25,
+            display: false
           }
         },
         title: {
