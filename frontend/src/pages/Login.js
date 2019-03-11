@@ -6,24 +6,23 @@ const Form = styled.form`
   margin: 20px auto;
   width: 350px;
   padding: 30px 25px;
-  background: white;
+  background: rgb(192,192,192, 0.5);
   border: 1px solid #c4c4c4;
   display: flex;
   flex-direction: column;
   justify-content: center;
 `
 
-const Title = styled.h1`
-  margin: -28px -25px 25px;
-  padding: 15px 25px;
-  line-height: 30px;
-  font-size: 25px;
-  font-weight: 300;
-  color: #ADADAD;
-  text-align:center;
-  background: #f7f7f7;
+// const Title = styled.h1`
+//   padding-top: 15px;
+//   padding-bottom: 15px;
+//   line-height: 30px;
+//   font-size: 25px;
+//   font-weight: 300;
+//   color: #ADADAD;
+//   text-align:center;
  
-`
+// `
 
 const ImageBox = styled.div`
   display: flex;
@@ -64,12 +63,15 @@ const Button = styled.input`
     background: #ed5749;
   }
 `
+const FlippedImage = styled.img`
+    transform: scaleX(-1);
+`
 
 const Register = styled.p`
   text-align:center;
   margin-top:25px;
   margin-bottom:0px;
-  color:#666;
+  color: white;
   text-decoration:none;
   font-size:13px;
 `
@@ -114,10 +116,12 @@ class Login extends Component {
       <React.Fragment>
         <Form onSubmit={this.handleSubmit}>
           
-            <Title> Login to Battle</Title>
+            {/* <Title>Welcome to...</Title> */}
+            <img src="img/header.png" alt="Project Pixel" width="300"></img>
+
             <ImageBox>
-              <img src="https://media.giphy.com/media/DYvu8sxNgPEIM/giphy.gif" alt="Battle Bot" height="150" width="150"></img>
-              <img src="https://66.media.tumblr.com/4f8896ebca88bb0d8308607315d085c9/tumblr_n439wbdHxA1sulisxo1_400.gif" alt="Battle Bot" height="150" width="150"></img>
+              <img src="img/robot19.gif" alt="Battle Bot" height="150" width="150"></img>
+              <FlippedImage src="img/robot20.gif" alt="Battle Bot" height="150" width="150"></FlippedImage>
             </ImageBox>
             <Input type="text" value={this.state.email} placeholder="Email" onChange={this.handleChangeEmail} />
             <Input type="password" value={this.state.password} placeholder="Password" onChange={this.handleChangePassword} />
