@@ -64,33 +64,32 @@ const GraphArea = styled.div`
   margin-right: -2.5rem;
 `;
 
-
-let red = '#f0776c';
-let darkRed = '#e0584c'
-let blue = '#0066ff';
-let darkBlue = '#04429e'
-let yellow = '#ff971a';
-let darkYellow = '#d67604'
+let red = "#f0776c";
+let darkRed = "#e0584c";
+let blue = "#0066ff";
+let darkBlue = "#04429e";
+let yellow = "#ff971a";
+let darkYellow = "#d67604";
 
 const ActionBtn = styled.button`
   padding: 1rem 1rem;
   font-size: 1.5rem;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   color: #fff;
   background: ${props => (props.color === "red" ? red : props.color === "blue" ? blue : yellow)};
   border: 0;
   border-radius: 5px;
-  outline:none;
-  -moz-transition: all .2s ease-in;
-    -o-transition: all .2s ease-in;
-    -webkit-transition: all .2s ease-in;
-    transition: all .2s ease-in;
+  outline: none;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
 
   :hover {
     cursor: pointer;
-    background: ${props => props.color === 'red' ?  darkRed : props.color === 'blue' ? darkBlue : darkYellow};
+    background: ${props => (props.color === "red" ? darkRed : props.color === "blue" ? darkBlue : darkYellow)};
   }
-`
+`;
 const StatChangeContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -109,17 +108,17 @@ const StatButton = styled.button`
   background: none;
   font-size: 1.3rem;
   border: none;
-  padding: .2rem;
-  -moz-transition: all .2s ease-in;
-    -o-transition: all .2s ease-in;
-    -webkit-transition: all .2s ease-in;
-    transition: all .2s ease-in;
+  padding: 0.2rem;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
 
   :hover {
     cursor: pointer;
     background: lightgray;
   }
-`
+`;
 
 const Canvas = styled.canvas`
   width: 315px;
@@ -201,21 +200,16 @@ class Robot extends React.Component {
           }
         ]
       },
-        options: {
-          defaultFontFamily: "'Press Start 2P', cursive",
-          legend: {
-            fontFamily: "'Press Start 2P', cursive",
-            display: false
-          },
-          scale: {
-            ticks: {
-              min: 0, 
-              max: 25
-            }
-          },
-          title: {
-            display: false,
-            // text: 'Robot Stats'
+      options: {
+        defaultFontFamily: "'Press Start 2P', cursive",
+        legend: {
+          fontFamily: "'Press Start 2P', cursive",
+          display: false
+        },
+        scale: {
+          ticks: {
+            min: 0,
+            max: 25
           }
         },
         title: {

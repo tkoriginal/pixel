@@ -10,6 +10,8 @@ const Container = styled.div`
   flex-direction: column;
   align-content: center;
   padding: 10px;
+  background-image: url("img/banner.jpg");
+  background-size: 100%;
 `;
 const Title = styled.p`
   text-align: center;
