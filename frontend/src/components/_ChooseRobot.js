@@ -4,12 +4,12 @@ import styled from "styled-components";
 const Chart = require("chart.js");
 
 const Content = styled.div`
-  display:flex;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
   width: 100%;
-`
+`;
 const Instuctions = styled.div`
   width: 600px;
   height: 75px;
@@ -17,8 +17,10 @@ const Instuctions = styled.div`
   background: white;
   border-radius: 4px;
   border: 1px solid #c4c4c4;
-  padding-top:20px;
+  padding-top: 20px;
   margin-bottom: 10px;
+  background-image: url("img/cardBackground.jpg");
+  background-size: cover;
 `;
 
 const RobotCard = styled.div`
@@ -32,6 +34,8 @@ const RobotCard = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 10px;
+  background-image: url("img/cardBackground.jpg");
+  background-size: cover;
 `;
 
 const RobotInfo = styled.div`
@@ -163,7 +167,6 @@ class ChooseRobot extends Component {
         console.log("New Robots: ", newRobots);
 
         newRobots.forEach(robot => {
-
           new Chart(document.getElementById(`stats-chart-${robot.robotId}`), {
             type: "radar",
             data: {
@@ -213,13 +216,10 @@ class ChooseRobot extends Component {
     }
     return (
       <div>
-        <div style={{ display: "flex" }}>
-
-        </div>
+        <div style={{ display: "flex" }} />
         <button onClick={this.handleGoHome}>Back</button>
 
         <Content>
-
           <Instuctions>
             <label htmlFor="robot-name">Give your new champion name...</label>
             <input type="text" name="robot-name" value={this.state.robotName} onChange={this.handleRobotName} required />

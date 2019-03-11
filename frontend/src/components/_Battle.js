@@ -4,7 +4,7 @@ import {TimelineLite} from "gsap/TweenMax";
 
 const BattleBox = styled.div`
   /* position: absolute; */
-`
+`;
 
 const FightText = styled.p`
   position: absolute;
@@ -39,24 +39,25 @@ const Versus = styled.p`
 `
 
 const Robot1 = styled.img`
-  position:absolute;
+  position: absolute;
   top: 66vh;
   left: 310px;
-`
+`;
 const Robot2 = styled.img`
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
-  position:absolute;
+  position: absolute;
   top: 66vh;
   left: 1100px;
-`
+`;
 const Cloud = styled.img`
   position: absolute;
   opacity: 0;
   top: 63vh;
   left: 680px;
+
 `
 const Winner = styled.img`
   position: absolute;
@@ -179,7 +180,7 @@ class Battle extends React.Component {
               id="robot2"
             />
             <Cloud 
-              src="img/Fightcloud.gif"
+              src="img/fightCloud.gif"
               id="cloud"
             />
             <Winner 
@@ -196,7 +197,7 @@ class Battle extends React.Component {
 
           </div>
       </div>
-    )
+    );
   }
 }
 
