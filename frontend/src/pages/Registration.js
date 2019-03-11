@@ -76,7 +76,6 @@ class Registration extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.checkConfirmedPassword()) {
       const body = JSON.stringify(this.state)
       fetch('/registration', {
         method: 'post',
@@ -94,10 +93,7 @@ class Registration extends Component {
        .catch(res => {
          console.log("error", res)
        });
-    } else {
-      window.alert("Password and Confirm Password do not match. Please confirm your password.");
-    }
-
+    
   }
 
   render() {
@@ -106,10 +102,10 @@ class Registration extends Component {
     return (
       <React.Fragment>
         <Form onSubmit={this.handleSubmit.bind(this)}>
-            <Input type="text" value={this.state.name} placeholder="Name" onChange={this.handleChangeName} />
+            <Input type="text" value={this.state.name} placeholder="Name" onChange={this.handleChangeName} required />
             <Input type="email" value={this.state.email} placeholder="Email" onChange={this.handleChangeEmail} />
             <Input type="password" value={this.state.password} placeholder="Password" onChange={this.handleChangePassword} />
-            <Input type="password" value={this.state.confirmPassword} placeholder="Confirm Password" onChange={this.handleChangeConfirmPassword} />
+            <Input type="password" value={this.state.confirmPassword} placeholder="Confirm Password" onChange={this.handleChangeConfirmPassword} required pattern={this.state.password}/>
           <Button type="submit" value="Register" />
           {/* <Login onClick={this.handleToLogin}>Login</Login> */}
           <Link to='/login' ><Login>Login</Login></Link>
