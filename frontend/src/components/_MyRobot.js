@@ -13,13 +13,25 @@ const Robots = styled.div`
 `
 const AddRobot = styled.button`
   font-size: 4rem;
+  font-family: 'Press Start 2P', cursive;
   background: #77dd77;
-  border: 1px solid #ddd;
+  /* border: 2px solid #000; */
   color: #fff;
   border-radius: 5px;
+  border: 0;
   margin-top: 10px;
   padding: 1.2rem 0;
+  -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+
+  :hover {
+    cursor: pointer;
+    background: #66d166;
+  }
 `
+
 //Styles End
 class MyRobots extends Component {
   state = {
@@ -91,7 +103,7 @@ class MyRobots extends Component {
             launchBattle={this.launchBattle}/>
         )}
 
-        <AddRobot type="submit" onClick={this.chooseRobot}>+</AddRobot>
+        <AddRobot type="submit" onClick={this.chooseRobot}>Add New Robot</AddRobot>
        
       </Robots>
     )

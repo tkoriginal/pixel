@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import styled from "styled-components";
 const Chart = require("chart.js");
 
@@ -23,7 +23,7 @@ const Instuctions = styled.div`
 
 const RobotCard = styled.div`
   width: 600px;
-  height: 200px;
+  height: 225px;
   padding: 10px;
   background: white;
   border-radius: 4px;
@@ -37,25 +37,25 @@ const RobotCard = styled.div`
 const RobotInfo = styled.div`
   display: flex;
   flex-direction: row;
-`;
+  justify-content: flex-start;
+`
 
 const RobotBio = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  width: 160px;
   height: 200px;
 `;
 
-const RobotName = styled.p`
-  text-align: center;
-`;
 const Stats = styled.div`
-  height: 200px;
+  width: 160px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 `;
+
 const Stat = styled.div``;
+
 const StatDescription = styled.p`
   display: inline-block;
   margin-right: 5px;
@@ -66,6 +66,48 @@ const GraphArea = styled.div`
   flex-direction: row;
   flex-grow: 2;
 `;
+
+const SelectBtn = styled.button`
+  padding: 1rem 1rem;
+  font-size: 1.5rem;
+  font-family: 'Press Start 2P', cursive;
+  color: #fff;
+  background: #77dd77;
+  border: 0;
+  border-radius: 5px;
+  outline:none;
+  -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+
+  :hover {
+    cursor: pointer;
+    background: #66d166;
+  }
+`
+
+const BackBtn = styled.button`
+  width:600px;
+  font-size: 4rem;
+  font-family: 'Press Start 2P', cursive;
+  background: rgb(169,169,169, 0.8);
+  border: 1px solid #ddd;
+  color: #000;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 1.2rem 0;
+  -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+
+  :hover {
+    cursor: pointer;
+    background: rgb(169,169,169, 0.9);
+  }
+`
+
 
 class ChooseRobot extends Component {
   state = {
@@ -98,12 +140,15 @@ class ChooseRobot extends Component {
         });
     }.bind(this);
   };
+  
   handleRobotName = e => {
     this.setState({ robotName: e.target.value });
   };
+
   handleGoHome = () => {
     this.setState({ goHome: true });
   };
+
   componentDidMount() {
     fetch("/generate-starter-robots")
       .then(res => res.json())
@@ -186,9 +231,9 @@ class ChooseRobot extends Component {
             <div key={i}>
               <RobotCard>
                 <RobotInfo>
+
                   <RobotBio>
                     <img src={robot.img_url} alt="Battle Bot" height="150" width="150" />
-                    <button onClick={this.selectRobot(robot, this.props.userInfo.id, this.state.robotName)}>Select Robot</button>
                   </RobotBio>
 
                   <Stats>
@@ -213,10 +258,15 @@ class ChooseRobot extends Component {
                     <canvas id={`stats-chart-${robot.robotId}`} />
                   </GraphArea>
                 </RobotInfo>
+
+                <SelectBtn onClick={this.selectRobot(robot, this.props.userInfo.id, this.state.robotName)}>I choose you!</SelectBtn>
+
               </RobotCard>
             </div>
           );
         })}
+
+          <Link to='/'><BackBtn>Nevermind...</BackBtn></Link>
 
         </Content>  
 
