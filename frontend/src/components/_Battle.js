@@ -26,9 +26,17 @@ const Cloud = styled.img`
   top: 63vh;
   left: 680px;
 `
-
+const Winner = styled.img`
+  position: absolute;
+  opacity: 0;
+  top: 65vh;
+  left: 690px;
+`
 class Battle extends React.Component {
-
+  winner = () => {
+    return this.props.battleLog.winner
+  }
+  
   componentDidMount() {
     const tl = new TimelineLite();
     tl.add('robotsMove')
@@ -40,16 +48,45 @@ class Battle extends React.Component {
     },'robotsMove');
     tl.to('#cloud',.8, {
       opacity: 1,
-      x: -20,
       scaleX: 1.4,
       scaleY: 1.4,
     }, '-=.8');
     tl.to('#robot1, #robot2', 0.5, {
       opacity: 0,
     });
-    
-
-    
+    tl.to('#cloud',1.3, {
+      opacity: 1,
+      x: Math.random() * 400,
+      y: Math.random() * 400,
+    });
+    tl.to('#cloud',1.3, {
+      opacity: 1,
+      x: - Math.random() * 400,
+      y: - Math.random() * 200,
+    });
+    tl.to('#cloud',1.3, {
+      opacity: 1,
+      x: Math.random() * 400,
+      y: Math.random() * 600,
+    });
+    tl.to('#cloud',1.3, {
+      opacity: 1,
+      x: - Math.random() * 400,
+      y: - Math.random() * 200,
+    });
+    tl.to('#cloud',1.3, {
+      opacity: 1,
+      x: 0,
+      y: 0,
+    });
+    tl.add('battleOver')
+    tl.to('#winner', 1.3, {
+      opacity: 1,
+      x: -20
+    }, 'battleOver');
+    tl.to('#cloud', 1.3, {
+      opacity: 0
+    }, 'battleOver')
   }
   render() {
     return (
@@ -69,6 +106,9 @@ class Battle extends React.Component {
               src="img/Fightcloud.gif"
               id='cloud'
             />
+            <Winner 
+              src={this.winner().img_url}
+              id='winner' />
           </BattleBox>
           <div style={{ color: "white" }}>
               {this.props.battleLog.log.map((turn, i) => {
