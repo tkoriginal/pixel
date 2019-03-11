@@ -216,7 +216,7 @@ class ChooseRobot extends Component {
 
         <Content>
           <Instuctions>
-            <label htmlFor="robot-name">Give your new champion name...</label>
+            <label htmlFor="robot-name">Give your new champion a name...</label>
             <input type="text" name="robot-name" value={this.state.robotName} onChange={this.handleRobotName} required />
             {this.state.noName && <p style={{ color: "red" }}>Please enter a robot name</p>}
           </Instuctions>
