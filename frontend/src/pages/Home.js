@@ -3,15 +3,12 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import MyRobots from '../components/_MyRobot';
 import HallOfFame from '../components/_HallOfFame';
-import loadingWrapper from '../components/_LoadingScreen'
+import loadingWrapper from '../components/_HOCLoading'
 const Content = styled.div`
   display:flex;
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  /* > #my-robots{
-    width: 700px;
-  } */
 `
 const TopBar = styled.div`
   width: 100%;
