@@ -73,6 +73,11 @@ const Ash = styled.img`
   transform: scale(.4, .4);
 `
 class Battle extends React.Component {
+  state ={
+    showModal: true
+  }
+  toggleModal = () => this.setState({showModal: !this.state.showModal})
+
   winner = () => {
     return this.props.battleLog.winner
   }
@@ -166,36 +171,37 @@ class Battle extends React.Component {
   render() {
     return (
       <div>
-          <BattleBox>
-            <FightText id="fightText">Fight!</FightText>
-            <Versus id="vsText">{this.props.userRobot.name} <span>vs</span> {this.props.opponentRobot.name}</Versus> 
-            <Robot1 
-              src={this.props.userRobot.img_url}
-              alt="Battle Robot1"
-              id="robot1"
-            />
-            <Robot2 
-              src={this.props.opponentRobot.img_url} 
-              alt="Battle Robot2"
-              id="robot2"
-            />
-            <Cloud 
-              src="img/fightCloud.gif"
-              id="cloud"
-            />
-            <Winner 
-              src={this.winner() ?  this.winner().img_url : 'img/pixelPile.png'}
-              id="winner" />
-            <Ash 
-              src="img/pixelPile.png"
-              id="ash" />
-          </BattleBox>
-          <div style={{ display:'none' }}>
-              {this.props.battleLog.log.map((turn, i) => {
-                return(<p key={i}>{JSON.stringify(turn)}</p>)
-              })}
+        <BattleBox>
+          <FightText id="fightText">Fight!</FightText>
+          <Versus id="vsText">{this.props.userRobot.name} <span>vs</span> {this.props.opponentRobot.name}</Versus> 
+          {/* <WinnerText id="Winner"></WinnerText> */}
+          <Robot1 
+            src={this.props.userRobot.img_url}
+            alt="Battle Robot1"
+            id="robot1"
+          />
+          <Robot2 
+            src={this.props.opponentRobot.img_url} 
+            alt="Battle Robot2"
+            id="robot2"
+          />
+          <Cloud 
+            src="img/fightCloud.gif"
+            id="cloud"
+          />
+          <Winner 
+            src={this.winner() ?  this.winner().img_url : 'img/pixelPile.png'}
+            id="winner" />
+          <Ash 
+            src="img/pixelPile.png"
+            id="ash" />
+        </BattleBox>
+        <div style={{ display:'none' }}>
+            {this.props.battleLog.log.map((turn, i) => {
+              return(<p key={i}>{JSON.stringify(turn)}</p>)
+            })}
 
-          </div>
+        </div>
       </div>
     );
   }
