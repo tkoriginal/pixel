@@ -75,7 +75,8 @@ const Ash = styled.img`
 `
 class Battle extends React.Component {
   state ={
-    showModal: false
+    showModal: false,
+    showButton: false
   }
   toggleModal = () => this.setState({showModal: !this.state.showModal})
 
@@ -84,7 +85,7 @@ class Battle extends React.Component {
   }
   
   componentDidMount() {
-    const tl = new TimelineLite();
+    const tl = new TimelineLite({onComplete:() => this.setState({showButton: true})});
     tl.add('title');
     tl.to('#vsText', .2, {
       opacity: 0
@@ -197,10 +198,12 @@ class Battle extends React.Component {
             src="img/pixelPile.png"
             id="ash" />
         </BattleBox>
-        <Link to="/">
-            <button>Go Back</button>
-        </Link>
-        <button onClick={this.toggleModal}>Show Battle Log</button>
+        { this.state.showButton && <div>
+          <Link to="/">
+              <button>Go Back</button>
+          </Link>
+          <button onClick={this.toggleModal}>Show Battle Log</button>
+        </div>}
         {
           this.state.showModal ? (<Modal>
         <div>
