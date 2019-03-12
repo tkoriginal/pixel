@@ -1,5 +1,5 @@
 import React from 'react';
-import { createPoral } from 'react-dom';
+import { createPortal } from 'react-dom';
 
 const modalRoot = document.getElementById('modal');
 
@@ -16,7 +16,7 @@ class Modal extends React.Component {
     modalRoot.removeChild(this.el)
   }
   render () {
-    return createPoral(this.props.children, this.el)
+    return createPortal(this.props.children, this.el)
   }
 }
 

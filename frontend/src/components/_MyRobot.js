@@ -55,7 +55,6 @@ class MyRobots extends Component {
       console.log('Error', e , 'Didn\'t go through')
     })
   }
-
   retireRobot = (robot) => {
     return (function (e) {
       e.preventDefault();

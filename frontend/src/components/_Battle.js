@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {TimelineLite} from "gsap/TweenMax";
-
+import Modal from '../pages/Modal';
+import { Link } from "react-router-dom";
 const BattleBox = styled.div`
   /* position: absolute; */
 `;
@@ -74,7 +75,7 @@ const Ash = styled.img`
 `
 class Battle extends React.Component {
   state ={
-    showModal: true
+    showModal: false
   }
   toggleModal = () => this.setState({showModal: !this.state.showModal})
 
@@ -196,12 +197,21 @@ class Battle extends React.Component {
             src="img/pixelPile.png"
             id="ash" />
         </BattleBox>
-        <div style={{ display:'none' }}>
+        <Link to="/">
+            <button>Go Back</button>
+        </Link>
+        <button onClick={this.toggleModal}>Show Battle Log</button>
+        {
+          this.state.showModal ? (<Modal>
+        <div>
             {this.props.battleLog.log.map((turn, i) => {
               return(<p key={i}>{JSON.stringify(turn)}</p>)
             })}
-
+            <button onClick={this.toggleModal}>Close Modal</button>
         </div>
+        </Modal>) : null
+        }
+        
       </div>
     );
   }
