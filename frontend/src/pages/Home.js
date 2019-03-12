@@ -3,16 +3,12 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import MyRobots from '../components/_MyRobot';
 import HallOfFame from '../components/_HallOfFame';
-// import { throws } from 'assert';
-
+import loadingWrapper from '../components/_HOCLoading'
 const Content = styled.div`
   display:flex;
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  /* > #my-robots{
-    width: 700px;
-  } */
 `
 const TopBar = styled.div`
   width: 100%;
@@ -63,6 +59,7 @@ const HomeScreen = styled.div`
 `
 
 class Home extends Component {
+
   render() {
     if (!this.props.userInfo.name) {
       return (<Redirect to="/login" />)
@@ -93,4 +90,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default loadingWrapper(Home);

@@ -55,7 +55,8 @@ class App extends Component {
     email: undefined,
     robots: [],
     battleRobot: undefined,
-    hallOfFame: undefined
+    hallOfFame: undefined,
+    loading: true
   }
   updateChosenBattleRobot = (robot) => {
     this.setState({battleRobot:robot})
@@ -71,6 +72,10 @@ class App extends Component {
     console.log(robots)
     this.setState({robots: robots})
   }
+
+  setLoading = () => {
+    this.setState({loading: false})
+  }
   
   updateHallOfFame = () => {
     fetch('/hall-of-fame')
@@ -85,7 +90,6 @@ class App extends Component {
   render() {
     return (
       <div>
-
         <GlobalStyle />
         <Switch>
           <Route exact path='/' 
@@ -97,6 +101,8 @@ class App extends Component {
                 updateChosenBattleRobot={this.updateChosenBattleRobot}
                 hallOfFame={this.state.hallOfFame}
                 updateHallOfFame = {this.updateHallOfFame}
+                loading={this.state.loading}
+                setLoading={this.setLoading}
               />
             )}
           />
