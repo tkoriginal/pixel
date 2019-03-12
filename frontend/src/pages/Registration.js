@@ -103,8 +103,8 @@ class Registration extends Component {
       <React.Fragment>
         <Form onSubmit={this.handleSubmit.bind(this)}>
             <Input type="text" value={this.state.name} placeholder="Name" onChange={this.handleChangeName} required />
-            <Input type="email" value={this.state.email} placeholder="Email" onChange={this.handleChangeEmail} />
-            <Input type="password" value={this.state.password} placeholder="Password" onChange={this.handleChangePassword} />
+            <Input type="email" value={this.state.email} placeholder="Email" onChange={this.handleChangeEmail} required />
+            <Input type="password" value={this.state.password} placeholder="Password" onChange={this.handleChangePassword} required/>
             <Input type="password" value={this.state.confirmPassword} placeholder="Confirm Password" onChange={this.handleChangeConfirmPassword} required pattern={this.state.password}/>
           <Button type="submit" value="Register" />
           {/* <Login onClick={this.handleToLogin}>Login</Login> */}

@@ -123,8 +123,8 @@ class Login extends Component {
               <img src="img/robot19.gif" alt="Battle Bot" height="150" width="150"></img>
               <FlippedImage src="img/robot20.gif" alt="Battle Bot" height="150" width="150"></FlippedImage>
             </ImageBox>
-            <Input type="text" value={this.state.email} placeholder="Email" onChange={this.handleChangeEmail} />
-            <Input type="password" value={this.state.password} placeholder="Password" onChange={this.handleChangePassword} />
+            <Input type="text" value={this.state.email} placeholder="Email" onChange={this.handleChangeEmail} required />
+            <Input type="password" value={this.state.password} placeholder="Password" onChange={this.handleChangePassword} required />
             <Button type="submit" value="Login" />
             <Link to='/registration' ><Register>Register</Register></Link>
          
