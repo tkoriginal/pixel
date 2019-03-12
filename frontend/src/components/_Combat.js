@@ -45,7 +45,7 @@ const RobotCard = styled.div`
 const RobotBio = styled.div`
   display: flex;
   flex-direction: column;
-  width: 160px;
+  /* width: 160px; */
   height: 200px;
 `;
 
@@ -56,7 +56,7 @@ const RobotInfo = styled.div`
 `
 
 const RobotName = styled.p`
-  width: 150px;
+  /* width: 150px; */
   flex-wrap: warp;
   text-align: center;
   font-size: 2rem;
