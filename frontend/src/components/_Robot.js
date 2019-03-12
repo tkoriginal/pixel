@@ -138,7 +138,6 @@ class Robot extends React.Component {
     armour: this.props.robot.armour,
     active: this.props.robot.active,
     traits: this.props.robot.traits,
-    remainingStats: this.props.robot.remainingStats,
     updateStat: false
   };
   fixedState = {
@@ -186,6 +185,8 @@ class Robot extends React.Component {
         }
       }
     });
+    this.setState({
+      remainingStats: this.props.robot.remainingStats})
   }
   componentDidUpdate() {
     new Chart(document.getElementById(`stats-chart-${this.state.id}`), {

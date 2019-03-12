@@ -132,7 +132,7 @@ class Combat extends Component {
   state = {
     opponents: undefined,
     battleLog: undefined,
-    opponentRobot: undefined
+    opponentRobot: undefined,
   };
   componentDidMount() {
     fetch("/generate-combat-robots", {
@@ -246,16 +246,14 @@ class Combat extends Component {
     }
     if (this.state.battleLog) {
       return (
-        <React.Fragment>
+        <div>
 
           <Battle 
             userRobot={this.props.battleRobot} 
             opponentRobot={this.state.opponentRobot} 
             battleLog={this.state.battleLog}/>
-          <Link to="/">
-            <button>Go Back</button>
-          </Link>
-        </React.Fragment>
+          
+        </div>
       );
     }
     return (
