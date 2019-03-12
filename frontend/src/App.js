@@ -45,7 +45,14 @@ const GlobalStyle = createGlobalStyle`
     transform: translateX(-300px);
     transition: all 500ms ease-in-out
   }
-
+  #modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background: white;
+  }
 `
 
 class App extends Component {
