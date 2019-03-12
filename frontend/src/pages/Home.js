@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import MyRobots from '../components/_MyRobot';
 import HallOfFame from '../components/_HallOfFame';
 import loadingWrapper from '../components/_HOCLoading'
+
 const Content = styled.div`
   display:flex;
   justify-content: space-between;

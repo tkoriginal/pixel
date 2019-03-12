@@ -13,7 +13,7 @@ const RobotCard = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  background-image: linear-gradient(to right, #d3d3d3, #808080);
+  /* background-image: linear-gradient(to right, #d3d3d3, #808080); */
 `;
 
 const RobotInfo = styled.div`
@@ -106,6 +106,7 @@ const StatNumber = styled.p`
 `;
 const StatButton = styled.button`
   background: none;
+  width: 20px;
   font-size: 1.3rem;
   border: none;
   padding: 0.2rem;
@@ -116,7 +117,7 @@ const StatButton = styled.button`
 
   :hover {
     cursor: pointer;
-    background: lightgray;
+    background: #ff971a;
   }
 `;
 

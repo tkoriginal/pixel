@@ -9,6 +9,7 @@ const Container = styled.div`
   background-color: #fff;
   flex-direction: column;
   align-content: center;
+  margin-top: 10px;
   padding: 10px;
   background-image: url("img/banner.jpg");
   background-size: cover;
