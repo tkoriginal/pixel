@@ -4,6 +4,10 @@ Project Pixel is a robot fighting simulator where users create, battle, and impr
 
 ## Final Product Screenshots
 
+![Login Screen](https://github.com/tkoriginal/pixel/blob/master/frontend/public/img/login.png?raw=true)
+
+![Home Screen](https://github.com/tkoriginal/pixel/blob/master/frontend/public/img/home_sreen.png?raw=true)
+
 ## Stack
 
 React(Router, Tooltips, Portal)
@@ -44,5 +48,5 @@ Green Sock (animations)
 
 ## Getting Started
 
-*Once you have cloned the repo onto your machine, run "npm install" in both the frontend and backend directories.
-*Once all the required packages have been installed, use "npm start" in both the frontend and backend directories.
+* Once you have cloned the repo onto your machine, run "npm install" in both the frontend and backend directories.
+* Once all the required packages have been installed, use "npm start" in both the frontend and backend directories.
