@@ -90,4 +90,4 @@ class Home extends Component {
   }
 }
 
-export default loadingWrapper(Home);
+export default Home;

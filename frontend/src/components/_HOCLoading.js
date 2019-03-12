@@ -49,9 +49,9 @@ const HOCLoading = WrappedComponent => {
         <Container>
           <LoadingText>PATIENCE HUMAN...YOUR ROBOTS ARE LOADING....</LoadingText>
           <ImageContainer>
-          {images.map(image => 
-            <Image className="loading-gif" src={image} alt="Robot" />
-            )}
+            {images.map(image => 
+                <Image className="loading-gif" src={image} alt="Robot" />
+              )}
           </ImageContainer>
         </Container>
        )
