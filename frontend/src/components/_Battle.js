@@ -102,6 +102,7 @@ const Ash = styled.img`
 const Log = styled.p`
   margin-bottom: .7rem;
   padding: .5rem;
+  color: ${props => (props.type === 'standard' ? '#fff' : props.type === 'thorn' ? 'red' : props.type === 'doubleDamage' ? 'blue' : props.type === 'critical' ? 'Yellow' : 'orange')}
 `
 const ButtonContainer = styled.div`
   opacity: 0;
@@ -210,7 +211,7 @@ class Battle extends React.Component {
               <div>
                 <ModalContainer>
                     {this.props.battleLog.log.map((turn, i) => {
-                      return(<Log key={i}>{JSON.stringify(turn)}</Log>)
+                      return(<Log type={turn.type} key={i}>{turn.text}</Log>)
                     })}
                 </ModalContainer>
               </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
+import {TimelineLite} from "gsap/TweenMax";
 
 const modalRoot = document.getElementById('modal');
 
@@ -11,6 +12,7 @@ class Modal extends React.Component {
   
   componentDidMount() {
     modalRoot.appendChild(this.el)
+
   }
   componentWillUnmount() {
     modalRoot.removeChild(this.el)
