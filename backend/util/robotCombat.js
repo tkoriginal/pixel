@@ -63,7 +63,10 @@ function Combat(robot1, robot2) {
   }
 
   if (combatStatus.attacker.health <= 0 && combatStatus.defender.health <= 0) {
-    combatStatus.combatLog.push(`         ***Both fighters are dead!***       `);
+    combatStatus.combatLog.push({
+      text: `***Both fighters are dead!***`,
+      type: "death"
+    });
 
     const results = {
       winner: null,
@@ -74,7 +77,10 @@ function Combat(robot1, robot2) {
   }
   combatStatus.winner = combatStatus.attacker.health > 0 ? combatStatus.attacker : combatStatus.defender;
   combatStatus.loser = combatStatus.winner === combatStatus.attacker ? combatStatus.defender : combatStatus.attacker;
-  combatStatus.combatLog.push(`    ***${combatStatus.loser.name} has died!***     `);
+  combatStatus.combatLog.push({
+    text: `***${combatStatus.loser.name} has died!***`,
+    type: "death"
+  });
 
   const results = {
     winner: combatStatus.winner,
