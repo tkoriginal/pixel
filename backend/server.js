@@ -38,21 +38,13 @@ app.use(express.static("public"));
 // app.use("/api/users", usersRoutes(knex));
 
 // Home page
-app.get("/api/getList", (req, res) => {
-    knex
-    .select("*")
-    .from("users")
-    .then((results) => {
-      res.json(results);
-  });
-});
 
-app.get('/generate-starter-robots', (req, res) => {
+app.get('/robots/new', (req, res) => {
   let starterBots =  generateRobot(3, 30, false)
   res.json(starterBots);
 })
 
-app.post('/generate-combat-robots', (req, res) => {
+app.post('/robots/opponents', (req, res) => {
 
   let powerLevel = req.body.strength + req.body.dexterity + req.body.armour + ((req.body.health - 50) / 5)
   let combatBots =  generateRobot(3, powerLevel, false)
@@ -141,7 +133,7 @@ app.post('/login', (req, res) => {
     })
 })
 
-app.post('/retire', (req, res) => {
+app.post('/robots/retire', (req, res) => {
   knex('robots')
     .where('id', req.body.id)
     .update('active', false)
@@ -162,7 +154,7 @@ app.post('/retire', (req, res) => {
     });
 })
 
-app.post('/add-robot', (req, res) => {
+app.post('/robots/add-robot', (req, res) => {
   knex('robots')
     .insert({
       name: req.body.robotName,
@@ -224,7 +216,7 @@ app.post('/robots/update', (req, res) => {
 
 })
 
-app.post('/robots-fight', (req, res) => {
+app.post('/robots/fight', (req, res) => {
   const result = Combat(req.body[0], req.body[1])
   knex('battle_results') //insert to battle results  with the winner ID
     .insert({
