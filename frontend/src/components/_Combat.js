@@ -135,7 +135,7 @@ class Combat extends Component {
     opponentRobot: undefined,
   };
   componentDidMount() {
-    fetch("/generate-combat-robots", {
+    fetch("/robots/opponents", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -222,7 +222,7 @@ class Combat extends Component {
       console.log(userRobot, opponentRobot);
       const robots = JSON.stringify([userRobot, opponentRobot]);
       e.preventDefault();
-      fetch("/robots-fight", {
+      fetch("/robots/fight", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

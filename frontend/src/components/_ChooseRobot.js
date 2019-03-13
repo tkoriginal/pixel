@@ -128,7 +128,7 @@ class ChooseRobot extends Component {
         return;
       }
       const body = JSON.stringify({ robot, user_id, robotName });
-      fetch("/add-robot", {
+      fetch("/robots/add-robot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body
@@ -154,7 +154,7 @@ class ChooseRobot extends Component {
   };
 
   componentDidMount() {
-    fetch("/generate-starter-robots")
+    fetch("/robots/new")
       .then(res => res.json())
       .then(starterRobots => {
         let newRobots = starterRobots.map((robot, i) => {

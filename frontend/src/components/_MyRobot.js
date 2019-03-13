@@ -63,7 +63,7 @@ class MyRobots extends Component {
     return (function (e) {
       e.preventDefault();
       console.log(robot)
-      fetch ('/retire', {
+      fetch ('/robots/retire', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
