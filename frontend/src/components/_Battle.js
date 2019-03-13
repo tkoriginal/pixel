@@ -3,9 +3,20 @@ import styled from 'styled-components';
 import {TimelineLite} from "gsap/TweenMax";
 import Modal from '../pages/Modal';
 import { Link } from "react-router-dom";
+import battleAnimation from '../util/animation';
+
+const Container= styled.div`
+  min-width: 100%;
+  min-height: 100%;
+`
 const BattleBox = styled.div`
-  /* position: absolute; */
+  
 `;
+
+let red = "#f0776c";
+let darkRed = "#e0584c";
+let yellow = "#ff971a";
+let darkYellow = "#d67604";
 
 const FightText = styled.p`
   position: absolute;
@@ -66,12 +77,73 @@ const Winner = styled.img`
   top: 65.5vh;
   left: 690px;
 `
+
+const WinnerText = styled.p`
+  position: absolute;
+  top: 30vh;
+  left: 50vw;
+  transform: translate(-50%, -50%) scale(0, 0);
+  font-size: 7rem;
+  color: #f9484a;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: #555;
+  background-image: linear-gradient(315deg, #ff0000 0%, #ffed00 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+`
 const Ash = styled.img`
   position: absolute;
   opacity: 0;
   top: 68.5vh;
   left: 720px;
   transform: scale(.4, .4);
+`
+const Log = styled.p`
+  margin-bottom: .7rem;
+  padding: .5rem;
+`
+const ButtonContainer = styled.div`
+  opacity: 0;
+  position: absolute;
+  top: 90vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  display: flex;
+  width: 600px;
+  justify-content: space-between
+`
+
+const Button = styled.button`
+  width: 270px;
+  padding: 1rem 1rem;
+  font-size: 1.5rem;
+  font-family: "Press Start 2P", cursive;
+  color: #fff;
+  background: ${props => (props.color === "red" ? red : yellow)};
+  border: 0;
+  border-radius: 5px;
+  outline: none;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+
+  :hover {
+    cursor: pointer;
+    background: ${props => (props.color === "red" ? darkRed: darkYellow)};
+  }
+`
+
+const ModalContainer = styled.div`
+  width: 800px;
+  height: 500px;
+  overflow-y:scroll;
+  font-size: 1.4rem;
+  padding: 3rem;
+  color: #fff;
+  background-color: #222;
+  border: 3px solid #fff;
 `
 class Battle extends React.Component {
   state ={
@@ -83,100 +155,28 @@ class Battle extends React.Component {
   winner = () => {
     return this.props.battleLog.winner
   }
-  
-  componentDidMount() {
-    const tl = new TimelineLite({onComplete:() => this.setState({showButton: true})});
-    tl.add('title');
-    tl.to('#vsText', .2, {
-      opacity: 0
-    })
-    tl.to('#vsText', .2, {
-      opacity: 1
-    })
-    tl.to('#vsText', .2, {
-      opacity: 0
-    })
-    tl.to('#vsText', .2, {
-      opacity: 1
-    })
-    tl.to('#vsText', .2, {
-      opacity: 0
-    })
-    tl.to('#vsText', .2, {
-      opacity: 1
-    })
-    tl.to('#vsText', 3, {
-      scaleX: 5, 
-      scaleY: 5, 
-      opacity: 0
-    });
-    tl.set('#fightText', {
-      opacity:1
-    })
-    tl.to('#fightText', 3, {
-      scaleX: 5,
-      scaleY:5, 
-      opacity: 0
-    })
-    tl.add('robotsMove');
-    tl.to("#robot1", 1.4, {
-      x: 420
-    }, 'robotsMove');
-    tl.to("#robot2", 1.4, {
-      x: -365
-    },'robotsMove');
-    tl.to('#cloud',.8, {
-      opacity: 1,
-      scaleX: 1.4,
-      scaleY: 1.4,
-    }, '-=.8');
-    tl.to('#robot1, #robot2', 0.5, {
-      opacity: 0,
-    });
-    tl.to('#cloud',1.3, {
-      opacity: 1,
-      x: Math.random() * 400,
-      y: -Math.random() * 400,
-    });
-    tl.to('#cloud',1.3, {
-      opacity: 1,
-      x: -Math.random() * 400,
-      y: -Math.random() * 200,
-    });
-    tl.to('#cloud',1.3, {
-      opacity: 1,
-      x: Math.random() * 400,
-      y: -Math.random() * 600,
-    });
-    tl.to('#cloud',1.3, {
-      opacity: 1,
-      x: - Math.random() * 400,
-      y: -Math.random() * 200,
-    });
-    tl.to('#cloud',1.3, {
-      opacity: 1,
-      x: 0,
-      y: 0,
-    });
-    tl.add('battleOver')
-    tl.to('#winner', 1.3, {
-      opacity: 1,
-      x: -80
-    }, 'battleOver');
-    tl.to('#cloud', 1.3, {
-      opacity: 0
-    }, 'battleOver')
-    tl.to('#ash', 1.3, {
-      opacity: 1,
-    }, 'battleOver')
+
+  whoWon = () => {
+    return this.winner().user_id ? 'You Win!!😁' : 'You Lose!!😭'
   }
+
+  showButton = () => {
+    this.setState({showButton: true})
+  }
+  componentDidMount() {
+    console.log(this.props.battleLog)
+    const masterAnimation = new TimelineLite();
+    masterAnimation.add(battleAnimation);
+  }
+
+  
   render() {
     return (
-      <div>
+      <Container>
         <BattleBox>
           <FightText id="fightText">Fight!</FightText>
           <Versus id="vsText">{this.props.userRobot.name} <span>vs</span> {this.props.opponentRobot.name}</Versus> 
-          {/* <WinnerText id="Winner"></WinnerText> */}
+          <WinnerText id="Winner">{this.whoWon()}</WinnerText>
           <Robot1 
             src={this.props.userRobot.img_url}
             alt="Battle Robot1"
@@ -198,24 +198,26 @@ class Battle extends React.Component {
             src="img/pixelPile.png"
             id="ash" />
         </BattleBox>
-        { this.state.showButton && <div>
+        <ButtonContainer id="buttons">
+          <Button onClick={this.toggleModal}>{this.state.showModal ? 'Close Battle Log' : 'Show Battle Log'}</Button>
           <Link to="/">
-              <button>Go Back</button>
+              <Button color='red'>Go Back</Button>
           </Link>
-          <button onClick={this.toggleModal}>Show Battle Log</button>
-        </div>}
+        </ButtonContainer>
         {
-          this.state.showModal ? (<Modal>
-        <div>
-            {this.props.battleLog.log.map((turn, i) => {
-              return(<p key={i}>{JSON.stringify(turn)}</p>)
-            })}
-            <button onClick={this.toggleModal}>Close Modal</button>
-        </div>
-        </Modal>) : null
+          this.state.showModal ? (
+            <Modal>
+              <div>
+                <ModalContainer>
+                    {this.props.battleLog.log.map((turn, i) => {
+                      return(<Log key={i}>{JSON.stringify(turn)}</Log>)
+                    })}
+                </ModalContainer>
+              </div>
+            </Modal>) : null  
         }
         
-      </div>
+      </Container>
     );
   }
 }

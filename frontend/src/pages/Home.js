@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import MyRobots from '../components/_MyRobot';
 import HallOfFame from '../components/_HallOfFame';
-import loadingWrapper from '../components/_HOCLoading'
+import LoadingScreen from '../components/_Loading'
 
 const Content = styled.div`
   display:flex;
@@ -64,6 +64,9 @@ class Home extends Component {
   render() {
     if (!this.props.userInfo.name) {
       return (<Redirect to="/login" />)
+    }
+    if (this.props.loading){
+      return <LoadingScreen name={this.props.userInfo.name} setLoading={this.props.setLoading}/>
     }
     return (
       <HomeScreen>
