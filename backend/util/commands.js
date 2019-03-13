@@ -28,7 +28,10 @@ module.exports = methods = {
     if (Math.random() * 100 < combatStatus.defender.dexterity * 3) {
       //console.log(defender.name, 0);
       combatStatus.damage = -1;
-      combatStatus.turnLog.push({ [`Turn ${combatStatus.turn}`]: `${combatStatus.defender.name} evaded the attack!` });
+      combatStatus.turnLog.push({
+        text: `Turn ${combatStatus.turn}: ${combatStatus.defender.name} evaded the attack!`,
+        type: `standard`
+      });
       return;
     }
 
@@ -43,7 +46,10 @@ module.exports = methods = {
   critical: combatStatus => {
     if (Math.random() * 100 < 30) {
       combatStatus.effectiveArmour = 0;
-      combatStatus.turnLog.push(`   ~~~${combatStatus.attacker.name} attempted a critical strike!~~~   `);
+      combatStatus.turnLog.push({
+        text: `~~~${combatStatus.attacker.name} attempted a critical strike!~~~`,
+        type: "critical"
+      });
     }
   },
 
@@ -51,7 +57,10 @@ module.exports = methods = {
     if (combatStatus.damage > 0) {
       if (Math.random() * 100 < 30) {
         combatStatus.damage = 0;
-        combatStatus.turnLog.push({ [`Turn ${combatStatus.turn}`]: `${combatStatus.defender.name} blocked ${combatStatus.attacker.name}'s attack!` });
+        combatStatus.turnLog.push({
+          text: `Turn ${combatStatus.turn}: ${combatStatus.defender.name} blocked ${combatStatus.attacker.name}'s attack!`,
+          type: "standard"
+        });
       }
     }
   },
@@ -59,8 +68,10 @@ module.exports = methods = {
   assignDamage: combatStatus => {
     if (combatStatus.damage > 0) {
       combatStatus.turnLog.push({
-        [`Turn ${combatStatus.turn}`]: `${combatStatus.attacker.name} dealt ${combatStatus.damage} damage to ${combatStatus.defender.name}!`
+        text: `Turn ${combatStatus.turn}: ${combatStatus.attacker.name} dealt ${combatStatus.damage} damage to ${combatStatus.defender.name}!`,
+        type: "standard"
       });
+
       combatStatus.defender.health -= combatStatus.damage;
     }
   },
@@ -68,7 +79,10 @@ module.exports = methods = {
   doubleDamage: combatStatus => {
     if (Math.random() * 100 < 30) {
       combatStatus.effectiveStrength = combatStatus.effectiveStrength * 2;
-      combatStatus.turnLog.push(`   ~~~${combatStatus.attacker.name} dealt double damage!~~~   `);
+      combatStatus.turnLog.push({
+        text: `~~~${combatStatus.attacker.name} dealt double damage!~~~`,
+        type: "doubleDamage"
+      });
     }
   },
 
@@ -86,16 +100,25 @@ module.exports = methods = {
 
   poisoned: combatStatus => {
     if (combatStatus.defender.poisoned == 5) {
-      combatStatus.turnLog.push(`     ~~~${combatStatus.defender.name} was oxidized!~~~     `);
+      combatStatus.turnLog.push({
+        text: `~~~${combatStatus.defender.name} was oxidized!~~~`,
+        type: "poison"
+      });
     }
 
     if (combatStatus.defender.poisoned > 2) {
-      combatStatus.turnLog.push(`   ~~~${combatStatus.defender.name} took 3 damage from rust!~~~   `);
+      combatStatus.turnLog.push({
+        text: `~~~${combatStatus.defender.name} took 3 damage from rust!~~~`,
+        type: "poison"
+      });
       combatStatus.defender.health -= 3;
       combatStatus.defender.poisoned--;
       return;
     } else if (combatStatus.defender.poisoned === 1) {
-      combatStatus.turnLog.push(`   ~~~${combatStatus.defender.name} is rusted no longer!~~~   `);
+      combatStatus.turnLog.push({
+        turn: `~~~${combatStatus.defender.name} is rusted no longer!~~~`,
+        type: "posion"
+      });
       combatStatus.defender.poisoned--;
     }
   },
@@ -103,7 +126,10 @@ module.exports = methods = {
   thorns: combatStatus => {
     if (combatStatus.damage >= 3) {
       combatStatus.attacker.health -= Math.floor(combatStatus.damage * 0.3);
-      combatStatus.turnLog.push(` ~~~${combatStatus.attacker.name} took ${Math.floor(combatStatus.damage * 0.2)} return damage from spikes!~~~ `);
+      combatStatus.turnLog.push({
+        text: `~~~${combatStatus.attacker.name} took ${Math.floor(combatStatus.damage * 0.2)} return damage from spikes!~~~ `,
+        type: "thorns"
+      });
     }
   }
 };
