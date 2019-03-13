@@ -27,10 +27,14 @@ const AddRobot = styled.button`
     -webkit-transition: all .2s ease-in;
     transition: all .2s ease-in;
 
-  :hover {
+  &:hover {
     cursor: pointer;
     background: #66d166;
   }
+`
+const RobotContainer = styled.div`
+  height: 726px;
+  overflow-y: scroll;
 `
 
 //Styles End
@@ -93,22 +97,24 @@ class MyRobots extends Component {
     return (
       <Robots>
         <AddRobot type="submit" onClick={this.chooseRobot}>Add New Robot</AddRobot>
-        <CSSTransitionGroup
-          transitionName='retire'
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
-        >
-          {this.props.robots.map((robot)=> 
-              <Robot 
-                key={robot.id}
-                robot={robot} 
-                updateRobotInfo={this.props.updateRobotInfo} 
-                retireRobot={this.retireRobot} 
-                user_id={this.props.user_id} 
-                launchBattle={this.launchBattle}
-              />
-          )}
-        </CSSTransitionGroup>
+        <RobotContainer>
+          <CSSTransitionGroup
+            transitionName='retire'
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
+          >
+            {this.props.robots.map((robot)=> 
+                <Robot 
+                  key={robot.id}
+                  robot={robot} 
+                  updateRobotInfo={this.props.updateRobotInfo} 
+                  retireRobot={this.retireRobot} 
+                  user_id={this.props.user_id} 
+                  launchBattle={this.launchBattle}
+                />
+            )}
+          </CSSTransitionGroup>
+        </RobotContainer>
       </Robots>
     )
   }
