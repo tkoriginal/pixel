@@ -81,8 +81,7 @@ class Login extends Component {
     super(props);
     this.state = {
       email: '', 
-      password: '',
-      loggedIn: false
+      password: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -109,7 +108,7 @@ class Login extends Component {
      });
   }
   render() {
-    if (this.state.loggedIn) {
+    if (this.props.loggedIn || this.state.loggedIn) {
       return (<Redirect to="/" />)
     }
     return (

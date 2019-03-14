@@ -201,7 +201,7 @@ class Battle extends React.Component {
         </BattleBox>
         <ButtonContainer id="buttons">
           <Button onClick={this.toggleModal}>{this.state.showModal ? 'Close Battle Log' : 'Show Battle Log'}</Button>
-          <Link to="/">
+          <Link to="/login">
               <Button color='red'>Go Back</Button>
           </Link>
         </ButtonContainer>

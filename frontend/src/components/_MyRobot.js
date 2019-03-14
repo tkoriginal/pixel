@@ -33,7 +33,7 @@ const AddRobot = styled.button`
   }
 `
 const RobotContainer = styled.div`
-  height: 726px;
+  max-height: 740px;
   overflow-y: scroll;
 `
 
