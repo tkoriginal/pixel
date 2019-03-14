@@ -73,7 +73,7 @@ class App extends Component {
     this.setState({loggedIn: true})
   }
   handleLogout = () => {
-    this.setState({id: undefined, name:undefined, email: undefined})
+    this.setState({id: undefined, name:undefined, email: undefined, loggedIn: undefined})
   }
   updateRobotInfo = (robots) => {
     console.log(this);
