@@ -127,12 +127,22 @@ module.exports = methods = {
     if (combatStatus.damage >= 3) {
       combatStatus.attacker.health -= Math.floor(combatStatus.damage * 0.3);
       combatStatus.turnLog.push({
-        text: `~~~${combatStatus.attacker.name} took ${Math.floor(combatStatus.damage * 0.2)} return damage from spikes!~~~ `,
+        text: `~~~${combatStatus.attacker.name} took ${Math.floor(combatStatus.damage * 0.2)} return damage from spikes!~~~`,
         type: "thorns"
+      });
+    }
+  },
+
+  regen: combatStatus => {
+    if (Math.random() * 100 > 30) {
+      combatStatus.defender.health += 4;
+      combatStatus.turnLog.push({
+        text: `~~~${combatStatus.defender.name} repaired for 4 health!~~~`,
+        type: "regen"
       });
     }
   }
 };
 
 const defenseOrder = ["block", "defend"];
-const postCombatOrder = ["assignDamage", "thorns", "poisoned", "changeTurn"];
+const postCombatOrder = ["assignDamage", "thorns", "poisoned", "regen", "changeTurn"];

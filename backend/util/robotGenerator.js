@@ -62,8 +62,29 @@ const imgArray = [
   "img/robot19.gif",
   "img/robot20.gif"
 ];
-const nameArray = ["Maximus", "Taqert", "Gorg", "Killary", "Brocas", "Tin", "Slimtim", "Facebump", "OnlyJuan", "Mr.Cache"];
-const traitsArray = ["critical", "block", "doubleDamage", "poison", "thorns"];
+const nameArray = [
+  "Maximus",
+  "Taqert",
+  "Gorg",
+  "Killary",
+  "Brocas",
+  "Tin",
+  "Slimtim",
+  "Facebump",
+  "Only Juan",
+  "Mr.Cache",
+  "Cl4p-tp",
+  "HAL",
+  "Daegren",
+  "Mr. World",
+  "Media",
+  "Grogan",
+  "Regi",
+  "Iron Giant",
+  "EDE",
+  "Timbersaw"
+];
+const traitsArray = ["critical", "block", "doubleDamage", "poison", "thorns", "regen"];
 
 module.exports = { generateRobot };
 // export default generateRobot;
