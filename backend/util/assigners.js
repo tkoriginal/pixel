@@ -68,5 +68,11 @@ module.exports = assigners = {
       type: "thorns",
       action: methods.thorns
     });
+  },
+  regen: currentBot => {
+    currentBot.states.postCombat.unshift({
+      tyep: "regen",
+      action: methods.regen
+    });
   }
 };

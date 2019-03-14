@@ -1,17 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import {TimelineLite} from "gsap/TweenMax";
-import Modal from '../pages/Modal';
+import React from "react";
+import styled from "styled-components";
+import { TimelineLite } from "gsap/TweenMax";
+import Modal from "../pages/Modal";
 import { Link } from "react-router-dom";
-import battleAnimation from '../util/animation';
+import battleAnimation from "../util/animation";
 
-const Container= styled.div`
+const Container = styled.div`
   min-width: 100%;
   min-height: 100%;
-`
-const BattleBox = styled.div`
-  
 `;
+const BattleBox = styled.div``;
 
 let red = "#f0776c";
 let darkRed = "#e0584c";
@@ -31,10 +29,10 @@ const FightText = styled.p`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   opacity: 0;
-`
+`;
 
 const Versus = styled.p`
-  position:absolute;
+  position: absolute;
   top: 30vh;
   left: 45vw;
   transform: translate(-50%, -50%);
@@ -45,10 +43,9 @@ const Versus = styled.p`
   background-image: linear-gradient(315deg, #ff0000 0%, #ffed00 74%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  & span{ 
-    
+  & span {
   }
-`
+`;
 
 const Robot1 = styled.img`
   position: absolute;
@@ -69,14 +66,13 @@ const Cloud = styled.img`
   opacity: 0;
   top: 63vh;
   left: 680px;
-
-`
+`;
 const Winner = styled.img`
   position: absolute;
   opacity: 0;
   top: 65.5vh;
   left: 690px;
-`
+`;
 
 const WinnerText = styled.p`
   position: absolute;
@@ -91,19 +87,30 @@ const WinnerText = styled.p`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   opacity: 0;
-`
+`;
 const Ash = styled.img`
   position: absolute;
   opacity: 0;
   top: 68.5vh;
   left: 720px;
-  transform: scale(.4, .4);
-`
+  transform: scale(0.4, 0.4);
+`;
 const Log = styled.p`
-  margin-bottom: .7rem;
-  padding: .5rem;
-  color: ${props => (props.type === 'standard' ? '#fff' : props.type === 'thorn' ? 'red' : props.type === 'doubleDamage' ? 'blue' : props.type === 'critical' ? 'Yellow' : 'orange')}
-`
+  margin-bottom: 0.7rem;
+  padding: 0.5rem;
+  color: ${props =>
+    props.type === "standard"
+      ? "#fff"
+      : props.type === "thorns"
+      ? "red"
+      : props.type === "doubleDamage"
+      ? "blue"
+      : props.type === "critical"
+      ? "Yellow"
+      : props.type === "regen"
+      ? "Green"
+      : "orange"};
+`;
 const ButtonContainer = styled.div`
   opacity: 0;
   position: absolute;
@@ -112,8 +119,8 @@ const ButtonContainer = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   width: 600px;
-  justify-content: space-between
-`
+  justify-content: space-between;
+`;
 
 const Button = styled.button`
   width: 270px;
@@ -132,92 +139,80 @@ const Button = styled.button`
 
   :hover {
     cursor: pointer;
-    background: ${props => (props.color === "red" ? darkRed: darkYellow)};
+    background: ${props => (props.color === "red" ? darkRed : darkYellow)};
   }
-`
+`;
 
 const ModalContainer = styled.div`
   width: 800px;
   height: 500px;
-  overflow-y:scroll;
+  overflow-y: scroll;
   font-size: 1.4rem;
   padding: 3rem;
   color: #fff;
   background-color: #222;
   border: 3px solid #fff;
-`
+`;
 class Battle extends React.Component {
-  state ={
+  state = {
     showModal: false,
     showButton: false
-  }
-  toggleModal = () => this.setState({showModal: !this.state.showModal})
+  };
+  toggleModal = () => this.setState({ showModal: !this.state.showModal });
 
   winner = () => {
-    return this.props.battleLog.winner
-  }
+    return this.props.battleLog.winner;
+  };
 
   whoWon = () => {
-    return this.winner().user_id ? 'You Win!!😁' : 'You Lose!!😭'
-  }
+    return this.winner().user_id ? "You Win!!😁" : "You Lose!!😭";
+  };
 
   showButton = () => {
-    this.setState({showButton: true})
-  }
+    this.setState({ showButton: true });
+  };
   componentDidMount() {
-    console.log(this.props.battleLog)
+    console.log(this.props.battleLog);
     const masterAnimation = new TimelineLite();
     masterAnimation.add(battleAnimation);
   }
 
-  
   render() {
     return (
       <Container>
         <BattleBox>
           <FightText id="fightText">Fight!</FightText>
-          <Versus id="vsText">{this.props.userRobot.name} <span>vs</span> {this.props.opponentRobot.name}</Versus> 
+          <Versus id="vsText">
+            {this.props.userRobot.name} <span>vs</span> {this.props.opponentRobot.name}
+          </Versus>
           <WinnerText id="Winner">{this.whoWon()}</WinnerText>
-          <Robot1 
-            src={this.props.userRobot.img_url}
-            alt="Battle Robot1"
-            id="robot1"
-          />
-          <Robot2 
-            src={this.props.opponentRobot.img_url} 
-            alt="Battle Robot2"
-            id="robot2"
-          />
-          <Cloud 
-            src="img/fightCloud.gif"
-            id="cloud"
-          />
-          <Winner 
-            src={this.winner() ?  this.winner().img_url : 'img/pixelPile.png'}
-            id="winner" />
-          <Ash 
-            src="img/pixelPile.png"
-            id="ash" />
+          <Robot1 src={this.props.userRobot.img_url} alt="Battle Robot1" id="robot1" />
+          <Robot2 src={this.props.opponentRobot.img_url} alt="Battle Robot2" id="robot2" />
+          <Cloud src="img/fightCloud.gif" id="cloud" />
+          <Winner src={this.winner() ? this.winner().img_url : "img/pixelPile.png"} id="winner" />
+          <Ash src="img/pixelPile.png" id="ash" />
         </BattleBox>
         <ButtonContainer id="buttons">
-          <Button onClick={this.toggleModal}>{this.state.showModal ? 'Close Battle Log' : 'Show Battle Log'}</Button>
+          <Button onClick={this.toggleModal}>{this.state.showModal ? "Close Battle Log" : "Show Battle Log"}</Button>
           <Link to="/">
-              <Button color='red'>Go Back</Button>
+            <Button color="red">Go Back</Button>
           </Link>
         </ButtonContainer>
-        {
-          this.state.showModal ? (
-            <Modal>
-              <div>
-                <ModalContainer>
-                    {this.props.battleLog.log.map((turn, i) => {
-                      return(<Log type={turn.type} key={i}>{turn.text}</Log>)
-                    })}
-                </ModalContainer>
-              </div>
-            </Modal>) : null  
-        }
-        
+        {this.state.showModal ? (
+          <Modal>
+            <div>
+              <ModalContainer>
+                {this.props.battleLog.log.map((turn, i) => {
+                  return (
+                    <Log type={turn.type} key={i}>
+                      {turn.text}
+                    </Log>
+                  );
+                })}
+              </ModalContainer>
+            </div>
+          </Modal>
+        ) : null}
       </Container>
     );
   }
