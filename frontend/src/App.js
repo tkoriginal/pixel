@@ -62,16 +62,18 @@ class App extends Component {
     robots: [],
     battleRobot: undefined,
     hallOfFame: undefined,
-    loading: true
+    loading: true,
+    loggedIn: false
   }
   updateChosenBattleRobot = (robot) => {
     this.setState({battleRobot:robot})
   }
   successfulLogin = (userData) => {
     this.setState(userData)
+    this.setState({loggedIn: true})
   }
   handleLogout = () => {
-    this.setState({id: undefined, name:undefined, email: undefined})
+    this.setState({id: undefined, name:undefined, email: undefined, loggedIn: undefined})
   }
   updateRobotInfo = (robots) => {
     console.log(this);
@@ -117,6 +119,7 @@ class App extends Component {
             render={(routeProps) => (
               <Login {...routeProps} 
                 successfulLogin={this.successfulLogin}
+                loggedIn={this.state.loggedIn}
               />
             )}
           />

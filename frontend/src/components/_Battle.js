@@ -193,9 +193,10 @@ class Battle extends React.Component {
           <Ash src="img/pixelPile.png" id="ash" />
         </BattleBox>
         <ButtonContainer id="buttons">
-          <Button onClick={this.toggleModal}>{this.state.showModal ? "Close Battle Log" : "Show Battle Log"}</Button>
-          <Link to="/">
-            <Button color="red">Go Back</Button>
+          <Button onClick={this.toggleModal}>{this.state.showModal ? 'Close Battle Log' : 'Show Battle Log'}</Button>
+          <Link to="/login">
+              <Button color='red'>Go Back</Button>
+
           </Link>
         </ButtonContainer>
         {this.state.showModal ? (

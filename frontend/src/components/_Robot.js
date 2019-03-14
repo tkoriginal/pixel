@@ -24,7 +24,6 @@ const RobotInfo = styled.div`
 const Actions = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
 `;
 
 const RobotBio = styled.div`
@@ -73,6 +72,8 @@ let darkYellow = "#d67604";
 
 const ActionBtn = styled.button`
   padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  margin-top: 1.3rem;
   font-size: 1.5rem;
   font-family: "Press Start 2P", cursive;
   color: #fff;
@@ -127,6 +128,7 @@ const Canvas = styled.canvas`
 `;
 
 class Robot extends React.Component {
+  points = this.props.robot.remainingStats;
   state = {
     user_id: this.props.user_id,
     id: this.props.robot.id,
@@ -138,6 +140,7 @@ class Robot extends React.Component {
     armour: this.props.robot.armour,
     active: this.props.robot.active,
     traits: this.props.robot.traits,
+    remainingStats:this.props.robot.remainingStats,
     updateStat: false
   };
   fixedState = {
@@ -185,8 +188,7 @@ class Robot extends React.Component {
         }
       }
     });
-    this.setState({
-      remainingStats: this.props.robot.remainingStats})
+    //  if (this.state.remainingStats !== this.props.robot.remainingStats) this.forceUpdate();
   }
   componentDidUpdate() {
     new Chart(document.getElementById(`stats-chart-${this.state.id}`), {
@@ -229,15 +231,14 @@ class Robot extends React.Component {
   handleStat = (attribute, value, operation) => {
     return function(e) {
       const obj = {};
-      let points = this.state.remainingStats;
       if (operation === "minus" && value > this.fixedState[attribute]) {
         attribute === 'health' ? value-=5 : value--;
-        points++;
-        this.setState({ remainingStats: points });
+        this.points+=1;
+        this.setState({ remainingStats: this.points });
       } else if (operation === "plus" && this.state.remainingStats > 0) {
         attribute === 'health' ? value+=5 : value++;
-        points--;
-        this.setState({ remainingStats: points });
+        this.points-=1;
+        this.setState({ remainingStats: this.points });
       }
       obj[attribute] = value;
       this.setState(obj);
@@ -333,12 +334,12 @@ class Robot extends React.Component {
                   <ActionBtn color="red" onClick={this.props.retireRobot(this.state)}>
                     Retire
                   </ActionBtn>
-                  <ActionBtn color="blue" onClick={this.handleUpdateState}>
-                    Update
-                  </ActionBtn>
                   <ActionBtn color="yellow" onClick={this.props.launchBattle(this.state)}>
                     Battle
                   </ActionBtn>
+                  {this.state.remainingStats !== this.fixedState.remainingStats && <ActionBtn color="blue" onClick={this.handleUpdateState}>
+                    Update
+                  </ActionBtn>}
                 </React.Fragment>
               )}
             </Actions>
