@@ -104,7 +104,7 @@ const Log = styled.p`
       : props.type === "thorns"
       ? "red"
       : props.type === "doubleDamage"
-      ? "blue"
+      ? "DeepSkyBlue"
       : props.type === "critical"
       ? "Yellow"
       : props.type === "regen"
