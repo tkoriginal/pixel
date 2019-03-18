@@ -66,7 +66,6 @@ const StatDescription = styled.p`
   margin-right: 5px;
 `;
 const GraphArea = styled.div`
-  height: 50px;
   display: flex;
   flex-direction: row;
   flex-grow: 2;
