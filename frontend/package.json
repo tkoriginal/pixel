@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "chart.js": "^2.7.3",
-    "gsap": "^2.1.2",
+    "gsap": "^3.6.0",
     "polished": "^3.0.3",
     "react": "^16.8.3",
     "react-chartjs-2": "^2.7.4",
